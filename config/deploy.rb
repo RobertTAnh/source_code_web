@@ -24,8 +24,18 @@ set :rvm_ruby_version, '3.1.2' # sửa theo ruby bạn dùng
 # -------------------------------
 # Linked Files & Directories
 # -------------------------------
-append :linked_files, %w{.env config/database.yml}
-append :linked_dirs, %w{public/storage}
+# Linked Files & Directories
+append :linked_files, %w[.env config/database.yml]
+
+append :linked_dirs, %w[
+  log
+  tmp/pids
+  tmp/cache
+  tmp/sockets
+  public/system
+  public/uploads
+  public/storage
+]
 # -------------------------------
 # Keep Releases
 # -------------------------------
