@@ -1,0 +1,232 @@
+- extra_fields = record.class.extra_fields_by_config.dup if record.class.respond_to?("extra_fields_by_config")
+- special_extra_fields = record.extra_field('config.extra_fields')&.data if record.respond_to?("extra_field")
+- if special_extra_fields.present? && special_extra_fields['sections'].present?
+  - extra_fields ||= {}
+  - extra_fields['sections'] ||= []
+  - extra_fields['sections'] += special_extra_fields['sections']
+
+- property_fields = record.class.properties_config if record.class.respond_to?(:properties_config)
+
+= form_for record, data: {turbo: false}, html: {id: 'edit-form'} do |f|
+  .mb-2
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', back_url, class: "btn btn-default"
+    -if(["Product", "Page", "Post", "Category"].include?(record.class.name))
+      = link_to "#{ web_path_for record }", class: "btn btn-default mr-1 float-right", target: '_blank' do
+        %i.fa-solid.fa-arrow-up-right-from-square
+        Open page
+      = link_to "#", class: "btn btn-default mr-1 float-right", data: { toggle: "modal", target: "#previewModal"}, id: "preview-btn" do
+        %i.fa-solid.fa-eye
+        View content
+    - if ['Page', 'Category'].include?(record.class.name)
+      = link_to "#{ new_page_contents_path(owner_type: @record.class.name, owner_id: @record.id) }", class: "btn btn-default mr-1 float-right" do
+        %i.fa-solid.fa-brush
+        Edit page
+    - if Settings.localized? && record.class.include?(HasLocale)
+      = link_to "#", class: "btn btn-default dropdown-toggle mr-1 float-right", role: "button", id: "dropdownLanguageLink", data: { toggle: "dropdown" }, aria: { haspopup: "true", expanded: "false" } do
+        %i.fa-solid.fa-language
+        = t("common.languages.#{@record.locale}")
+      .dropdown-menu{"aria-labelledby" => "dropdownLanguageLink"}
+        - language_list.each do |lang|
+          - if @record.available_locales.include? lang[:code]
+            %a.dropdown-item{href: "?locale_redirect=#{lang[:code]}", class: "dropdown-item #{@record.locale == lang[:code] ? 'active' : ''}"}= lang[:name]
+          - else
+            %a{href: "#", class: "dropdown-item", data: {locale: lang[:code], toggle: "modal", target: "#localeMapperModal"}}= lang[:name]
+
+
+  - if @errors&.any?
+    = render "admin/shared/errors", errors: @errors
+  .card.card-primary.card-outline.card-outline-tabs
+    .card-header.p-0.border-bottom-0
+      %ul#custom-tabs-four-tab.nav.nav-tabs{:role => "tablist"}
+        - if tabs.include?("default")
+          %li.nav-item
+            %a#default-tab.nav-link.text-dark.tab.active{"aria-controls" => "default", "aria-selected" => "true", "data-toggle" => "pill", :href => "#default", :role => "tab", :onclick => "updateCurrentGroup(this);"} Details
+        - if tabs.include?("category")
+          %li.nav-item
+            %a#category-tab.nav-link.text-dark{"aria-controls" => "category", "aria-selected" => "false", "data-toggle" => "pill", :href => "#category-form", :role => "tab", :onclick => "updateCurrentGroup(this);"} Category
+        - if tabs.include?("additional_category")
+          - (WebConfig.additional_categories_for(record.class.name.underscore.pluralize) || []).each do |category|
+            %li.nav-item
+              %a.nav-link.text-dark{id: "additional-category-#{category['key']}-tab", "aria-controls" => "category", "aria-selected" => "false", "data-toggle" => "pill", :href => "#additional-category-#{category['key']}-form", :role => "tab", :onclick => "updateCurrentGroup(this);"}= "#{category["name"]} category"
+        - if tabs.include?("content")
+          %li.nav-item
+            %a#content-tab.text-dark.nav-link{"aria-controls" => "content", "aria-selected" => "false", "data-toggle" => "pill", :href => "#content-form", :role => "tab", :onclick => "updateCurrentGroup(this)"} Content
+        - if tabs.include?("custom_html")
+          %li.nav-item
+            %a#custom_html-tab.text-dark.nav-link{"aria-controls" => "custom_html", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom_html-form", :role => "tab", :onclick => "updateCurrentGroup(this)"} Custom HTML
+        - if tabs.include?("properties") && property_fields.present?
+          %li.nav-item
+            %a#properties-tab.text-dark.nav-link{"aria-controls" => "properties", "aria-selected" => "false", "data-toggle" => "pill", :href => "#properties-form", :role => "tab", :onclick => "updateCurrentGroup(this)"} Properties
+        - if tabs.include?("variants")
+          %li.nav-item
+            %a#variants-tab.text-dark.nav-link{"aria-controls" => "variants", "aria-selected" => "false", "data-toggle" => "pill", :href => "#variants-form", :role => "tab", :onclick => "updateCurrentGroup(this)"} Variants
+        - if tabs.include?("extra_fields") && extra_fields.present?
+          %li.nav-item
+            %a#extra_field-tab.nav-link.text-dark{"aria-controls" => "extra_field", "aria-selected" => "false", "data-toggle" => "pill", :href => "#extra_field-form", :role => "tab", :onclick => "updateCurrentGroup(this);"} Extra fields
+        - if tabs.include?("medias")
+          %li.nav-item
+            %a#medias-tab.text-dark.nav-link{"aria-controls" => "medias", "aria-selected" => "false", "data-toggle" => "pill", :href => "#medias", :role => "tab", :onclick => "updateCurrentGroup(this);setupMediaTab();"} Files
+        - if tabs.include?("metadata")
+          %li.nav-item
+            %a#metadata-tab.text-dark.nav-link{"aria-controls" => "metadata", "aria-selected" => "false", "data-toggle" => "pill", :href => "#metadata-form", :role => "tab", :onclick => "updateCurrentGroup(this);"} Meta data
+        - if tabs.include?("tracking")
+          %li.nav-item
+            %a#tracking-tab.text-dark.nav-link{"aria-controls" => "tracking", "aria-selected" => "false", "data-toggle" => "pill", :href => "#tracking-form", :role => "tab", :onclick => "updateCurrentGroup(this);"} Tracking
+        - if tabs.include?("global_slug")
+          %li.nav-item
+            %a#global-slug-tab.text-dark.nav-link{"aria-controls" => "global-slug", "aria-selected" => "false", "data-toggle" => "pill", :href => "#global-slugs", :role => "tab", :onclick => "updateCurrentGroup(this);addGlobalSlugSubmitHandle();"} All slugs
+        - if tabs.include?("albums") && WebConfig.for('features.owned_albums')&.dig('enabled')
+          %li.nav-item
+            = link_to send("albums_#{record.class.name.underscore}_path"), class: "nav-link text-dark" do
+              Albums
+        - if tabs.include?("history")
+          %li.nav-item
+            %a#history-tab.text-dark.nav-link{"aria-controls" => "history", "aria-selected" => "false", "data-toggle" => "pill", :href => "#history-list", :role => "tab", :onclick => "updateCurrentGroup(this);"} History
+    .card-body
+      #custom-tabs-four-tabContent.tab-content
+        - if tabs.include?("default")
+          #default.tab-pane.fade.show.active{"aria-labelledby" => "default-tab", :role => "tabpanel"}
+            = render "admin/shared/default_info_form", record: record, f: f
+        - if tabs.include?("category")
+          #category-form.tab-pane.fade{"aria-labelledby" => "category-tab", :role => "tabpanel"}
+            = render "admin/shared/category_form", record: record, f: f
+        - if tabs.include?("content")
+          #content-form.tab-pane.fade{"aria-labelledby" => "custom-tabs-four-profile-tab", :role => "tabpanel"}
+            = render "admin/shared/content_form", record: record, f: f
+        - if tabs.include?("custom_html")
+          #custom_html-form.tab-pane.fade{"aria-labelledby" => "custom-tabs-four-profile-tab", :role => "tabpanel"}
+            = render "admin/shared/custom_html_form", record: record, f: f
+        - if tabs.include?("properties") && property_fields.present?
+          #properties-form.tab-pane.fade{"aria-labelledby" => "custom-tabs-four-profile-tab", :role => "tabpanel"}
+            = render "admin/shared/property_form", record: record, f: f, fields_config: property_fields
+        - if tabs.include?("extra_fields") && extra_fields.present?
+          #extra_field-form.tab-pane.fade{"aria-labelledby" => "extra_field-tab", :role => "tabpanel"}
+            = render "admin/shared/extra_field_form", record: record, f: f,  sections: extra_fields["sections"]
+        - if tabs.include?("medias")
+          #medias.tab-pane.fade{"aria-labelledby" => "medias-tab", :role => "tabpanel"}
+            = render "admin/shared/medias", record: record
+        - if tabs.include?("metadata")
+          #metadata-form.tab-pane.fade{"aria-labelledby" => "metadata-tab", :role => "tabpanel"}
+            = render "admin/shared/meta_data_form", record: record, f: f
+        - if tabs.include?("tracking")
+          #tracking-form.tab-pane.fade{"aria-labelledby" => "tracking-tab", :role => "tabpanel"}
+            = render "admin/shared/tracking_form", record: record, f: f
+        - if tabs.include?("global_slug")
+          #global-slugs.tab-pane.fade{"aria-labelledby" => "global-slug-tab", :role => "tabpanel"}
+            = render "admin/shared/global_slugs", record: record
+        - if tabs.include?("variants")
+          #variants-form.tab-pane.fade{"aria-labelledby" => "variants-tab", :role => "tabpanel"}
+            = render "admin/shared/variants", record: record, f: f
+        - if tabs.include?("additional_category")
+          - (WebConfig.additional_categories_for(record.class.name.underscore.pluralize) || []).each do |category|
+            .tab-pane.fade{:role => "tabpanel", id: "additional-category-#{category["key"]}-form"}
+              = render "admin/shared/additional_category", record: record, f: f, category_config: category
+        - if tabs.include?("history")
+          #history-list.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+            = render "admin/shared/history_list", record: record, f: f
+    / /.card
+#render-upload-midia-place
+- if tabs.include?("global_slug")
+  = render "admin/shared/global_slug_form_modal", record: record
+- if tabs.include?("variants")
+  = render "admin/shared/edit_variant_modal", record: record
+
+= render "admin/shared/preview_modal"
+= render "admin/shared/locale_mapper_modal"
+:javascript
+  $(document).ready(() => {
+    var urlParams = new URLSearchParams(window.location.search);
+    var currentGroup = urlParams.get('group')
+    if(currentGroup){
+      var tabBtn = document.querySelector("#"+currentGroup)
+      if(tabBtn){
+        tabBtn.click()
+      }
+    }
+
+    setupCkeditor();
+  });
+
+  if (window.CKEDITOR) {
+    setupCkeditor();
+  }
+
+  document.getElementById("preview-btn").addEventListener("click", function(){
+    if(CKEDITOR.instances['content-editor']){
+      document.querySelector("#previewModal .modal-body").innerHTML = CKEDITOR.instances['content-editor'].getData()
+    }else{
+      document.querySelector("#previewModal .modal-body").innerHTML = document.getElementById("content-editor").value
+    }
+  })
+
+  function updateCurrentGroup(e){
+    const url = new URL(window.location);
+    url.searchParams.set('group', e.id);
+    window.history.pushState(null, '', url.toString());
+    const form = $("#edit-form")
+    form.attr('action', form.attr('action').split('?')[0] + '?' + `group=${e.id}`)
+  }
+
+  function addGlobalSlugSubmitHandle(){
+    $('#global-slug-form').submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+           type: "POST",
+           url : "/admin/global_slugs",
+           data: $("#global-slug-form").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+                e.preventDefault();
+                var ele = $("#global-slugs-list");
+                var dataItemCount = parseInt(ele.attr('data-item-count'));
+                var nextItemCount = dataItemCount + 1;
+                ele.attr('data-item-count', nextItemCount);
+                $("#global-slugs-list").append(`
+                  <tr>
+                    <td>${nextItemCount}.</td>
+                    <td>${data['created_at']}</td>
+                    <td>${data['name']}</td>
+                    <td>${data['primary']}</td>
+                    <td>
+                      <div class="margin">
+                      <a class="btn btn-outline-primary mr-1" href="/"><i class="bi bi-box-arrow-up-right"></i>
+                      </a><a class="btn btn-outline-danger mr-1" href="javascript:void(0)" onclick="handleDeleteSlug(this, ${data['id']});"><i class="bi bi-trash"></i>
+                      </a></div>
+                    </td>
+                  </tr>`)
+                $("#globalSlugFormModal").modal("hide");
+                $("#slug-form-error").html('')
+                $("#global_slug_name").val('')
+                return;
+           },
+           error: function(xhr, status, error) {
+            $("#slug-form-error").html(`<div class="alert alert-warning" role="alert">${error}<div>`);
+           }
+        })
+    });
+  }
+
+  function setupCkeditor(){
+    CKEDITOR.replace( 'content-editor', {
+      extraPlugins: 'html5video',
+      filebrowserBrowseUrl: "/admin/medias/browse?record_type=#{record.class.to_s}&record_id=#{record.id}&for=content",
+      filebrowserImageBrowseUrl: "/admin/medias/browse?record_type=#{record.class.to_s}&record_id=#{record.id}&type=image&for=content", // image/video/file
+      filebrowserUploadUrl: "/admin/medias/upload?record_type=#{record.class.to_s}&record_id=#{record.id}&for=content",
+      filebrowserImageUploadUrl: "/admin/medias/upload?record_type=#{record.class.to_s}&record_id=#{record.id}&for=content",
+      language: "US",
+      height: "600",
+      toolbar: "Full"
+    });
+  }
+
+  function setupMediaTab(){
+    $(".new-media-btn").click(function(e){
+      if(e.currentTarget.dataset.type == "featured_images"){
+        var htmlContent = "#{j render "admin/shared/upload_media_modal", record: record, type: 'featured_images' }"
+      }else if(e.currentTarget.dataset.type == "general_medias"){
+        var htmlContent = "#{j render "admin/shared/upload_media_modal", record: record, type: 'general_medias' }"
+      }
+      $("#render-upload-midia-place").html(htmlContent)
+    })
+  }

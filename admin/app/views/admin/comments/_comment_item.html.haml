@@ -1,0 +1,21 @@
+%tr{ id: "comment_#{comment.id}" }
+  %td{class: "accordion-toggle", data: { toggle: "collapse", target: ".comment_replies_#{comment.id}"}}
+    %button.btn.btn-default.btn-xs{class: !comment.replied? ? "disabled" : "border-dark"}
+      %i.bi.bi-chevron-down
+  %td.text-truncate= comment.content
+  %td.text-truncate= comment.name
+  %td.text-truncate= comment.email
+  %td.text-truncate= comment.phone
+  %td.text-truncate= "#{ comment.owner_type}: #{comment.owner.name}"
+  %td.comment-status= comment.status
+  %td= comment.rate.to_i
+  %td= comment.created_at.strftime("%H:%M %d/%m/%Y")
+  %td
+    %a.btn.btn-primary.edit-comment{"data-id" => comment.id, "data-url" => comment_path(comment) }
+      %i.bi.bi-pencil{data: { toggle: 'tooltip',placement: 'top', title: 'Reply' } }
+    %a.btn.btn-outline-warning.mr-1.update-comment{data: {id: comment.id, status: 'uncensored', toggle: 'tooltip', placement: 'top', title: 'Uncensored'}, class: comment.uncensored? ? "d-none" : ""}
+      %i.bi.bi-stopwatch
+    %a.btn.btn-outline-success.mr-1.update-comment{data: {id: comment.id, status: 'published', toggle: 'tooltip', placement: 'top', title: 'Publish'}, class: comment.published? ? "d-none" : ""}
+      %i.bi.bi-person-check
+    %a.btn.btn-outline-danger.mr-1.update-comment{data: {id: comment.id, status: 'rejected', toggle: 'tooltip', placement: 'top', title: 'Reject'}, class: comment.rejected? ? "d-none" : ""}
+      %i.bi.bi-x-circle

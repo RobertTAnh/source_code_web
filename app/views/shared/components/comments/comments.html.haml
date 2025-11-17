@@ -1,0 +1,79 @@
+.wk-comments-container.container
+  .col-md-12.bootstrap.snippets.pt-3
+    .h3
+      Bình luận 
+      - if owner.respond_to? :name
+        = owner.name
+    .panel
+      .panel-body
+        .media-block
+          .media-left.mar-top
+            %i.bi.bi-person-square{style: 'font-size: 40px'}
+          .media-body
+            %form{class: "wk-comment-form", action: "#{ comments_path }", method: :post }
+              .row
+                .col-md-8.col-sm-12
+                  .row
+                    .col-md-12.mar-top
+                      %input.form-control{name: "content", placeholder: "Mời bạn chia sẻ một số cảm nhận về sản phẩm này"}
+                    .col-md-6.col-sm-12.mar-top
+                      %input.form-control{name: "name", placeholder: "Họ tên(Bắt buộc)"}
+                    .col-md-6.col-sm-12.mar-top
+                      %input.form-control{name: "phone", placeholder: "Số điện thoại"}
+                    .col-md-12.col-sm-12.mar-top
+                      %textarea.form-control{name: "address", placeholder: "Địa chi", rows: "2"}
+                .col-md-4.col-sm-12
+                  .row.mar-top
+                    .col-md-12.col-sm-12.rating.px-0
+                      %b Bạn cảm thấy sản phẩm như thế nào?(chọn sao nhé)
+                    .col-md-12.col-sm-12.mar-top.rating
+                      %p.rating-line
+                        %input{class: "form-check-input", type:"radio", name: "rate", value: 5, checked: true}
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span Tuyệt vời
+                      %p.rating-line
+                        %input{class: "form-check-input", type:"radio", name: "rate", value: 4}
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star-o
+                        %span Rất tốt
+                      %p.rating-line
+                        %input{class: "form-check-input", type:"radio", name: "rate", value: 3}
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star-o
+                        %span.fa.fa-star-o
+                        %span Tốt
+                      %p.rating-line
+                        %input{class: "form-check-input", type:"radio", name: "rate", value: 2}
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star-o
+                        %span.fa.fa-star-o
+                        %span.fa.fa-star-o
+                        %span Bình thường
+                      %p.rating-line
+                        %input{class: "form-check-input", type:"radio", name: "rate", value: 1}
+                        %span.fa.fa-star.checked
+                        %span.fa.fa-star-o
+                        %span.fa.fa-star-o
+                        %span.fa.fa-star-o
+                        %span.fa.fa-star-o
+                        %span Chưa tốt
+                .col-md-8.col-sm-12.mar-top.clearfix.mar-top
+                  %input{type: "hidden", name: "owner_id", value: owner.id}
+                  %input{type: "hidden", name: "owner_type", value: owner.class.to_s}
+                  %button.btn.btn-sm.btn-danger.w-100{type: "submit"} Gửi bình luận
+    .panel
+      .panel-body.wk-comments-body{data: {owner_type: owner.class.to_s, owner_id: owner.id, url: comments_path}}
+      .load-more-comments.text-center.d-none{style: "padding: 10px;", data: {page: 2} }
+        %button.btn.btn-sm.btn-success Xem thêm
+
+= render_view 'components/comments/modal_comments'

@@ -1,0 +1,22 @@
+.form-container
+  - if @errors&.any?
+    = render "admin/shared/errors", errors: @errors
+  - property_fields = record.class.properties_config if record.class.respond_to?(:properties_config)
+  - kinds = property_fields.present? ? property_fields["sections"].map{|i| [i["kind_name"].present? ? i["kind_name"] : i["kind"], i["kind"]] if i["kind"].present?}.uniq.compact : []
+
+  = form_for @record, data: {turbo: false} do |f|
+    .form-group
+      %label Name
+      = f.text_field :name, class: 'form-control', placeholder: 'Product name'
+    .form-group
+      %label Slug
+      = f.text_field :slug, class: 'form-control', placeholder: 'Auto generated'
+    - if kinds.present?
+      .form-group
+        %label Kind
+        = f.select :kind, options_for_select(kinds, record.kind || params[:kind]), {include_blank: "No Kind"}, { class: "form-control" }
+    .form-group
+      = render "admin/shared/tag_form_select", record: @record, form: f
+
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', products_path, class: "btn btn-default"

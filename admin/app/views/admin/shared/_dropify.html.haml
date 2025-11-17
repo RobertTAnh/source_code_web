@@ -1,0 +1,33 @@
+:javascript
+  document.addEventListener('jQueryLoaded', function (e) {
+    (function ($) {
+
+      console.log('All of my code in here. Or some of it, I can wrap more code with the same event listener elsewhere.');
+      console.log('jQuery version: ', $.fn.jquery);
+
+    })(jQuery);
+  });
+  if(window.$) {
+    $(function() {
+      $('.dropify').attr("data-max-file-size", `${ window.IMAGE_LIMIT_SIZE / 1024 / 1024 }M`);
+
+      $('.dropify').dropify({
+        imgFileExtensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'],
+        tpl: {
+            wrap:            '<div class="dropify-wrapper"></div>',
+            loader:          '<div class="dropify-loader"></div>',
+            message:         '<div class="dropify-message"><span class="file-icon"></span> <p>{{ default }}</p></div>',
+            preview:         '<div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-infos-message">{{ replace }}</p></div></div></div>',
+            filename:        '<p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner"></span></p>',
+            clearButton:     '<button type="button" class="dropify-clear">{{ remove }}</button>',
+            errorLine:       '<p class="text-danger dropify-error">{{ error }}</p>',
+            errorsContainer: '<div class=""><ul></ul></div>'
+        }
+      });
+
+      $('.dropify').on('change', function(event) {
+        const file = event.target.files[0];
+          window.validateImageSize(file, window.IMAGE_LIMIT_SIZE);
+      });
+    });
+  };

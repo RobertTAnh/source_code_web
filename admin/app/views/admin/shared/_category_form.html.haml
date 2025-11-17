@@ -1,0 +1,21 @@
+.row
+  - if record.class.name.in? ["Product", "Post"]
+    .col-6
+      .w-75
+        %h5
+          %b Product categories
+        = render "admin/shared/category_select", categories: Category.product, primaryizable: true
+
+  - if record.class.name == "Post"
+    .col-6
+      .w-75
+        %h5
+          %b Post categories
+        = render "admin/shared/category_select", categories: Category.post, primaryizable: true
+
+  - if record.is_a? Resource
+    .col-6
+      .w-75
+        %h5
+          %b= "#{record.class.name} categories"
+        = render "admin/shared/category_select", categories: Category.where(kind: record.class.name.underscore), primaryizable: true

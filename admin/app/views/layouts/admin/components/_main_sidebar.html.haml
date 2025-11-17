@@ -1,0 +1,134 @@
+/ /.navbar
+/ Main Sidebar Container
+%aside.main-sidebar.sidebar-light-primary.elevation-4
+  / Brand Logo
+  %a.brand-link{:href => dashboard_path}
+    %img.brand-image{:alt => "Logo", :src => web_config("logo_url"), :style => "opacity: .8; float: unset;"}/
+    %span.brand-text.font-weight-light= web_config('website.name')
+  / Sidebar
+  .sidebar
+    / Sidebar user panel (optional)
+    .user-panel.mt-3.pb-3.mb-3.d-flex
+      .image
+        %img.img-circle.elevation-2{:alt => "User Image", :src => current_user.image_url || "https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg"}/
+      .info
+        %a.d-block{:href => "#"}= current_user.name
+    / SidebarSearch Form
+    /.form-inline
+    /  .input-group{"data-widget" => "sidebar-search"}
+    /    %input.form-control.form-control-sidebar{"aria-label" => "Search", :placeholder => "Search", :type => "search"}/
+    /    .input-group-append
+    /      %button.btn.btn-sidebar
+    /        %i.fas.fa-search.fa-fw
+    / Sidebar Menu
+    %nav.mt-2
+      %ul.nav.nav-pills.nav-sidebar.flex-column{"data-accordion" => "false", "data-widget" => "treeview", :role => "menu"}
+        %li.nav-item
+          %a.nav-link{:href => dashboard_path, class: "#{controller_name == 'dashboard' ? 'active' : ''}"}
+            %i.nav-icon.bi.bi-speedometer
+            %p
+              Dashboard
+        %li.nav-item
+          %a.nav-link{:href => products_path, class: "#{controller_name == 'products' ? 'active' : ''}"}
+            %i.nav-icon.bi.bi-boxes
+            %p
+              Products
+              //%span.badge.badge-info.right 6
+        %li.nav-item
+          %a.nav-link{:href => posts_path, class: "#{controller_name == 'posts' ? 'active' : ''}"}
+            %i.nav-icon.fa-regular.fa-newspaper
+            %p
+              Posts
+        %li.nav-item
+          %a.nav-link{:href => pages_path, class: "#{controller_name == 'pages' ? 'active' : ''}"}
+            %i.nav-icon.fa-solid.fa-pager
+            %p
+              Pages
+        %li.nav-item
+          %a.nav-link{:href => contacts_path, class: "#{controller_name == 'contacts' ? 'active' : ''}"}
+            %i.nav-icon.fas.fa-edit
+            %p
+              Contacts
+        %li.nav-item
+          %a.nav-link{:href => orders_path, class: "#{controller_name == 'orders' ? 'active' : ''}"}
+            %i.nav-icon.fa-sharp.fa-solid.fa-receipt
+            %p
+              Orders
+
+        %li.nav-item
+          %a.nav-link{:href => albums_path, class: "#{controller_name == 'albums' ? 'active' : ''}"}
+            %i.nav-icon.bi.bi-chat-left-text-fill
+            %p
+              Gallery
+
+        - if WebConfig.for('features')&.dig('comments')
+          %li.nav-item
+            %a.nav-link{:href => comments_path, class: "#{controller_name == 'comments' ? 'active' : ''}"}
+              %i.nav-icon.fa-sharp.fa-solid.fa-receipt
+              %p
+                Comment
+
+        - if custom_resource_config =  WebConfig.custom_resource_config.presence
+          %li.nav-header
+            OTHERS
+          - custom_resource_config.each do |resource|
+            - resource_name_pluralize = resource[:name].underscore.pluralize
+            %li.nav-item{class: "#{controller_name == resource_name_pluralize || (controller_name == "categories" && params[:kind] == resource[:name].underscore) ? 'active menu-open menu-is-opening' : ''}"}
+              =link_to "/admin/#{resource[:name].underscore.pluralize}", class: "nav-link #{(controller_name == resource_name_pluralize) ? 'active' : ''}", onclick: "redirectToLink(this)" do
+                %i.fa-solid.fa-shapes
+                %p
+                  =resource[:name]
+                - if resource[:has_category]
+                  %i.fas.fa-angle-left.right
+
+              - if resource[:has_category]
+                %ul.nav.nav-treeview
+                  %li.nav-item
+                    =link_to categories_path(kind: resource[:name].underscore), class: "nav-link #{params[:kind] == resource[:name].underscore ? 'active' : ''}" do
+                      %i.far.fa-circle.nav-icon
+                      %p Categories
+
+        %li.nav-header
+          SETTINGS
+
+        %li.nav-item{class: "#{controller_name == 'categories' && params[:kind].in?(["post", "product", "service"]) ? 'active menu-open menu-is-opening' : ''}"}
+          %a.nav-link{:href => "#", class: "#{controller_name == 'categories' && params[:kind].in?(["post", "product", "service"]) ? 'active' : ''}"}
+            %i.nav-icon.bi.bi-tags-fill
+            %p
+              Categories
+              %i.fas.fa-angle-left.right
+          %ul.nav.nav-treeview
+            %li.nav-item
+              =link_to categories_path(kind: "post"), class: "nav-link #{params[:kind] == "post" ? 'active' : ''}" do
+                %i.far.fa-circle.nav-icon
+                %p Post categories
+            %li.nav-item
+              =link_to categories_path(kind: "product"), class: "nav-link #{params[:kind] == "product" ? 'active' : ''}" do
+                %i.far.fa-circle.nav-icon
+                %p Product categories
+            %li.nav-item
+              =link_to categories_path(kind: "service"), class: "nav-link #{params[:kind] == "service" ? 'active' : ''}" do
+                %i.far.fa-circle.nav-icon
+                %p Service categories
+        %li.nav-item
+          =link_to "/admin/web_configs", class: "nav-link #{(controller_name == "web_configs" && action_name == "edit") ? 'active' : ''}" do
+            %i.nav-icon.fas.fa-table
+            %p
+              Website
+        - if WebConfig.for("website.advanced_settings")
+          %li.nav-item
+            =link_to "/admin/advanced_settings", class: "nav-link #{(controller_name == "web_configs" && action_name == "advanced_settings") ? 'active' : ''}" do
+              %i.nav-icon.fa-solid.fa-gear
+              %p
+                Advanced Settings
+        %li.nav-item
+          =link_to users_path, class: "nav-link #{controller_name == "users" ? 'active' : ''}" do
+            %i.nav-icon.fa-solid.fa-people-group
+            %p
+              All Users
+        %li.nav-item
+          = link_to destroy_user_session_path, class: "nav-link", method: :delete, data: {turbo_method: :delete} do
+            %i.nav-icon.fa-solid.fa-power-off
+            %p
+              Sign out
+              %i.fas.right

@@ -1,0 +1,32 @@
+%section.vh-100{:style => "background-color: #9A616D;"}
+  .container.py-5.h-100
+    .row.d-flex.justify-content-center.align-items-center.h-100
+      // .col.col-xl-10
+      .col.col-xl-7
+        .card{:style => "border-radius: 1rem; border: none;"}
+          .row.g-0
+            // .col-md-6.col-lg-5.d-none.d-md-block
+            //   %img.img-fluid{:alt => "login form", :src => "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp", :style => "border-radius: 1rem 0 0 1rem;"}/
+            // .col-md-6.col-lg-7.d-flex.align-items-center
+            .col-md-12.d-flex.align-items-center
+              .card-body.p-4.p-lg-5.text-black
+                = form_for(resource, as: resource_name, url: session_path(resource)) do |f|
+                  .d-flex.align-items-center.mb-3.pb-1
+                    %i.fas.fa-cubes.fa-2x.me-3{:style => "color: #ff6219;"}
+                    %span.h1.fw-bold.mb-0= web_config('website.name')
+                  %h5.fw-normal.mb-3.pb-3{:style => "letter-spacing: 1px;"} Sign into your account
+                  = render "devise/shared/error_messages", resource: resource
+                  .form-outline.mb-4
+                    %label.form-label.mb-0{:for => "email_field"} Email address
+                    = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", id: "email_field"
+                  .form-outline.mb-4
+                    %label.form-label.mb-0{:for => "form2Example27"} Password
+                    = f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg"
+                  .pt-1.mb-4
+                    = f.submit "Login", class: "btn btn-dark btn-lg btn-block"
+                = form_for "Login", url: user_google_oauth2_omniauth_authorize_path(resource), method: :post, data: {turbo: "false"} do |f|
+                  = button_tag(type: 'submit', class: "omniauth_google_sign_in btn-outline-danger", style: "border-radius:5px;") do
+                    %i.bi.bi-google &nbsp;
+                    %span.text-dark.font-weight-bold Login with google
+                = content_tag(:div, flash[:google_error], id: "flash_error", class: "text-danger") if flash[:google_error]
+                = link_to "Forgot your password?", new_password_path(resource_name), class: "small text-muted"

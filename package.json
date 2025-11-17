@@ -1,0 +1,34 @@
+{
+  "name": "app",
+  "private": "true",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.1.2",
+    "@hotwired/stimulus": "^3.0.1",
+    "@hotwired/turbo-rails": "^7.1.3",
+    "@popperjs/core": "^2.11.5",
+    "add": "^2.0.6",
+    "bootstrap": "^4.6.1",
+    "bootstrap-icons": "^1.8.3",
+    "ckeditor4": "ckeditor/ckeditor4-releases#full/latest",
+    "dropify": "^0.2.2",
+    "dropzone": "^6.0.0-beta.2",
+    "esbuild": "^0.14.48",
+    "flag-icons": "^6.6.4",
+    "gijgo": "^1.9.14",
+    "jquery": "^3.6.0",
+    "jquery-validation": "^1.19.5",
+    "jsoneditor": "^9.9.2",
+    "popper.js": "^1.16.1",
+    "sass": "^1.53.0",
+    "select2": "4.0.13",
+    "toastr": "^2.1.4",
+    "yarn": "^1.22.19"
+  },
+  "scripts": {
+    "build": "yarn build:js && yarn build:css && yarn build:admin:js && yarn build:admin:css",
+    "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets",
+    "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
+    "build:admin:js": "esbuild admin/app/javascript/*.* --bundle --sourcemap --outdir=admin/app/assets/builds/admin --public-path=assets",
+    "build:admin:css": "sass ./admin/app/assets/stylesheets/admin/admin.bootstrap.scss:./admin/app/assets/builds/admin/admin.css --no-source-map --load-path=node_modules"
+  }
+}

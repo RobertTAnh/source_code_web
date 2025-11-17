@@ -1,0 +1,7 @@
+.content-header
+// Main content
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        = render "admin/shared/list", view_options: resources_view_options(@records, get_resource_config_for(@resource_model.to_s)), records: @records

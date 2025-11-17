@@ -1,0 +1,22 @@
+#globalSlugFormModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "globalSlugModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    = form_for record.global_slugs.new, html: { remote: true, id: "global-slug-form" }, data: { turbo: false } do |sf|
+      = sf.hidden_field :sluggable_type
+      = sf.hidden_field :sluggable_id
+
+      .modal-content
+        .modal-header
+          %h5#globalSlugModalLabel.modal-title New global slug
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          #slug-form-error
+          .form-group
+            = sf.label :slug
+            = sf.text_field :name, class: "form-control"
+          .form-check
+            = sf.check_box :primary, class: "form-check-input", value: true, id: "primary-checkbox"
+            = sf.label :primary, "Mask as Primary", class: "form-check-label", for: "primary-checkbox"
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+          = sf.submit "Submit", class: "btn btn-primary"

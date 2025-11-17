@@ -1,0 +1,16 @@
+.row
+  .col-sm-12
+    = file_field_tag :custom_html
+  %br
+  %br
+  .col-sm-12
+    %table.w-100
+      %tbody
+        - if record.respond_to?("view") && record.view
+          - custom_html = record.view
+          %tr
+            %td
+              = custom_html.name
+            %td
+              = check_box_tag :delete_custom_html
+              = label_tag :delete_custom_html, :Delete

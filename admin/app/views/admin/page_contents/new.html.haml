@@ -1,0 +1,351 @@
+.content-header
+
+%section.content
+  .container-fluid
+    .row{style: 'justify-content: space-between' }
+      = form_with url: '#', data: {turbo: false}, html: {id: 'edit-view-content-form'} do |f|
+        .mb-2
+          = f.submit 'Submit', id: 'submitData', class: 'btn btn-primary submit'
+          = link_to 'Back', edit_polymorphic_url(@owner), class: "btn btn-default"
+      .float-right
+        %button.btn.btn-default{onclick: "viewAsMobile();"} Mobile
+        %button.btn.btn-default{onclick: "viewAsDesktop();"} Desktop
+
+    .row.wk-editable-iframe{style: 'justify-content: center'}
+      %iframe{id: 'wk-editable-iframe',  src: web_path_for(@owner, locale: @owner.locale), title: "description", width: '100%', height: '800px'}
+
+    .modal#wk-editable-modal{tabindex: "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %h5.modal-title Edit text
+            %button.close{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+              %span{"aria-hidden" => "true"} ×
+          .modal-body
+          .modal-footer
+            %button.btn.btn-secondary{"data-dismiss" => "modal", type: "button"} Cancel
+            %button.btn.btn-primary.submit{type: "button"} Save changes
+
+    - shared_form_scope = capture_haml do
+      .form-group
+        %label{:for => "scope"} Apply for
+        %input#currentPageScope{:name => "scope", :type => "radio", :value => "current_page", checked: true}/
+        %label{:for => "currentPageScope"} Current page
+        %input#allPageScope{:name => "scope", :type => "radio", :value => "all_page"}/
+        %label{:for => "allPageScope"} All page
+
+    - wk_editable_text = capture_haml do
+      .form-group
+        %label{:for => "newText"} New text
+        %textarea.form-control{name: 'text', rows: 5}
+
+    - wk_editable_link = capture_haml do
+      .form-group
+        %label{:for => "newText"} New text
+        %input.form-control{name: 'text', placeholder: 'Link text'}
+      .form-group
+        %label{:for => "newTarget"} New target
+        %input.form-control{name: 'target', placeholder: '/link-to-page'}
+      .form-group.link_image
+        %label{:for => "oldImage"} Image
+        %input{name: "upload", class: "dropify", type: "file", "data-max-file-size": "#{max_image_size_in_mb}M"}
+        %input{name: "file_url", type: "hidden"}/
+
+    - wk_editable_image = capture_haml do
+      .form-group
+        %label{:for => "oldImage"} New Image
+        %input{name: "upload", id: "upload-file_medias", class: "dropify", type: "file", "data-max-file-size": "#{max_image_size_in_mb}M"}
+        %input{name: "file_url", type: "hidden"}/
+
+    :javascript
+      const ownerData = #{@owner_data.to_json.html_safe};
+      const themeData = #{@theme_data.to_json.html_safe};
+      const defaultData = {};
+      let currentData = ownerData;
+      const sharedFormScope = `#{shared_form_scope}`;
+      const editableComponents = {
+        "wk-editable-text": {
+          form: `#{wk_editable_text}`,
+          applyForm: (data) => {
+            $('#wk-editable-modal textarea[name="text"]').val(data || '');
+          },
+          data: () => {
+            return $('#wk-editable-modal textarea[name="text"]').val();
+          },
+          applyView: (id, data) => {
+            if (!isPresent(data)) return;
+
+            $('#wk-editable-iframe').contents().find('#' + $.escapeSelector(id)).text(data);
+          },
+          dataFromView: (element) => {
+            return element.text();
+          }
+        },
+        "wk-editable-link": {
+          form: `#{wk_editable_link}`,
+          applyForm: (data) => {
+            $('#wk-editable-modal input[name="text"]').val((data || {}).text);
+            $('#wk-editable-modal input[name="target"').val((data || {}).target);
+            $('#wk-editable-modal input[name="file_url"').val((data || {}).image);
+          },
+          data: () => {
+            const text = $('#wk-editable-modal input[name="text"]').val();
+            const target = $('#wk-editable-modal input[name="target"]').val();
+            const image = $('#wk-editable-modal input[name="file_url"]').val();
+
+            return {
+              text,
+              target,
+              image
+            };
+          },
+          applyView: (id, data) => {
+            if (!isPresent(data)) return;
+
+            const element = $('#wk-editable-iframe').contents().find('#' + $.escapeSelector(id));
+            element.attr('href', data?.target || '');
+            const textElement = element.find('.wk-text')
+            const imageElement = element.find('.wk-image')
+
+            if (textElement.length){
+              textElement.text(data?.text || '');
+              imageElement[0]?.attr('src', data?.image);
+            } else if (imageElement.length){
+              imageElement.attr('src', data?.image);
+            }
+            else {
+              element.text(data?.text || '');
+            }
+          },
+          dataFromView: (element) => {
+            return {
+              text: $(element.find('.wk-text')[0] || element).text(),
+              target: element.attr('href'),
+              image: element.find('.wk-image')[0]?.src
+            }
+          }
+        },
+        "wk-editable-image": {
+          form: `#{wk_editable_image}`,
+          applyForm: (data) => {
+            $('#wk-editable-modal image[name="wk-preview-image"]').attr('src', data || '');
+          },
+          data: () => {
+            return $('#wk-editable-modal input[name="file_url"]').val();
+          },
+          applyView: (id, data) => {
+            if (!isPresent(data)) return;
+
+            $('#wk-editable-iframe').contents().find('#' + $.escapeSelector(id)).attr('src', data);
+          },
+          dataFromView: (element) => {
+            return element.attr('src');
+          }
+        },
+      };
+
+      function isPresent(data) {
+        if (!data) return false;
+
+        if (typeof(data) == 'string') {
+          return $.trim(data).length > 0
+        } else if (Array.isArray(data)) {
+          return data.length;
+        } else {
+          return !!Object.keys(data).find(key => isPresent(data[key]));
+        }
+      }
+
+      $('#wk-editable-iframe').on('load', () => {
+        $('#wk-editable-iframe').contents().find('a').click(function(event) {
+          event.preventDefault();
+        });
+
+        $('#wk-editable-iframe').contents().find('.wk-editable-text, .wk-editable-link, .wk-editable-image').each(function(index, element) {
+          $(element).css('outline', '1px solid yellow');
+          $(element).css('outline-offset', '5px');
+          $(element).css('cursor', 'pointer');
+          $(element).css('min-height', '30px');
+          $(element).css('min-width', '30px');
+        });
+
+        function getCustomContentData() {
+          return currentData;
+        }
+
+        function getDisplayDataFor(eid) {
+          return ownerData[eid] || themeData[eid] || defaultData[eid];
+        }
+
+        function setCustomContentData(data) {
+          $('#edit-view-content-form input[name="data"]').val(JSON.stringify(data));
+        }
+
+        function getCurrentCustomElementId() {
+          return $('#edit-view-content-form').data('currentElementId');
+        }
+
+        function setCurrentCustomElementId(id) {
+          return $('#edit-view-content-form').data('currentElementId', id);
+        }
+
+        function getCurrentCustomElementType() {
+          return $('#edit-view-content-form').data('currentElementType');
+        }
+
+        function setCurrentCustomElementType(type) {
+          return $('#edit-view-content-form').data('currentElementType', type);
+        }
+
+        function assignNewData(id, data) {
+          if (isPresent(data)) {
+            currentData[id] = data;
+          } else {
+            delete currentData[id];
+          }
+        }
+
+        const formContents = $('#wk-editable-iframe').contents();
+
+        Object.keys(editableComponents).forEach(editable => {
+          formContents.find(`.${editable}`).each((index, element) => {
+            const eid = element.id;
+            defaultData[eid] = editableComponents[editable].dataFromView($(element));
+            editableComponents[editable].applyView(eid, getDisplayDataFor(eid));
+
+            $(element).click(function(event) {
+              const eid = $(event.currentTarget).attr('id');
+
+              setCurrentCustomElementId(eid);
+              setCurrentCustomElementType(editable);
+
+              $('#wk-editable-modal .modal-body').empty().append(sharedFormScope).append(editableComponents[editable].form);
+
+              applyCurrentScope();
+
+              $('#wk-editable-modal').modal('show');
+            });
+          });
+        });
+
+        $('#wk-editable-modal .submit').click(function(event){
+          const eid = getCurrentCustomElementId();
+          const data = getCustomContentData();
+          const editable = editableComponents[getCurrentCustomElementType()];
+
+          assignNewData(eid, editable.data());
+
+          editable.applyView(eid, getDisplayDataFor(eid));
+
+          $('#wk-editable-modal').modal('hide');
+        });
+
+        function applyCurrentScope() {
+          const current = $('#wk-editable-modal input[name="scope"]:checked').val();
+
+          if (current == 'current_page') {
+            currentData = ownerData;
+          } else {
+            currentData = themeData;
+          }
+
+          const editable = editableComponents[getCurrentCustomElementType()];
+          editable.applyForm(currentData[getCurrentCustomElementId()]);
+        }
+
+        $('#wk-editable-modal').on('change', 'input[name="scope"]', applyCurrentScope);
+      });
+
+      $(document).on('change', '#wk-editable-modal input[type="file"]', function(event) {
+        const imageInput = event.target;
+
+        if (imageInput.files && imageInput.files[0]) {
+          const fileData = new FormData();
+
+          fileData.append("upload", imageInput.files[0]);
+          fileData.append('record_type', '#{@owner.class.name}');
+          fileData.append('record_id', '#{@owner.id}');
+          fileData.append('for', 'featured_images');
+
+          $.ajax({
+            type: "POST",
+            url: '#{medias_upload_path}',
+            data: fileData,
+            processData: false,
+            contentType: false,
+            success: (res) => {
+              if (res.uploaded > 0) {
+                $('#wk-editable-modal input[name="file_url"]').val(res.url);
+              } else {
+                alert(res.message || 'Error');
+              }
+            },
+          }).fail(() => {
+            alert('Error');
+          });
+        }
+      });
+
+      $('#wk-editable-modal').on('shown.bs.modal', function() {
+        if ($(this).find('input.dropify').length > 0) {
+          $(this).find('input.dropify').data('max-file-size', `${ window.IMAGE_LIMIT_SIZE / 1024 / 1024 }M`);
+
+          $(this).find('input.dropify').dropify({
+            imgFileExtensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'webp'],
+            tpl: {
+              wrap:            '<div class="dropify-wrapper"></div>',
+                loader:          '<div class="dropify-loader"></div>',
+                message:         '<div class="dropify-message"><span class="file-icon"></span> <p>{{ default }}</p></div>',
+                preview:         '<div class="dropify-preview"><span class="dropify-render"></span><div class="dropify-infos"><div class="dropify-infos-inner"><p class="dropify-infos-message">{{ replace }}</p></div></div></div>',
+                filename:        '<p class="dropify-filename"><span class="file-icon"></span> <span class="dropify-filename-inner"></span></p>',
+                clearButton:     '<button type="button" class="dropify-clear">{{ remove }}</button>',
+                errorLine:       '<p class="text-danger dropify-error">{{ error }}</p>',
+                errorsContainer: '<div class=""><ul></ul></div>'
+            }
+          });
+
+          $('.dropify').on('change', function(event) {
+            const file = event.target.files[0];
+            window.validateImageSize(file, window.IMAGE_LIMIT_SIZE)
+          });
+        }
+      });
+
+
+      $('#submitData').click((event) => {
+        event.preventDefault();
+
+        const data = Object.assign(Object.fromEntries((new FormData(event.target.form)).entries()), {
+          commit: 'Submit',
+          owner_type: '#{@owner.class.name}',
+          owner_id: '#{@owner.id}',
+          owner_data: ownerData,
+          theme_data: themeData
+        })
+
+        submitPageContent(data);
+      })
+
+      function submitPageContent(data){
+        $.ajax({
+          type: "POST",
+          url: '#{page_contents_path()}',
+          data: JSON.stringify(data),
+          success: () => {
+            alert('Success');
+          },
+          dataType: 'json',
+          contentType: "application/json"
+        }).fail(() => {
+          alert('Error');
+        });
+      }
+
+      function viewAsMobile() {
+        $('#wk-editable-iframe').attr('width', '600px');
+      }
+
+      function viewAsDesktop() {
+        $('#wk-editable-iframe').attr('width', '100%');
+      }
+

@@ -1,0 +1,22 @@
+#albumFormModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "albumFormModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    = form_for Album.new, html: { remote: true, id: "album-modal-form" }, data: { turbo: false } do |f|
+      = f.hidden_field :owner_type, value: record.class.name
+      = f.hidden_field :owner_id, value: record.id
+
+      .modal-content
+        .modal-header
+          %h5#albumFormModalLabel.modal-title New Album
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          #album-modal-form-error
+          .form-group
+            %label Name
+            = f.text_field :name, class: 'form-control', placeholder: 'Album name'
+          .form-group
+            %label Slug
+            = f.text_field :slug, class: 'form-control', placeholder: 'Auto generated'
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+          = f.submit "Submit", class: "btn btn-primary"

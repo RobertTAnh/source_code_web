@@ -1,0 +1,11 @@
+.content-header
+
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        - tabs = ["default", "category", "content", "custom_html", "medias", "additional_category",
+            "metadata", "tracking", "global_slug", "extra_fields", "properties", "albums", "history"]
+        - tabs << "variants" if @record.class.include?(HasVariants)
+        = render "admin/shared/edit_form", record: @record, back_url: products_path,
+          tabs: tabs

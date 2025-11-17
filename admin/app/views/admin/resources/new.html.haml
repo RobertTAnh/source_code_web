@@ -1,0 +1,18 @@
+.content-header
+  .container-fluid
+    .row.mb-2
+      .col-sm-6
+        %h1.m-0= "New #{@resource_model.to_s}"
+      .col-sm-6
+        %ol.breadcrumb.float-sm-right
+          %li.breadcrumb-item
+            %a{:href => "#"} Home
+          %li.breadcrumb-item.active= @resource_model.to_s
+
+%section.content
+  .container-fluid
+    .row
+      .col-md-12
+        .card.card-primary.card-outline.card-outline-tabs
+          .card-body
+            = render "admin/shared/new_form", record: @record, errors: @errors, back_url: resources_path(@resource_name)

@@ -1,0 +1,18 @@
+.content-header
+  .container-fluid
+    .row.mb-2
+      .col-sm-6
+        %h1.m-0 New Category
+      .col-sm-6
+        %ol.breadcrumb.float-sm-right
+          %li.breadcrumb-item
+            %a{:href => "#"} Home
+          %li.breadcrumb-item.active Category
+
+%section.content
+  .container-fluid
+    .row
+      .col-md-6
+        .card.card-primary.card-outline.card-outline-tabs
+          .card-body
+            = render "admin/categories/form", record: @record, errors: @errors, back_url: categories_path

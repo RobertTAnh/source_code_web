@@ -1,0 +1,93 @@
+- index_columns = view_options[:index_columns]
+- index_actions = view_options[:index_actions]
+- index_data_table = view_options[:index_data_table]
+.card
+  .card-header
+    - if view_options[:createable]
+      .card-tools.float-right
+        = link_to send("new_#{controller_name.classify.downcase}_path"), class: "btn btn-block btn-sx btn-primary" do
+          %span New
+          %i.bi.bi-plus
+    .card-tools.float-left
+      = form_tag send("#{controller_name}_path"), method: :get do
+        .input-group.input-group-m.mt-0
+          %span{ style: "font-size: 1.6rem; font-weight: 500; margin-right: 10px;"}= controller_name.classify
+          -params.except(:controller, :action, :page, :search).each do |k, v|
+            =hidden_field_tag  k, v
+          =text_field_tag "search", params[:search], { placeholder: "Search", type: "text", class: "form-control float-right"}
+          .input-group-append
+            %button.btn.btn-default{:type => "submit"}
+              %i.fas.fa-search
+          - if controller_name == "contacts"
+            = select_tag "filter_form", options_for_select( [["All"],Contact.select('distinct form').map(&:form)].flatten.compact, params[:filter_form]), { class: "form-control mx-3", onchange: "this.form.submit();" }
+            = link_to "Download file", '/admin/contacts.csv', onclick: "exportCsv()", class: "btn btn-primary", id: "exportCSV"
+          - if controller_name == "products"
+            = select_tag "filter_category", options_for_select([["All", "All"]] + all_categories_select_options(Category.where(depth: 1, kind: "product"), ''), params[:filter_category]),
+              { class: "form-control mx-3", onchange: "this.form.submit();" }
+          - if controller_name == "posts"
+            = select_tag "filter_category", options_for_select([["All", "All"]] + all_categories_select_options(Category.where(depth: 1, kind: "post"), ''), params[:filter_category]),
+              { class: "form-control mx-3", onchange: "this.form.submit();" }
+  .card-body.table-responsive.p-0
+    %table.table.table-hover.text-nowrap.table-head-fixed.limit-width-table
+      %thead
+        %tr
+          - index_columns.each do |col|
+            %th= col[:human_column_name]
+          - if index_actions.any?
+            %th Actions
+      %tbody
+        - index_data_table.each do |i|
+          %tr
+            - index_columns.each do |col|
+              %td{style: "max-width: 25%"}= i[col[:column_name]]
+            - # %td
+            - #   %select.custom-select
+            - #     %option True
+            - #     %option False
+            - # %td
+            - #   %select.custom-select
+            - #     %option Index
+            - #     %option NoIndex
+            - # %td
+            - #   %select.custom-select
+            - #     %option True
+            - #     %option False
+            - if index_actions.any?
+              %td{style: "min-width: 175px;"}
+                .margin
+                  - if index_actions.include?(:customer_show)
+                    = link_to "#{ web_path_for i[:_record] }", class: "btn btn-outline-primary mr-1", target: '_blank' do
+                      %i.bi.bi-box-arrow-up-right
+                  - if index_actions.include?(:show)
+                    = link_to send("#{i[:_record].class.name.downcase}_path", i[:_record]), class: "btn btn-outline-info mr-1" do
+                      %i.bi.bi-display
+                  - if index_actions.include?(:edit)
+                    = link_to send("edit_#{i[:_record].class.name.downcase}_path", i[:_record]), class: "btn btn-outline-info mr-1" do
+                      %i.bi.bi-pencil-square
+                  - if index_actions.include?(:destroy)
+                    = link_to send("#{i[:_record].class.name.downcase}_path", i[:_record]), class: "btn btn-outline-danger mr-1", method: :delete,  data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do
+                      %i.bi.bi-trash
+      %thead
+        %tr
+          - index_columns.each do |col|
+            %th= col[:human_column_name]
+          - if index_actions.any?
+            %th Actions
+.row
+  .col-sm-12.col-md-5
+    .form-inline
+      %span= meta_count records
+      %span
+        =form_tag send("#{controller_name}_path"), method: :get do
+          -params.except(:controller, :action, :page_size, :page).each do |k, v|
+            =hidden_field_tag  k, v
+          =select_tag :page_size, options_for_select([10, 20, 50, 100], params[:page_size] || 20), { class: "custom-select my-1", onchange: "this.form.submit();" }
+  .col-sm-12.col-md-7
+    .float-right= paginate records, theme: "twitter-bootstrap-4"
+:javascript
+  function exportCsv(){
+    const queryString = window.location.search;
+    const exportCSV = document.querySelector('#exportCSV');
+    let hrefAttr = exportCSV.getAttribute("href");
+    exportCSV.setAttribute("href", `${hrefAttr}${queryString}`)
+  }

@@ -1,0 +1,44 @@
+%section.content
+  .container-fluid
+    / Timelime example
+    .row
+      .col-md-12
+        / The time line
+        .timeline
+          - ActionLog.where(actionable: record).includes(:actor).order(created_at: :asc).each do |log|
+            %div
+              %i.fas.fa-user.bg-info{ style: "height: 17px;width: 17px" }
+              .timeline-item
+                %span.time
+                  %i.fas.fa-clock
+                  = format_datetime log.created_at
+                %h3.timeline-header
+                  %a{href: "#"}= log.actor.name
+                  has executed a 
+                  - if log.finished?
+                    %span.right.badge.badge-success successful
+                  - else
+                    %span.right.badge.badge-danger fail
+                  %b= log.code
+                  action.
+                  
+                - if log.finished?
+                  - if log.changed_data.present?
+                    .timeline-body
+                      %ul
+                        %li
+                          %b Updated fields:
+                          = log.changed_data.keys.sort.map{|key| field_label_mapper key}.uniq.compact.join(', ')
+                - else
+                  .timeline-body
+                    %ul
+                      %li
+                        %b Status code
+                        = (log.error || {})["http_code"]
+                      %li
+                        %b Message
+                        = (log.error || {})["message"]
+          %div
+            %i.fas.fa-clock.bg-gray{ style: "height: 17px;width: 17px" }
+      / /.col
+  / /.timeline

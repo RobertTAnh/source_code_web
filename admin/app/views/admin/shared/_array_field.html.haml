@@ -1,0 +1,23 @@
+- random_id = Random.hex(4)
+.card
+  .card-body
+    .array-elements{id: "array-elements_for_#{random_id}", data: { fields: fields }}
+      - (extra_field_data.presence || [{}]).each_with_index do |ele, index|
+        = render "admin/shared/array_element", fields: fields, ele: ele, f: f, index: index, element_id: random_id
+    .clear-data-echo{id: "clear-data-echo_for_#{random_id}"}
+  .card-footer
+    = button_tag class: "btn btn-default", onclick: "#{"addElement#{random_id}"}('#{random_id}')", type: "button" do
+      %i.fa-solid.fa-add
+
+:javascript
+  function #{"removeElement#{random_id}"}(e, random_id){
+    $(e).parent().parent().remove()
+    if($(`#array-elements_for_${random_id}`).children().length == 0){
+      $(`#clear-data-echo_for_${random_id}`).html("#{escape_javascript(f.hidden_field :data, value: nil)}")
+    }
+  }
+
+  function #{"addElement#{random_id}"}(random_id){
+    $(`#array-elements_for_${random_id}`).append("#{escape_javascript(render("admin/shared/array_element", fields: fields, ele: {}, index: nil, f: f, element_id: random_id))}")
+    $(`#clear-data-echo_for_${random_id}`).html('')
+  }

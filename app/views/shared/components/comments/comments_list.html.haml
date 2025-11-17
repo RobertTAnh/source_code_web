@@ -1,0 +1,3 @@
+- comments.each do |comment|
+  = render_view("components/comments/comment_item", locals: {comment: comment, children: comment.replies })
+

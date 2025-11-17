@@ -1,0 +1,61 @@
+- config_record = (record.properties || {})[property_field['key']] || { data: '' }
+= f.fields_for "properties" do |wf|
+  .form-group
+    = wf.label property_field['name']
+    = wf.fields_for property_field['key'] do |kf|
+      - if property_field['options']
+        = kf.select :data, options_for_select(property_field['options'], config_record['data']), {}, class: "form-control"
+      - elsif property_field['data_type'] == "string" || property_field['data_type'].blank?
+        = kf.text_field :data, value: config_record['data'], class: "form-control"
+      - elsif property_field['data_type'] == "text"
+        = kf.text_area :data, value: config_record['data'], class: "form-control", rows: 5
+      - elsif property_field['data_type'] == "number"
+        = kf.number_field :data, value: config_record['data'], class: "form-control"
+      - elsif property_field['data_type'] == "boolean"
+        = kf.check_box :data, "checked": config_record['data'] == "1", class: "", "data-height": "20", "data-width": "20"
+      - elsif property_field['data_type'] == "richtext"
+        = kf.text_area :data, value: config_record['data'],class: "property-editor", id: "#{property_field['key']}-editor", cols: "80", rows: "10"
+
+:javascript
+
+  if (window.CKEDITOR) {
+    setupCkeditor();
+  }
+
+  function setupCkeditor(){
+    $(".property-editor").each(function(index, ele) {
+      CKEDITOR.replace($(this).attr("id"), {
+        language: "US",
+        filebrowserBrowseUrl: "/admin/medias/browse?record_type=#{record.class.to_s}&record_id=#{record.id}",
+        filebrowserImageBrowseUrl: "/admin/medias/browse?record_type=#{record.class.to_s}&record_id=#{record.id}&type=image", // image/video/file
+        filebrowserUploadUrl: "/admin/medias/upload?record_type=#{record.class.to_s}&record_id=#{record.id}",
+        filebrowserImageUploadUrl: "/admin/medias/upload?record_type=#{record.class.to_s}&record_id=#{record.id}",
+        toolbarGroups: [{
+          "name": "basicstyles",
+          "groups": ["basicstyles"]
+        },
+        {
+          name: "colors"
+        },
+        {
+          "name": "styles",
+          "groups": ["styles"]
+        },
+        {
+          "name": "links",
+          "groups": ["links"]
+        },
+        {
+          name: "paragraph",
+          groups: ["list", "indent", "blocks", "align", "bidi" ]
+        },
+        {
+          "name": "insert",
+          "groups": ["Image"]
+        },
+      ],
+      removeButtons: "Subscript,Superscript,Anchor,Specialchar,PasteFromWord,Language,Table,Smiley,Iframe,HorizontalRule,SpecialChar,PageBreak"
+      });
+    });
+  }
+

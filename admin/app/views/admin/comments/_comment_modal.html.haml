@@ -1,0 +1,31 @@
+.modal-dialog{:role => "document"}
+  .modal-content
+    .modal-header
+      %h5#commentFormModalLabel.modal-title Reply Comment
+      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+    .modal-body
+      .form-group
+        %label Name
+        %input.form-control{ type: "text", name: "comment_name", value: comment.name, "readonly" => true }
+      .form-group
+        %label Rate
+        - (1..5).each do |i|
+          - if comment.rate.to_i >= i
+            %span.fa.fa-star
+          - else
+            %span.fa.fa-star-o
+      .form-group
+        %label Content
+        %input.form-control{ type: "text", name: "comment_content", value: comment.content, "readonly" => true }
+      .form-group
+        = form_for Comment.new, url: comments_path, method: :post, html: { remote: true, id: "comment-modal-form",  data: { turbo: false } } do |f|
+          %input.form-control{ type: "hidden", name: "id", value: comment.id}
+          = f.hidden_field :is_admin, value: true
+          = f.hidden_field :owner_id, value: comment.owner_id
+          = f.hidden_field :owner_type, value: comment.owner_type
+          %label.d-block Reply
+          = f.text_area :content, class: "form-control", rows: "3"
+    .modal-footer
+      %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+      %button.btn.btn-primary{type: "submit", form: "comment-modal-form"} Submit

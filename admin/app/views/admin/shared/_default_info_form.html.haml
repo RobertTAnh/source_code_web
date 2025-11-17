@@ -1,0 +1,59 @@
+.row
+  .col-md-7.col-sm-12
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: "form-control"
+    - if record.is_a? User
+      .form-group
+        = f.label :email
+        = f.email_field :email, class: "form-control", readonly: true
+    - else
+      .form-group
+        = f.label :description
+        = f.text_area :description, class: "form-control"
+      - if record.is_a? Resource
+        - resource_config = get_resource_config_for @resource_model.to_s
+        - if resource_config[:has_slug]
+          = render "admin/shared/slug_form", f: f, record: record
+        = render "admin/shared/single_column_properties_form", property_fields: resource_config[:attributes].as_json, f: f, record: record
+      - else
+        = render "admin/shared/slug_form", f: f, record: record
+
+      - if ["Product", "Post", "Category"].include?(record.class.name)
+        .form-group
+          = f.label :display_order
+          = f.number_field :display_order, value: record.display_order, class: "form-control", min: 0
+      - if record.is_a? Post
+        .form-group
+          = f.label :release_date, "Release Date"
+          = f.text_field :release_date, value: record.release_date&.strftime('%d-%m-%Y'), class: "form-control #{'datepicker' unless record.published? }", disabled: record.published? ? true : false
+      - if record.is_a? Product
+        .form-group
+          = f.label :sku, "SKU"
+          = f.text_field :sku, class: "form-control"
+        .form-group
+          = f.label :original_price
+          = f.number_field :original_price, class: "form-control", step: "any"
+        .form-group
+          = f.label :price
+          = f.number_field :price, class: "form-control", step: "any"
+      - if record.class.name == 'Category'
+        .form-group
+          = f.label :kind
+          = f.text_field :kind, class: "form-control", value: record.kind, disabled: true
+        .form-group
+          = f.label :parent
+          = f.select :parent_id, options_for_select(Category.where(depth: [1,2,3], kind: record.kind).where.not(id: record.id).pluck(:name, :id), record.parent_id), {include_blank: "No parent"}, { class: "form-control" }
+      - if record.class.include? HasTag
+        = render "admin/shared/tag_form_select", form: f, record: record
+
+  .col-md-5.col-sm-12
+    = f.file_field :image,  class: "dropify", "data-height": "600", "data-default-file": record.image_url, style: "opacity: 0;", "data-max-file-size": "#{max_image_size_in_mb}M"
+
+
+    // .form-group
+    //   %label Author
+    //   %select.form-control{:placeholder => "Author"}
+    //     %option Nguyen Duc Dai
+= render "admin/shared/dropify"
+

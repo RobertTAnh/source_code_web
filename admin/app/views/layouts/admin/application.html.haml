@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= web_config("website.name")
+    = favicon_link_tag web_config("favicon_url")
+    %meta{:content => web_config("logo_url"), :name => "image"}
+    %meta{:content => web_config("website.name"), :name => "title"}
+    %meta{:content => web_config("logo_url"), :property => "og:image"}
+    %meta{:content => web_config("website.name"), :property => "og:image:alt"}
+    %meta{:content => web_config("website.name"), :property => "og:title"}
+
+    %meta{ :content =>  "noindex, nofollow", :name => "robots" }
+    %meta{ :content =>  "noindex, nofollow", :name => "googlebot-news" }
+    %meta{ :content =>  "noindex, nofollow", :name => "googlebot" }
+    %meta{ :content => "nosnippet", :name => "googlebot-news" }
+
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    :javascript
+      var CKEDITOR_BASEPATH = '/assets/ckeditor4/';
+      window.IMAGE_LIMIT_SIZE = "#{max_image_size_in_mb * 1024 * 1024}";
+
+    = stylesheet_link_tag "admin/admin", media: "all", "data-turbo-track": "reload"
+    = javascript_include_tag "admin/admin", "data-turbo-track": "reload", defer: false
+    = favicon_link_tag(web_config("favicon_url") || '')
+  %body.hold-transition.sidebar-mini.layout-fixed.layout-navbar-fixed
+    = render partial: 'layouts/admin/main_layout'

@@ -1,0 +1,4 @@
+.row
+  .col-sm-12
+    = f.fields_for :content do |cf|
+      = cf.text_area :body, id: "content-editor", cols: "80", rows: "10"

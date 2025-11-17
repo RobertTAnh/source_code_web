@@ -1,0 +1,145 @@
+.card
+  .card-header
+    .card-tools.float-right
+      = link_to new_category_path(kind: params[:kind]), class: "btn btn-block btn-sx btn-primary" do
+        %span New
+        %i.bi.bi-plus
+    .card-tools.float-left
+      = form_tag send("#{controller_name}_path"), method: :get do
+        .input-group.input-group-m.mt-0
+          %span{ style: "font-size: 1.6rem; font-weight: 500; margin-right: 10px;"}= controller_name.classify
+          -params.except(:controller, :action, :page, :search).each do |k, v|
+            =hidden_field_tag  k, v
+          =text_field_tag "search", params[:search], { placeholder: "Search", type: "text", class: "form-control float-right"}
+          .input-group-append
+            %button.btn.btn-default{:type => "submit"}
+              %i.fas.fa-search
+  .card-body.table-responsive.p-0
+    %table.table.table-hover.text-nowrap.table-head-fixed.limit-width-table
+      %thead
+        %tr
+          %th Image
+          %th Name
+          %th Slug
+          %th Status
+          %th Seo Index
+          %th Created At
+          %th Actions
+      %tbody
+      - records.each do |record|
+        %tr
+          - if record.image_url
+            %td= image_tag record.image_url, width: 86
+          - else
+            %td
+          %td
+            %span
+              %i.bi.bi-star
+              = record.name
+          %td= record.slug
+          %td= record.status && record.status.camelize
+          %td= record.content.seo_index ? "Index" : "NoIndex"
+          %td= format_date(record.created_at)
+          %td
+            .margin
+              = link_to new_category_path(parent_id: record.id, kind: params[:kind]), class: "btn btn-primary mr-1" do
+                %i.bi.bi-node-plus-fill
+              = link_to web_path_for(record), class: "btn btn-outline-primary mr-1", target: '_blank' do
+                %i.bi.bi-box-arrow-up-right
+              = link_to send("edit_category_path", record), class: "btn btn-outline-info mr-1" do
+                %i.bi.bi-pencil-square
+              = link_to send("category_path", record), class: "btn btn-outline-danger mr-1", method: :delete,  data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do
+                %i.bi.bi-trash
+        - if record.children.any?
+          - record.children.each do |level_1_child|
+            %tr
+              - if level_1_child.image_url
+                %td= image_tag level_1_child.image_url, width: 86
+              - else
+                %td
+              %td{style: "padding-left: 50px"}
+                %span
+                  %i.bi.bi-circle-fill
+                  = level_1_child.name
+              %td= level_1_child.slug
+              %td= level_1_child.status && level_1_child.status.camelize
+              %td= level_1_child.content.seo_index ? "Index" : "NoIndex"
+              %td= format_date(level_1_child.created_at)
+              %td
+                .margin
+                  = link_to new_category_path(parent_id: level_1_child.id, kind: params[:kind]), class: "btn btn-primary mr-1" do
+                    %i.bi.bi-node-plus-fill
+                  = link_to web_path_for(level_1_child), class: "btn btn-outline-primary mr-1", target: '_blank' do
+                    %i.bi.bi-box-arrow-up-right
+                  = link_to send("edit_category_path", level_1_child), class: "btn btn-outline-info mr-1" do
+                    %i.bi.bi-pencil-square
+                  = link_to send("category_path", level_1_child), class: "btn btn-outline-danger mr-1", method: :delete,  data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do
+                    %i.bi.bi-trash
+            - if level_1_child.children.any?
+              - level_1_child.children.each do |level_2_child|
+                %tr
+                  - if level_2_child.image_url
+                    %td= image_tag level_2_child.image_url, width: 86
+                  - else
+                    %td
+                  %td{style: "padding-left: 90px"}
+                    %span
+                      %i.bi.bi-plus
+                      = level_2_child.name
+                  %td= level_2_child.slug
+                  %td= level_2_child.status && level_2_child.status.camelize
+                  %td= level_2_child.content.seo_index ? "Index" : "NoIndex"
+                  %td= format_date(level_2_child.created_at)
+                  %td
+                    .margin
+                      = link_to new_category_path(parent_id: level_2_child.id, kind: params[:kind]), class: "btn btn-primary mr-1" do
+                        %i.bi.bi-node-plus-fill
+                      = link_to web_path_for(level_2_child), class: "btn btn-outline-primary mr-1", target: '_blank' do
+                        %i.bi.bi-box-arrow-up-right
+                      = link_to send("edit_category_path", level_2_child), class: "btn btn-outline-info mr-1" do
+                        %i.bi.bi-pencil-square
+                      = link_to send("category_path", level_2_child), class: "btn btn-outline-danger mr-1", method: :delete,  data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do
+                        %i.bi.bi-trash
+                - if level_2_child.children.any?
+                  - level_2_child.children.each do |level_3_child|
+                    %tr
+                      - if level_3_child.image_url
+                        %td= image_tag level_3_child.image_url, width: 86
+                      - else
+                        %td
+                      %td{style: "padding-left: 130px"}
+                        %span
+                          %i.bi.bi-plus
+                          = level_3_child.name
+                      %td= level_3_child.slug
+                      %td= level_3_child.status && level_3_child.status.camelize
+                      %td= level_3_child.content.seo_index ? "Index" : "NoIndex"
+                      %td= format_date(level_3_child.created_at)
+                      %td
+                        .margin
+                          = link_to web_path_for(level_3_child), class: "btn btn-outline-primary mr-1", target: '_blank' do
+                            %i.bi.bi-box-arrow-up-right
+                          = link_to send("edit_category_path", level_3_child), class: "btn btn-outline-info mr-1" do
+                            %i.bi.bi-pencil-square
+                          = link_to send("category_path", level_3_child), class: "btn btn-outline-danger mr-1", method: :delete,  data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do
+                            %i.bi.bi-trash
+      %thead
+        %tr
+          %th Name
+          %th Image
+          %th Slug
+          %th Status
+          %th Seo Index
+          %th Created At
+          %th Actions
+.row
+  .col-sm-12.col-md-5
+    .form-inline
+      %span= meta_count records
+      %span
+        =form_tag send("categories_path"), method: :get do
+          -params.except(:controller, :action, :page_size, :page).each do |k, v|
+            =hidden_field_tag  k, v
+          =select_tag :page_size, options_for_select([10, 20, 50, 100], params[:page_size] || 20), { class: "custom-select my-1", onchange: "this.form.submit();" }
+  .col-sm-12.col-md-7
+    .float-right= paginate records, theme: "twitter-bootstrap-4"

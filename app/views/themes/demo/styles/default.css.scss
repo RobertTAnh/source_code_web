@@ -1,0 +1,11 @@
+h1 {
+  color: red;
+}
+
+h2 {
+  color: green;
+}
+
+section:not(:first-child) {
+  margin-top: 32px;
+}

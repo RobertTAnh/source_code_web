@@ -1,0 +1,231 @@
+/ Content Header (Page header)
+.content-header
+  .container-fluid
+    .row.mb-2
+      .col-sm-6
+        %h1.m-0 Dashboard
+      / /.col
+      .col-sm-6
+        %ol.breadcrumb.float-sm-right
+          %li.breadcrumb-item
+            %a{:href => "#"} Home
+          %li.breadcrumb-item.active Dashboard v1
+      / /.col
+    / /.row
+  / /.container-fluid
+/ /.content-header
+/ Main content
+%section.content
+  .container-fluid
+    / Small boxes (Stat box)
+    .row
+      .col-lg-3.col-6
+        / small box
+        .small-box.bg-info
+          .inner
+            %h3 150
+            %p New Orders
+          .icon
+            %i.ion.ion-bag
+          %a.small-box-footer{:href => "#"}
+            More info
+            %i.fas.fa-arrow-circle-right
+      / ./col
+      .col-lg-3.col-6
+        / small box
+        .small-box.bg-success
+          .inner
+            %h3
+              53
+              %sup{:style => "font-size: 20px"} %
+            %p Bounce Rate
+          .icon
+            %i.ion.ion-stats-bars
+          %a.small-box-footer{:href => "#"}
+            More info
+            %i.fas.fa-arrow-circle-right
+      / ./col
+      .col-lg-3.col-6
+        / small box
+        .small-box.bg-warning
+          .inner
+            %h3 44
+            %p User Registrations
+          .icon
+            %i.ion.ion-person-add
+          %a.small-box-footer{:href => "#"}
+            More info
+            %i.fas.fa-arrow-circle-right
+      / ./col
+      .col-lg-3.col-6
+        / small box
+        .small-box.bg-danger
+          .inner
+            %h3 65
+            %p Unique Visitors
+          .icon
+            %i.ion.ion-pie-graph
+          %a.small-box-footer{:href => "#"}
+            More info
+            %i.fas.fa-arrow-circle-right
+      / ./col
+    / /.row
+    / Main row
+    .row
+      / Left col
+      %section.col-lg-7.connectedSortable
+        / TO DO List
+        .card
+          .card-header
+            %h3.card-title
+              %i.ion.ion-clipboard.mr-1
+              To Do List
+            .card-tools
+              %ul.pagination.pagination-sm
+                %li.page-item
+                  %a.page-link{:href => "#"} «
+                %li.page-item
+                  %a.page-link{:href => "#"} 1
+                %li.page-item
+                  %a.page-link{:href => "#"} 2
+                %li.page-item
+                  %a.page-link{:href => "#"} 3
+                %li.page-item
+                  %a.page-link{:href => "#"} »
+          / /.card-header
+          .card-body
+            %ul.todo-list{"data-widget" => "todo-list"}
+              %li
+                / drag handle
+                %span.handle
+                  %i.fas.fa-ellipsis-v
+                  %i.fas.fa-ellipsis-v
+                / checkbox
+                .icheck-primary.d-inline.ml-2
+                  %input#todoCheck1{:name => "todo1", :type => "checkbox", :value => ""}/
+                  %label{:for => "todoCheck1"}
+                / todo text
+                %span.text Design a nice theme
+                / Emphasis label
+                %small.badge.badge-danger
+                  %i.far.fa-clock
+                  2 mins
+                / General tools such as edit or delete
+                .tools
+                  %i.fas.fa-edit
+                  %i.fas.fa-trash-o
+              %li
+                %span.handle
+                  %i.fas.fa-ellipsis-v
+                  %i.fas.fa-ellipsis-v
+                .icheck-primary.d-inline.ml-2
+                  %input#todoCheck2{:checked => "checked", :name => "todo2", :type => "checkbox", :value => ""}/
+                  %label{:for => "todoCheck2"}
+                %span.text Make the theme responsive
+                %small.badge.badge-info
+                  %i.far.fa-clock
+                  4 hours
+                .tools
+                  %i.fas.fa-edit
+                  %i.fas.fa-trash-o
+              %li
+                %span.handle
+                  %i.fas.fa-ellipsis-v
+                  %i.fas.fa-ellipsis-v
+                .icheck-primary.d-inline.ml-2
+                  %input#todoCheck3{:name => "todo3", :type => "checkbox", :value => ""}/
+                  %label{:for => "todoCheck3"}
+                %span.text Let theme shine like a star
+                %small.badge.badge-warning
+                  %i.far.fa-clock
+                  1 day
+                .tools
+                  %i.fas.fa-edit
+                  %i.fas.fa-trash-o
+              %li
+                %span.handle
+                  %i.fas.fa-ellipsis-v
+                  %i.fas.fa-ellipsis-v
+                .icheck-primary.d-inline.ml-2
+                  %input#todoCheck4{:name => "todo4", :type => "checkbox", :value => ""}/
+                  %label{:for => "todoCheck4"}
+                %span.text Let theme shine like a star
+                %small.badge.badge-success
+                  %i.far.fa-clock
+                  3 days
+                .tools
+                  %i.fas.fa-edit
+                  %i.fas.fa-trash-o
+              %li
+                %span.handle
+                  %i.fas.fa-ellipsis-v
+                  %i.fas.fa-ellipsis-v
+                .icheck-primary.d-inline.ml-2
+                  %input#todoCheck5{:name => "todo5", :type => "checkbox", :value => ""}/
+                  %label{:for => "todoCheck5"}
+                %span.text Check your messages and notifications
+                %small.badge.badge-primary
+                  %i.far.fa-clock
+                  1 week
+                .tools
+                  %i.fas.fa-edit
+                  %i.fas.fa-trash-o
+              %li
+                %span.handle
+                  %i.fas.fa-ellipsis-v
+                  %i.fas.fa-ellipsis-v
+                .icheck-primary.d-inline.ml-2
+                  %input#todoCheck6{:name => "todo6", :type => "checkbox", :value => ""}/
+                  %label{:for => "todoCheck6"}
+                %span.text Let theme shine like a star
+                %small.badge.badge-secondary
+                  %i.far.fa-clock
+                  1 month
+                .tools
+                  %i.fas.fa-edit
+                  %i.fas.fa-trash-o
+          / /.card-body
+          .card-footer.clearfix
+            %button.btn.btn-primary.float-right{:type => "button"}
+              %i.fas.fa-plus
+              Add item
+        / /.card
+      / /.Left col
+      / right col (We are only adding the ID to make the widgets sortable)
+      %section.col-lg-5.connectedSortable
+        / Map card
+        .card.bg-gradient-primary
+          .card-header.border-0
+            %h3.card-title
+              %i.fas.fa-map-marker-alt.mr-1
+              Visitors
+            / card tools
+            .card-tools
+              %button.btn.btn-primary.btn-sm.daterange{:title => "Date range", :type => "button"}
+                %i.far.fa-calendar-alt
+              %button.btn.btn-primary.btn-sm{"data-card-widget" => "collapse", :title => "Collapse", :type => "button"}
+                %i.fas.fa-minus
+            / /.card-tools
+          .card-body
+            #world-map{:style => "height: 250px; width: 100%;"}
+          / /.card-body
+          .card-footer.bg-transparent
+            .row
+              .col-4.text-center
+                #sparkline-1
+                .text-white Visitors
+              / ./col
+              .col-4.text-center
+                #sparkline-2
+                .text-white Online
+              / ./col
+              .col-4.text-center
+                #sparkline-3
+                .text-white Sales
+              / ./col
+            / /.row
+        / /.card
+      / right col
+    / /.row (main row)
+  / /.container-fluid
+/ /.content

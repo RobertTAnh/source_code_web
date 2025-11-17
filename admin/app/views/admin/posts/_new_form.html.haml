@@ -1,0 +1,26 @@
+.form-container
+  - if errors&.any?
+    = render "admin/shared/errors", errors: errors
+  = form_for record, data: {turbo: false} do |f|
+    .row
+      .col-md-7.col-sm-12
+        .form-group
+          = f.label :name
+          = f.text_field :name, class: 'form-control', placeholder: 'Post name'
+        .form-group
+          = f.label :slug
+          = f.text_field :slug, class: 'form-control', placeholder: 'Auto generated'
+        .form-group
+          = f.label :status
+          = f.select :status, options_for_select([["Published", "published"], ["Unpublished", "unpublished"]], "published"), {}, {class: "form-control record-status-field"}
+        .form-group
+          = f.label :release_date
+          = f.text_field :release_date, class: 'form-control', disabled: true
+        = render "admin/shared/tag_form_select", form: f, record: record
+      .col-md-5.col-sm-12
+        = f.file_field :image, class: 'dropify', data: { height: "600" }
+    .row
+      .col-12
+        = f.submit 'Submit', class: 'btn btn-primary'
+        = link_to 'Back', posts_path, class: 'btn btn-default'
+= render "admin/shared/dropify"

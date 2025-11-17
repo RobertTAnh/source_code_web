@@ -1,0 +1,10 @@
+.content-header
+
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        - tabs = ["default", "content", "medias", "extra_fields", "history"]
+        - tabs = tabs.concat(["global_slug", "metadata", "tracking", "custom_html"]) if get_resource_config_for(@resource_model.to_s)[:has_slug]
+        - tabs = tabs.concat(["category", "additional_category"]) if get_resource_config_for(@resource_model.to_s)[:has_category]
+        = render "admin/shared/edit_form", record: @record, back_url: resources_path(@resource_name), tabs: tabs

@@ -1,0 +1,21 @@
+- config_record = record.extra_fields.find_by(key: extra_field['key']) || record.extra_fields.build(key: extra_field['key'], data_type: extra_field['data_type'] || "string")
+= f.fields_for :extra_fields, config_record do |wf|
+  .form-group
+    = wf.label extra_field['name']
+    = wf.hidden_field :key, value: config_record.key
+    = wf.hidden_field :id, value: config_record.id
+    = wf.hidden_field :data_type, value: config_record.data_type
+    - if config_record.data_type == "string"
+      = wf.text_field :data, class: "form-control"
+    - elsif config_record.data_type == "text"
+      = wf.text_area :data, class: "form-control", rows: 5
+    - elsif config_record.data_type == "number"
+      = wf.number_field :data, class: "form-control"
+    - elsif config_record.data_type == "image"
+      = wf.file_field :image,  class: "dropify", "data-height": "200", "data-default-file": config_record.data, "data-max-file-size": "#{max_image_size_in_mb}M"
+    - elsif config_record.data_type == "boolean"
+      = wf.check_box :data, class: "", "data-height": "20", "data-width": "20", "checked_value": config_record.data ? "1" : "0"
+    - elsif config_record.data_type == "json"
+      = render "admin/shared/json_field", f: wf, f_name: :data
+    - elsif config_record.data_type == "array"
+      = render "admin/shared/array_field", f: wf, f_name: :data, fields: extra_field['fields'], extra_field_data: config_record.data

@@ -1,0 +1,15 @@
+- sections.each do |section|
+  %h2{ style: "margin-bottom: 0px; margin-top: 20px;" }= section['name']
+  %hr{ style: "margin-top: 0px;" }
+  - section['configs'].each do |config_element|
+    .row
+      - if config_element.is_a? Array
+        - config_element.each do |extra_field|
+          .col
+            = render "admin/shared/extra_field", extra_field: extra_field, f: f, record: record
+      - else
+        .col
+          = render "admin/shared/extra_field", extra_field: config_element, f: f, record: record
+
+= render "admin/shared/dropify"
+

@@ -1,0 +1,29 @@
+- if fields_config.is_a?(Hash) && sections = fields_config["sections"]
+  - sections.each do |section|
+    - if !section["kind"].present? || section["kind"] == record.kind
+      %h2{ style: "margin-bottom: 0px; margin-top: 20px;" }= section['name']
+      %hr{ style: "margin-top: 0px;" }
+
+      - section['configs'].each do |config_element|
+        .row
+          - if config_element.is_a? Array
+            - config_element.each do |property_field|
+              .col
+                = render "admin/shared/property_field", property_field: property_field, f: f, record: record
+          - else
+            .col
+              = render "admin/shared/property_field", property_field: config_element, f: f, record: record
+- elsif fields_config.is_a?(Array)
+  - fields_config.each do |config_element|
+    .row
+      - if config_element.is_a? Array
+        - config_element.each do |property_field|
+          .col
+            = render "admin/shared/property_field", property_field: property_field, f: f, record: record
+      - else
+        .col
+          = render "admin/shared/property_field", property_field: config_element, f: f, record: record
+
+= render "admin/shared/dropify"
+
+

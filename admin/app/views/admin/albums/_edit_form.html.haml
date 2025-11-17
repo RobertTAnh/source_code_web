@@ -1,0 +1,44 @@
+- back_url = record.owner_type.present? ? send("albums_#{record.owner_type.underscore}_path", record.owner_id) : albums_path
+
+= form_for record, data: {turbo: false}, html: {id: 'edit-form'} do |f|
+  .mb-2
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', back_url, class: "btn btn-default"
+  - if @errors&.any?
+    = render "admin/shared/errors", errors: @errors
+  .card.card-primary.card-outline.card-outline-tabs
+    .card-header.p-0.border-bottom-0
+      %ul#custom-tabs-four-tab.nav.nav-tabs{:role => "tablist"}
+        %li.nav-item
+          %a#default-tab.nav-link.text-dark.tab.active{"aria-controls" => "default", "aria-selected" => "true", "data-toggle" => "pill", :href => "#default", :role => "tab", :onclick => "updateCurrentGroup(this);"} Details
+        %li.nav-item
+          %a#galleries-tab.text-dark.nav-link{"aria-controls" => "gallery", "aria-selected" => "false", "data-toggle" => "pill", :href => "#gallery", :role => "tab", :onclick => "updateCurrentGroup(this);"} Files
+        %li.nav-item
+          %a#history-tab.text-dark.nav-link{"aria-controls" => "history", "aria-selected" => "false", "data-toggle" => "pill", :href => "#history-list", :role => "tab", :onclick => "updateCurrentGroup(this);"} History
+    .card-body
+      #custom-tabs-four-tabContent.tab-content
+        #default.tab-pane.fade.show.active{"aria-labelledby" => "default-tab", :role => "tabpanel"}
+          .row
+            .col-md-7.col-sm-12
+              .form-group
+                = f.label :name
+                = f.text_field :name, class: "form-control"
+              .form-group
+                = f.label :slug
+                = f.text_field :slug, class: "form-control"
+        #gallery.tab-pane.fade{"aria-labelledby" => "medias-tab", :role => "tabpanel"}
+          .row
+            .col-sm-12
+              .d-flex.align-items-start
+                = render "admin/shared/multiple_images_list", type: "album", images: get_album_files(record), record: record
+        #history-list.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+          = render "admin/shared/history_list", record: record, f: f
+
+:javascript
+  function updateCurrentGroup(e){
+    const url = new URL(window.location);
+    url.searchParams.set('group', e.id);
+    window.history.pushState(null, '', url.toString());
+    const form = $("#edit-form")
+    form.attr('action', form.attr('action').split('?')[0] + '?' + `group=${e.id}`)
+  }

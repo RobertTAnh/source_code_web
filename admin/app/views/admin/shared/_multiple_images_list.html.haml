@@ -1,0 +1,103 @@
+%div{ id: "append-echo-#{type}", style: "width: 100%" }
+  %div{class: "dropzone-images-#{type}-#{record.id} dropzone", id: "dropzone-images", style: "width: auto; min-height: 200px"}
+= render "admin/shared/dropzone_preview_template", type: "featured_images", images: images
+
+:css
+  .dropzone {
+    background: white;
+    border-radius: 5px;
+    border: 2px dashed rgb(0, 135, 247);
+    border-image: none;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 250px;
+  }
+
+  .dz-preview.dz-image-preview .dz-image img {
+    width: 120px;
+    height: 120px;
+  }
+  .dz-preview.dz-image-preview .dz-details .dz-filename {
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+:javascript
+    $(document).ready(function(){
+      console.log("Dropzone is loaded");
+      const myDropzone = new Dropzone(".dropzone-images-#{type}-#{record.id}", {
+        url: '/admin/medias/upload?record_type=#{record.class.name}&record_id=#{record.id}&for=#{type}',
+        previewTemplate: document.querySelector('#preview-template').innerHTML,
+        addRemoveLinks: true,
+        uploadMultiple: true,
+        maxFilesize: window.IMAGE_LIMIT_SIZE / 1024 / 1024,
+        paramName: "upload",
+        parallelUploads: 2,
+        thumbnailHeight: 120,
+        thumbnailWidth: 120,
+        thumbnailMethod: "crop",
+        thumbnail: function(file, dataUrl) {
+          if (file.previewElement) {
+            file.previewElement.classList.remove("dz-file-preview");
+            var images = file.previewElement.querySelectorAll("[data-dz-thumbnail]");
+            for (var i = 0; i < images.length; i++) {
+              var thumbnailElement = images[i];
+              thumbnailElement.alt = file.name;
+              thumbnailElement.src = dataUrl;
+            }
+            setTimeout(function() { file.previewElement.classList.add("dz-image-preview"); }, 1);
+          }
+        },
+        init: function() {
+          // Preload existing images into dropzone
+          var myDropzone = this;
+          var existingImages = JSON.parse('#{raw(images.to_json)}');
+
+          existingImages.forEach(function(image) {
+            var mockFile = { name: image.filename, size: image.size, data: {key: image.key }};
+            myDropzone.options.addedfile.call(myDropzone, mockFile);
+            myDropzone.options.thumbnail.call(myDropzone, mockFile, image.url);
+          });
+
+          this.on("success", function(file, response) {
+            let file_name = file.upload.filename;
+            for (let i = 0; i < response.files.length; i++) {
+              if (response.files[i].filename === file_name) {
+                file.data = { 'key': response.files[i].key}
+                break;
+              }
+            }
+          })
+
+          this.on("error", function(file, message) { 
+            if (file.size > this.options.maxFilesize * 1024 * 1024) {
+            window.validateImageSize(file, window.IMAGE_LIMIT_SIZE)
+            }
+          });
+
+          this.on("addedfile", function(file) {
+            if (file.size > this.options.maxFilesize * 1024 * 1024) {
+              this.removeFile(file);
+            }
+          });
+
+          this.on("removedfile", function(file) {
+            if (file.size > this.options.maxFilesize * 1024 * 1024) {
+              return true;
+            }
+
+            if(window.confirm("Are you sure?")){
+              var key = file.data.key;
+              $.ajax({
+                method: 'delete',
+                url: `/admin/medias/files/${key}`,
+                contentType: false,
+                dataType: 'json'
+              });
+            }
+          });
+        }
+      });
+    })
