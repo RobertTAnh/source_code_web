@@ -7,7 +7,7 @@
 set :application,     'mopxopminhphat'
 set :repo_url,        'git@gitlab.com:fagotek/waker.git'
 set :user,            'ubuntu'
-set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :deploy_to,       "/home/#{fetch(:user)}/#{fetch(:application)}"
 
 # -------------------------------
 # Git / Branch
@@ -25,8 +25,7 @@ set :rvm_ruby_version, '3.1.2' # sửa theo ruby bạn dùng
 # Linked Files & Directories
 # -------------------------------
 append :linked_files, %w{config/mongoid.yml .env config/database.yml}
-append :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets public/system public/uploads}
-
+append :linked_dirs, "public/storage/"
 # -------------------------------
 # Keep Releases
 # -------------------------------
