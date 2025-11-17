@@ -12,7 +12,7 @@ set :deploy_to,       "/home/#{fetch(:user)}/#{fetch(:application)}"
 # -------------------------------
 # Git / Branch
 # -------------------------------
-set :branch,          'main'
+set :branch,          'master'
 set :deploy_via,      :remote_cache
 
 # -------------------------------
@@ -24,8 +24,8 @@ set :rvm_ruby_version, '3.1.2' # sửa theo ruby bạn dùng
 # -------------------------------
 # Linked Files & Directories
 # -------------------------------
-# append :linked_files, %w{config/mongoid.yml .env config/database.yml}
-append :linked_dirs, %w[public/storage]
+append :linked_files, %w{.env config/database.yml}
+append :linked_dirs, %w{public/storage}
 # -------------------------------
 # Keep Releases
 # -------------------------------
