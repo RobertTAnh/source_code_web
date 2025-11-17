@@ -25,9 +25,9 @@ set :rvm_ruby_version, '3.1.2' # sửa theo ruby bạn dùng
 # Linked Files & Directories
 # -------------------------------
 # Linked Files & Directories
-append :linked_files, %w[.env config/database.yml]
+set :linked_files, %w[.env config/database.yml]
 
-append :linked_dirs, %w[
+set :linked_dirs, %w[
   log
   tmp/pids
   tmp/cache
