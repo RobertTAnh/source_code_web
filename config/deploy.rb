@@ -24,7 +24,7 @@ set :rvm_ruby_version, '3.1.2' # sửa theo ruby bạn dùng
 # -------------------------------
 # Linked Files & Directories
 # -------------------------------
-append :linked_files, %w{config/mongoid.yml .env config/database.yml}
+# append :linked_files, %w{config/mongoid.yml .env config/database.yml}
 append :linked_dirs, "public/storage/"
 # -------------------------------
 # Keep Releases
