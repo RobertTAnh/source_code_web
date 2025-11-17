@@ -19,7 +19,7 @@ set :deploy_via,      :remote_cache
 # RVM
 # -------------------------------
 set :rvm_type,        :user
-set :rvm_ruby_version, '3.1.7' # sửa theo ruby bạn dùng
+set :rvm_ruby_version, '3.2.4' # sửa theo ruby bạn dùng
 
 # -------------------------------
 # Linked Files & Directories
@@ -94,6 +94,9 @@ namespace :deploy do
   task :migrate do
     puts "No migrations"
   end
+
+  # Rake::Task["deploy:assets:precompile"].clear
+  # Rake::Task["deploy:assets:backup_manifest"].clear
 
   # Map deploy start/stop/restart to Puma
   desc 'Start application'
