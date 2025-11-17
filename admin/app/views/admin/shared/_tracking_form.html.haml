@@ -1,0 +1,12 @@
+.row
+  .col-12
+    = f.fields_for :content do |cf|
+      .form-group
+        = cf.label :tracking_head
+        = cf.text_area :tracking_head, class: "form-control"
+      .form-group
+        = cf.label :tracking_body
+        = cf.text_area :tracking_body, class: "form-control"
+      .form-group
+        = cf.label :tracking_content
+        = cf.text_area :tracking_content, class: "form-control"

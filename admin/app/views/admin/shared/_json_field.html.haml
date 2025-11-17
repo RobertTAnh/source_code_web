@@ -1,0 +1,31 @@
+- id_element =  SecureRandom.hex(3)
+= f.hidden_field f_name.to_sym, value: json_input_display(f.object[f_name.to_sym]), id: "json-input-#{id_element}"
+.jsoneditor{id: "json_#{id_element}", style: "height: 600px;"}
+
+:javascript
+  document.addEventListener("DOMContentLoaded", function(event) {
+    setupJsonEditor("#{id_element}")
+  })
+
+  if(window.JSONEditor){
+    setupJsonEditor("#{id_element}")
+  }
+
+  function setupJsonEditor(id_element){
+    const jsonInput = document.getElementById(`json-input-${id_element}`)
+    const value = jsonInput.value
+    const editor = new JSONEditor(document.getElementById(`json_${id_element}`), {
+      mode: "code",
+      modes: ['code', 'view', 'tree', 'form', 'text', 'preview'],
+      onChange: function(){
+        jsonInput.value = JSON.stringify(editor.get())
+      }
+    })
+
+    // set json
+    const initialJson = JSON.parse(value)
+    if(typeof(initialJson)!='object'){
+      alert("#{f_name.to_sym} is not a json. Please check!")
+    }
+    editor.set(initialJson)
+  }

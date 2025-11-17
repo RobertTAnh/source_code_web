@@ -1,0 +1,6 @@
+.alert.alert-warning{role: 'alert'}
+  %h5.alert-heading Errors
+  - errors.values.flatten.compact.each do |err|
+    %p
+      &ensp;
+      %i.bi.bi-dot= err

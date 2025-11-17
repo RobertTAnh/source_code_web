@@ -1,0 +1,53 @@
+
+.card.card-primary.card-outline.card-outline-tabs
+  .card-header.p-0.border-bottom-0
+    %ul#custom-tabs-four-tab.nav.nav-tabs{:role => "tablist"}
+      %li.nav-item
+        %a#custom-tabs-four-home-tab.nav-link.text-dark.active{"aria-controls" => "custom-tabs-four-home", "aria-selected" => "true", "data-toggle" => "pill", :href => "#custom-tabs-four-home", :role => "tab"} Default information
+      %li.nav-item
+        %a#custom-tabs-four-profile-tab.nav-link.text-dark{"aria-controls" => "custom-tabs-four-profile", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom-tabs-four-profile", :role => "tab"} Category
+      %li.nav-item
+        %a#custom-tabs-four-messages-tab.text-dark.nav-link{"aria-controls" => "custom-tabs-four-messages", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom-tabs-four-messages", :role => "tab"} Description
+      %li.nav-item
+        %a#content-tab.text-dark.nav-link{"aria-controls" => "content", "aria-selected" => "false", "data-toggle" => "pill", :href => "#content-form", :role => "tab"} Content
+      %li.nav-item
+        %a#custom-tabs-four-settings-tab.text-dark.nav-link{"aria-controls" => "custom-tabs-four-files", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom-tabs-four-settings", :role => "tab"} Files
+      %li.nav-item
+        %a#custom-tabs-four-metadata-tab.text-dark.nav-link{"aria-controls" => "custom-tabs-four-meta-data", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom-tabs-four-settings", :role => "tab"} Meta data
+      %li.nav-item
+        %a#custom-tabs-four-settings-tab.text-dark.nav-link{"aria-controls" => "custom-tabs-four-tracking", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom-tabs-four-settings", :role => "tab"} Tracking
+      %li.nav-item
+        %a#custom-tabs-four-settings-tab.text-dark.nav-link{"aria-controls" => "custom-tabs-four-schema", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom-tabs-four-settings", :role => "tab"} Schema
+      %li.nav-item
+        %a#custom-tabs-four-settings-tab.text-dark.nav-link{"aria-controls" => "custom-tabs-four-redirect-link", "aria-selected" => "false", "data-toggle" => "pill", :href => "#custom-tabs-four-settings", :role => "tab"} Redirect links
+  .card-body
+    #custom-tabs-four-tabContent.tab-content
+      #custom-tabs-four-home.tab-pane.fade.show.active{"aria-labelledby" => "custom-tabs-four-home-tab", :role => "tabpanel"}
+        .row
+          .col-md-5.col-sm-12
+            %input.dropify{"type": "file", "data-height": "600"}
+          .col-md-7.col-sm-12
+            %form
+              .form-group
+                %label Name
+                %input.form-control{:placeholder => "Post name", :type => "text"}
+              .form-group
+                %label Link URL
+                %input.form-control{:placeholder => "https://example.com...", :type => "text"}
+              .form-group
+                %label Redirect link
+                %input.form-control{:placeholder => "https://example.com...", :type => "text"}
+              .form-group
+                %label Author
+                %select.form-control{:placeholder => "Author"}
+                  %option Nguyen Duc Dai
+
+      #content-form.tab-pane.fade{"aria-labelledby" => "custom-tabs-four-profile-tab", :role => "tabpanel"}
+        = render "admin/posts/content_form", record: record
+      #custom-tabs-four-messages.tab-pane.fade{"aria-labelledby" => "custom-tabs-four-messages-tab", :role => "tabpanel"}
+        Morbi turpis dolor, vulputate vitae felis non, tincidunt congue mauris. Phasellus volutpat augue id mi placerat mollis. Vivamus faucibus eu massa eget condimentum. Fusce nec hendrerit sem, ac tristique nulla. Integer vestibulum orci odio. Cras nec augue ipsum. Suspendisse ut velit condimentum, mattis urna a, malesuada nunc. Curabitur eleifend facilisis velit finibus tristique. Nam vulputate, eros non luctus efficitur, ipsum odio volutpat massa, sit amet sollicitudin est libero sed ipsum. Nulla lacinia, ex vitae gravida fermentum, lectus ipsum gravida arcu, id fermentum metus arcu vel metus. Curabitur eget sem eu risus tincidunt eleifend ac ornare magna.
+      #custom-tabs-four-settings.tab-pane.fade{"aria-labelledby" => "custom-tabs-four-settings-tab", :role => "tabpanel"}
+        Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis.
+  / /.card
+//= render "admin/posts/dropify"
+

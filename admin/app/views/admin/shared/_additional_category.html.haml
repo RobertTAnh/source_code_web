@@ -1,0 +1,10 @@
+%h5
+  .row
+    .col
+      %b= "#{category_config['name']} categories"
+    .col
+      = link_to "Manage #{category_config['name']} category", categories_path(kind: category_config["key"]), class: "btn btn-primary", style: "float: right"
+.row
+  .container
+    .w-75
+      = render "admin/shared/category_select", categories: Category.where(kind: category_config["key"]), primaryizable: false

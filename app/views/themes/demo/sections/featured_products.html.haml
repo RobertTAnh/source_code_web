@@ -1,0 +1,7 @@
+%section.featured_products
+  %h1 Featured products
+  - featured_products.each_with_index do |product, index|
+    %a{href: product_path(product)}
+      = index + 1
+      = '. '
+      = product.name

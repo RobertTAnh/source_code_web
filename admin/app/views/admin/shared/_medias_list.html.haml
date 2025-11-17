@@ -1,0 +1,27 @@
+
+%div{ id: "append-echo-#{type}" }
+  .row
+    .col-2
+      .card.mt-2.mr-2.float-left.hoverable.align-items-center.new-media-btn{ style: "width: 11rem;height: 150px;", data: { type: type } }
+        .card-body.align-middle.mx-auto.px-100{ style: "font-size: 80%;" }
+          %label
+            %i.bi.bi-cloud-upload{ style: "font-size: 40px; color: #0d6efd;"}
+            %p Upload
+    - images.each do |file|
+      .col-2
+        .card.mt-2.mr-2.float-left{ style: "width: 11rem;"}
+          %a.btn.btn-danger.ck-delete-btn{onclick: "handleDeleteImage(event,this, '#{file[:key]}');"}
+            %i.bi.bi-trash
+          %img.card-img-top.img-list{:alt => file[:filename], :src => file[:url]}/
+          .card-body.p-2{ style: "font-size: 80%;" }
+            %p.card-text= file[:filename]
+            .row
+              .col-9
+                =link_to file[:url], file[:url], class: "card-text medias-url-wrap", target: "_blank"
+              .col-3
+                =button_tag class: "btn btn-outline-primary btn-sm", type: "button",
+                  onclick: "copyToClipboard('#{file[:url]}')", data: { toggle: "tooltip", placement: "top" },
+                  title: "Copy link" do
+                  %i.bi.bi-clipboard
+          .card-footer.p-2
+            %small.text-muted= file[:created_at]

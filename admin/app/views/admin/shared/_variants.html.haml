@@ -1,0 +1,131 @@
+- options = record.variant_options.presence || [{"name" => nil, "values" => []}]
+.card
+  .card-header
+    %h5
+      %b Options
+  .card-body
+    .list-options
+      - options.each_with_index do |option, index|
+        = render "admin/shared/option_field", index: index, f: f, option: option
+  .card-footer
+    = button_tag class: "btn btn-default", onclick: "addOption()", type: "button" do
+      %i.fa-solid.fa-add
+
+.card
+  .card-header
+    %h5
+      %b Variants
+  .card-body.p-0
+    %table.table.table-striped
+      %thead
+        %tr
+          %th{:style => "width: 10px"} #
+          %th Image
+          %th Created At
+          %th Name
+          %th SKU
+          %th Original price
+          %th Price
+          %th Actions
+      %tbody{ data: { item_count: record.global_slugs.size } }
+        - record.variants.each_with_index do |variant, index|
+          %tr{id: "variant_row-#{variant.id}", data: { properties: variant.properties, name: variant.name, sku:  variant.sku, image_url: variant.image_url }}
+            %td= "#{index + 1}."
+            %td= image_tag(variant.image_url || '', width: "86px", id: "image-#{variant.id}")
+            %td= format_date(variant.created_at)
+            %td= variant.name
+            %td= variant.sku
+            %td{id: "original_price-#{variant.id}"}= variant.original_price
+            %td{id: "price-#{variant.id}"}= variant.price
+            %td
+              .margin
+                = link_to "javascript:void(0);", class: "btn btn-outline-primary mr-1 edit-variant",
+                  data: { target: "#variantFormModal", toggle: "modal", variant_id: variant.id } do
+                  %i.bi.bi-pencil-square
+                = link_to "javascript:void(0);", class: "btn btn-outline-danger mr-1", onclick: "handleDeleteVariant(this, #{variant.id});" do
+                  %i.bi.bi-trash
+
+:javascript
+  function removeOption(e){
+    e.parentNode.parentNode.remove()
+  }
+
+  function addOption(){
+    $(".list-options").append("#{escape_javascript(render("admin/shared/option_field", index: nil, f: f, option: {"name" => nil, "values" => []}))}")
+  }
+
+  function changePreviewImage(imageUrl){
+    var dropify = $('#variant_image').data('dropify');
+    dropify.destroy()
+    dropify.resetPreview();
+    dropify.clearElement();
+    dropify.settings.defaultFile = imageUrl;
+    dropify.settings.height = '600px';
+    dropify.init();
+    $('#variant_image').parent('.dropify-wrapper').css('height', '400px');
+  }
+  
+  function editVariantSubmitHandle(variant_id){
+    $("#variant_price").val($(`#price-${variant_id}`).html())
+    changePreviewImage($(`#variant_row-${variant_id}`).attr('data-image-url'))
+    $("#variant_original_price").val($(`#original_price-${variant_id}`).html())
+    variantRow = $(`#variant_row-${variant_id}`)
+    $("input[id^=variant_properties_").each(function(){
+      properties_name = this.id.split('variant_properties_')[1]?.replaceAll('_', '-')
+      data = variantRow.attr(`data-properties-${properties_name}`)
+      if(data == undefined || data == null){
+        if(this.type == 'checkbox'){
+          $(this).prop('checked', false)
+        }else{
+          this.value = ''
+        }
+      }else{
+        if(this.type == 'checkbox'){
+          $(this).prop('checked', data != '0')
+        }else{
+          this.value = data
+        }
+      }
+    })
+    $('#variant-form').off('submit').on('submit', function(e) {
+      e.preventDefault();
+      $.ajax({
+           type: "PATCH",
+           url : `/admin/variants/${variant_id}`,
+           headers: {
+             'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+           },
+           processData: false,
+           contentType: false,
+           data: new FormData($("#variant-form").closest("form")[0]), // serializes the form's elements.
+           success: function(data)
+             {
+                e.preventDefault();
+                $(`#original_price-${data['id']}`).html(data['original_price'])
+                $(`#variant_row-${data['id']}`).attr(`data-image-url`, data.image_url)
+                $(`#image-${data['id']}`).attr('src', data['image_url'])
+                Object.keys(data.properties || {}).forEach(function(property){
+                  converted_property = property.replaceAll('_', '-')
+                  $(`#variant_row-${data['id']}`).attr(`data-properties-${converted_property}-data`, data.properties[property]?.data)
+                  $(`#variant_row-${data['id']}`).attr(`data-properties-${converted_property}-key`, data.properties[property]?.key)
+                })
+                $(`#price-${data['id']}`).html(data['price'])
+                $("#variant-error").html('')
+                $("#variant_price").val('')
+                $("#variant_original_price").val('')
+                alert('Update completed!')
+                $("#variantFormModal").modal("hide");
+                return;
+           },
+           error: function(xhr, status, error) {
+            $("#variant-error").html(`<div class="alert alert-warning" role="alert">${error}<div>`);
+           }
+        })
+    });
+  }
+
+  $(document).ready(function() {
+    $('.edit-variant').on('click', function() {
+      editVariantSubmitHandle(this.dataset.variantId);
+    });
+  });

@@ -1,0 +1,30 @@
+#variantFormModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "VariantLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-xl{:role => "document"}
+    - temp_variant = Variant.new(owner: record)
+    - property_fields = temp_variant.properties_config
+    = form_for temp_variant, url: 'admin/variants', html: { remote: true, id: "variant-form" }, data: { turbo: false } do |sf|
+      .modal-content
+        .modal-header
+          %h5#variantModalLabel.modal-title Edit variant
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          .container-fluid
+            .row
+              #variant-error
+            .row
+              .col-6
+                = sf.file_field :image,  class: "dropify", style: "opacity: 0;", "data-max-file-size": "#{max_image_size_in_mb}M"
+              .col-6
+                .form-group
+                  = sf.label :original_price
+                  = sf.number_field :original_price, class: "form-control"
+                .form-group
+                  = sf.label :price
+                  = sf.number_field :price, class: "form-control"
+                - if property_fields
+                  = render "admin/shared/property_form", record: temp_variant, f: sf, fields_config: property_fields
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+          = sf.submit "Submit", class: "btn btn-primary"
+

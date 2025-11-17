@@ -1,0 +1,13 @@
+%section
+  %h1 This is menu
+
+  %ul
+    - menus[:items].each do |item|
+      %li
+        %a{href: menu_item_href(item)}
+          = item[:title]
+        - if item[:children]
+          %ul
+            - item[:children].each do |item|
+              %li
+                %a{href: menu_item_href(item)}= item[:title]

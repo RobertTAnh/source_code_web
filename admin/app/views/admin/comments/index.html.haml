@@ -1,0 +1,113 @@
+= render "admin/comments/comments_list", comments: @comments
+
+:javascript
+  $(document).ready(function(){
+    $('#comment-section [data-toggle="tooltip"]').tooltip();
+
+    $('#comment-section').on('click', '.edit-comment', function(e) {
+      e.preventDefault();
+      const commentId = $(this).data('id');
+      const url = $(this).data('url');
+      $.ajax({
+        url: url,
+        method: 'GET',
+        data: { id: commentId },
+        success: function(res) {
+          const tr = $(this).closest('tr');
+
+          if (tr.find('.comment-replies').length > 0){
+            tr.find('.comment-replies table').append(res.html);
+          }else{
+            tr.closest('tbody').append(res.html);
+          }
+
+          $('#commentFormModal').html(res.modal_data);
+          $('#commentFormModal').modal('show');
+        },
+        error: function(res) {
+          alert(res.errors);
+        }
+      })
+    })
+
+    $('#commentFormModal').on('submit', '#comment-modal-form', function(e) {
+      e.preventDefault();
+      const url = $(this).attr('action');
+      const formData = $(this).serializeArray();
+      $.ajax({
+        url: url,
+        method: 'POST',
+        data: formData,
+        success: function(res) {
+          $(`#comment_replies_${res.comment.parent_id}`).removeClass('disabled');
+          const tr = $(`#comment_${res.comment.parent_id}`);
+          tr.after(res.comment_html);
+          $('#commentFormModal').modal('hide');
+          $(`#comment_${res.comment.parent_id}`).find('[data-toggle]').click();
+        },
+        error: function(res) {
+          alert(res.errors);
+        }
+      })
+    })
+
+    $('#comment-section').on('click', `a[data-target="#editReplyModal"]`, function(e) {
+      e.preventDefault();
+      $('#edit-reply-modal-form').find('input[name="id"]').val($(this).data('id'));
+      const content = $(this).closest("tr").find('.reply_content').text();
+      $('#edit-reply-modal-form').find('textarea[name="content"]').val(content);
+
+      $('#editReplyModal').modal('show');
+    })
+
+    $('#edit-reply-modal-form').on('submit',  function(e) {
+      e.preventDefault();
+      const data = {}
+
+      $.each($(this).serializeArray(), function() {
+        data[this.name] = this.value;
+      });
+
+      target = $(`#reply_${data.id}`);
+      updateComment(data, target);
+      $('#editReplyModal').modal('hide');
+      target.removeClass('collapse');
+    })
+
+    $('#comment-section').on('click', '.update-comment', function(e) {
+      e.preventDefault();
+      const target = $(this).closest('tr')
+      const data = {
+        id: $(this).data('id'),
+        status: $(this).data('status')
+      }
+
+      updateComment(data, target);
+
+      if ($(this).hasClass('comment-replies')){
+        const collapse_class = $(this).attr('class').split(' ').slice(-1)[0];
+        $(`.${collapse_class}`).collapse();
+      }
+    })
+  }, { once: true });
+
+  function updateComment(data, target){
+    const url = `/admin/comments/${data.id}`;
+  
+    $.ajax({
+      url: url,
+      headers: {
+        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
+      },
+      method: 'PUT',
+      data: data,
+      success: function(res) {
+        target.replaceWith(res.comment_html);
+      },
+      error: function(res) {
+        alert(res.errors);
+      }
+    })
+  }
+
+

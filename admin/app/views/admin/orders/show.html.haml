@@ -1,0 +1,116 @@
+.content-header
+
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        .mb-2
+          = link_to 'Edit', edit_order_path(@record), class: 'btn btn-primary'
+          = link_to 'Back', orders_path, class: "btn btn-default"
+        .card.card-primary.card-outline.card-outline-tabs
+          .card-body.border-bottom-0.order-detail
+            .row
+              .col-sm-6
+                %table
+                  %tbody
+                    %tr
+                      %th{ width: 200 } Code
+                      %td= @record.code
+                    %tr
+                      %th{ width: 200 } Status
+                      %td= @record.status
+                    %tr
+                      %th{ width: 200 } Customer name
+                      %td= @record.customer_name
+                    %tr
+                      %th{ width: 200 } Email
+                      %td= @record.customer_email
+                    %tr
+                      %th{ width: 200 } Phone
+                      %td= @record.customer_phone
+                    %tr
+                      %th{ width: 200 } Payment method
+                      %td= @record.payment_method
+                    %tr
+                      %th{ width: 200 } Shipping method
+                      %td= @record.shipping_method
+                    %tr
+                      %th{ width: 200 } Invoice required
+                      %td= @record.invoice_required
+                    %tr
+                      %th{ width: 200 } Created at
+                      %td= format_datetime(@record.created_at)
+              .col-sm-6.bd-l
+                %table
+                  %tbody
+                    %tr
+                      %th{ width: 200 } Invoice
+                      %td
+                    %tr
+                      %th{ width: 200 } &emsp;+ Company name
+                      %td= @record.invoice_data && @record.invoice_data['company_name']
+                    %tr
+                      %th{ width: 200 } &emsp;+ Tax number
+                      %td= @record.invoice_data && @record.invoice_data['tax_number']
+                    %tr
+                      %th{ width: 200 } &emsp;+ Address
+                      %td= @record.invoice_data && @record.invoice_data['address']
+                    %tr
+                      %th{ width: 200 } &emsp;+ Note
+                      %td= @record.invoice_data && @record.invoice_data['note']
+                    %tr
+                      %th{ width: 200 } Shipping address
+                      %td
+                    %tr
+                      %th{ width: 200 } &emsp;+ Address
+                      %td= @record.shipping_address && @record.shipping_address['address']
+                    %tr
+                      %th{ width: 200 } &emsp;+ Province
+                      %td= @record.shipping_address && @record.shipping_address['province']
+                    %tr
+                      %th{ width: 200 } &emsp;+ District
+                      %td= @record.shipping_address && @record.shipping_address['district']
+                    %tr
+                      %th{ width: 200 } &emsp;+ Ward
+                      %td= @record.shipping_address && @record.shipping_address['ward']
+            .row.mt-5
+              .col-md-12
+                %table
+                  %thead
+                    %tr
+                      %th Image
+                      %th Product
+                      %th Variants
+                      %th Price (VND)
+                      %th Discount (%)
+                      %th Quantity
+                  %tbody
+                    - @record.order_items.each do |item|
+                      %tr
+                        %td= image_tag item.product.image_url, height: 50
+                        %td= item.product.name
+                        %td= item.variants.to_s
+                        %td= item.price
+                        %td= item.discount_percentage
+                        %td= item.quantity
+                    %tr
+                      %th
+                      %th
+                      %th
+                      %th
+                      %th Vat fee amount (VND)
+                      %td= @record.vat_fee_amount
+                    %tr
+                      %th
+                      %th
+                      %th
+                      %th
+                      %th Subtotal (VND)
+                      %td= @record.sub_total
+                    %tr
+                      %th
+                      %th
+                      %th
+                      %th
+                      %th Total price (VND)
+                      %td= @record.total_price

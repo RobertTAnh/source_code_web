@@ -1,0 +1,38 @@
+- selected_categories = @record.categories.pluck(:id)
+- primary_category = @record.primary_category
+- categories.where(depth: 1).each do |level_1_category|
+  .form-check.mt-2
+    = check_box_tag "categories[]", level_1_category.id, selected_categories.include?(level_1_category.id), { class: "form-check-input"}
+    %label.form-check-label
+      %strong= level_1_category.name
+    - if primaryizable
+      = radio_button_tag :primary_category, level_1_category.id, primary_category&.id == level_1_category.id, class: "form-check-input ml-1 float-right", style: "position: unset"
+      %label.form-check-label.float-right Primary
+  - if level_1_category.children.any?
+    .pl-3
+      - level_1_category.children.each do |level_2_category|
+        .form-check
+          = check_box_tag "categories[]", level_2_category.id, selected_categories.include?(level_2_category.id), { class: "form-check-input"}
+          %label.form-check-label= level_2_category.name
+          - if primaryizable
+            = radio_button_tag :primary_category, level_2_category.id, primary_category&.id == level_2_category.id, class: "form-check-input ml-1 float-right", style: "position: unset"
+            %label.form-check-label.float-right Primary
+          - if level_2_category.children.any?
+            .pl-3
+              - level_2_category.children.each do |level_3_category|
+                .form-check
+                  = check_box_tag "categories[]", level_3_category.id, selected_categories.include?(level_3_category.id), { class: "form-check-input"}
+                  %label.form-check-label= level_3_category.name
+                  - if primaryizable
+                    = radio_button_tag :primary_category, level_3_category.id, primary_category&.id == level_3_category.id, class: "form-check-input ml-1 float-right", style: "position: unset"
+                    %label.form-check-label.float-right Primary
+                  - if level_3_category.children.any?
+                    .pl-3
+                      - level_3_category.children.each do |level_4_category|
+                        .form-check
+                          = check_box_tag "categories[]", level_4_category.id, selected_categories.include?(level_4_category.id), { class: "form-check-input"}
+                          %label.form-check-label= level_4_category.name
+                          - if primaryizable
+                            = radio_button_tag :primary_category, level_4_category.id, primary_category&.id == level_4_category.id, class: "form-check-input ml-1 float-right", style: "position: unset"
+                            %label.form-check-label.float-right Primary
+

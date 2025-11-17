@@ -1,0 +1,31 @@
+.form-container
+  - if errors&.any?
+    = render "admin/shared/errors", errors: @errors
+  = form_for record, data: {turbo: false} do |f|
+    .row
+      - if record.class.name != 'Page'
+        .col-md-7.col-sm-12
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :slug
+            = f.text_field :slug, class: 'form-control', placeholder: 'Auto generated'
+        .col-md-5.col-sm-12
+          = f.file_field :image, class: 'dropify', data: { height: "600" }
+      - else
+        .col-sm-12
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: 'form-control'
+          .form-group
+            = f.label :slug
+            = f.text_field :slug, class: 'form-control', placeholder: 'Auto generated'
+      - if record.class.include? HasTag
+        .col-sm-12
+          = render "admin/shared/tag_form_select", form: f, record: record
+    .row
+      .col-12
+        = f.submit 'Submit', class: 'btn btn-primary'
+        = link_to 'Back', back_url, class: 'btn btn-default'
+= render "admin/shared/dropify"

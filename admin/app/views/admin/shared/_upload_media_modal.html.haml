@@ -1,0 +1,20 @@
+.modal{:role => "dialog", :tabindex => "-1", :style=> "display: block;"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      = form_tag "/admin/medias/upload?record_type=#{record.class.name}&record_id=#{record.id}&for=#{type}",
+          enctype: "multipart/form-data", method: "POST", format: 'json', id: "upload-medias", remote: true do
+        .modal-header
+          %h5.modal-title Upload media
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button", :onclick=> "closeModal()"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          = file_field_tag :upload, id: "upload-file_medias", class: "dropify", "data-max-file-size": "#{max_image_size_in_mb}M"
+        .modal-footer
+          %button.btn.btn-primary{onclick: "handleUploadMedias(this)", :type => "button"} Upload
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button", :onclick=>"closeModal()"} Close
+= render "admin/shared/dropify"
+
+:javascript
+  function closeModal(){
+    $("#render-upload-midia-place").html('')
+  }

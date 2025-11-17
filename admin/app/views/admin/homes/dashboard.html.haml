@@ -1,0 +1,97 @@
+/ Content Header (Page header)
+.content-header
+  .container-fluid
+    .row.mb-2
+      .col-sm-6
+        %h1.m-0 Dashboard
+/ Main content
+%section.content
+  .container-fluid
+    / Small boxes (Stat box)
+    .row
+      .col-lg-6.col-6
+        / small box
+        .small-box.bg-info
+          .inner
+            %h3
+              = @statistic[:products]
+            %p Products
+          .icon
+            %i.ion.ion-bag
+          = link_to products_path, class: "small-box-footer" do
+            More info
+            %i.fas.fa-arrow-circle-right
+      .col-lg-6.col-6
+        / small box
+        .small-box.bg-info
+          .inner
+            %h3
+              = @statistic[:contacts]
+            %p Contacts
+          .icon
+            %i.ion.ion-bag
+          = link_to contacts_path, class: "small-box-footer" do
+            More info
+            %i.fas.fa-arrow-circle-right
+    .row
+      / Left col
+      %section.col-lg-12.col-12
+        / TO DO List
+        .card
+          .card-header
+            %h3.card-title{:style => "font-size: 1.7rem"}
+              = "Posts: #{@statistic[:posts][:total]}"
+          - posts = @statistic[:posts]
+          .card-body
+            .row
+              .col-lg-3.col-6
+                / small box
+                .small-box.bg-info
+                  .inner
+                    %h3
+                      = posts[:published]
+                    %p Published
+                  .icon
+                    %i.ion.ion-bag
+                  = link_to posts_path, class: "small-box-footer" do
+                    More info
+                    %i.fas.fa-arrow-circle-right
+              / ./col
+              .col-lg-3.col-6
+                / small box
+                .small-box.bg-success
+                  .inner
+                    %h3
+                      = posts[:unpublished]
+                    %p Unpublished
+                  .icon
+                    %i.ion.ion-stats-bars
+                  = link_to posts_path, class: "small-box-footer" do
+                    More info
+                    %i.fas.fa-arrow-circle-right
+              / ./col
+              .col-lg-3.col-6
+                / small box
+                .small-box.bg-warning
+                  .inner
+                    %h3
+                      = posts[:this_week]
+                    %p New this week
+                  .icon
+                    %i.ion.ion-person-add
+                  = link_to posts_path, class: "small-box-footer" do
+                    More info
+                    %i.fas.fa-arrow-circle-right
+              / ./col
+              .col-lg-3.col-6
+                / small box
+                .small-box.bg-danger
+                  .inner
+                    %h3
+                      = posts[:this_month] || 0
+                    %p New this month
+                  .icon
+                    %i.ion.ion-pie-graph
+                  = link_to posts_path, class: "small-box-footer" do
+                    More info
+                    %i.fas.fa-arrow-circle-right

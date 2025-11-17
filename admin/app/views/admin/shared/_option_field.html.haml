@@ -1,0 +1,35 @@
+- index ||= Random.hex(4)
+.row{id: "option-#{index}"}
+  .col-2
+    .form-group
+      %label Name
+      = f.text_field("variant_options[][name]", value: option["name"], class: "form-control")
+  .col-9
+    .form-group
+      %label Values
+      %br
+      = f.select("variant_options[][values]", option["values"], {selected: option["values"]}, {style: "display: block", class: "form-control variant-select2", multiple: true, id: "variant_options_#{index}_values"})
+  .col-1
+    %label Delete
+    %br
+    = button_tag class: "btn btn-danger", onclick: "removeOption(this)", type: "button" do
+      %i.fa-solid.fa-trash
+
+:javascript
+  $(document).ready(function(){
+    const newOptionIndex = generateString(8)
+    $("#option-#{index}").attr("id", `option-${newOptionIndex}`)
+    $("#variant_options_#{index}_values").attr("id", `variant_options_${newOptionIndex}_values`)
+    $(`#variant_options_${newOptionIndex}_values`).select2({tags: true, width: "100%"});
+  })
+
+  function generateString(length) {
+      let result = '';
+      const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const charactersLength = characters.length;
+      for ( let i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
+      return result;
+  }

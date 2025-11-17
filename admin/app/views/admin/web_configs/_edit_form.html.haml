@@ -1,0 +1,24 @@
+= form_for record, data: {turbo: false}, url: url do |f|
+  .mb-2
+    = f.submit 'Submit', class: 'btn btn-primary'
+  - if @errors&.any?
+    .alert.alert-warning{role: 'alert'}
+      = @errors&.to_json
+  .card.card-primary.card-outline.card-outline-tabs
+    .card-header.p-0.border-bottom-0
+      %ul#custom-tabs-four-tab.nav.nav-tabs{:role => "tablist"}
+        - @configs['groups'].each_with_index do |group, index|
+          %li.nav-item
+            %a.nav-link.text-dark{class: index.zero? ? 'active' : '', "aria-controls" => group['name'], "aria-selected" => "true", "data-toggle" => "pill", :href => "##{group['name']}", :role => "tab"}= group['name']
+        %li.nav-item
+          %a#history-tab.text-dark.nav-link{"aria-controls" => "history", "aria-selected" => "false", "data-toggle" => "pill", :href => "#history-list", :role => "tab", :onclick => "updateCurrentGroup(this);"} History
+    .card-body
+      #custom-tabs-four-tabContent.tab-content
+        - @configs['groups'].each_with_index do |group, index|
+          .tab-pane.fade.show{class: index.zero? ? 'active' : '', "aria-labelledby" => "#{group['name']}-tab", :role => "tabpanel", :id => group['name']}
+            = render "admin/web_configs/default_info_form", record: record, f: f, extra_fields: group['configs'], sections: group['sections']
+        #history-list.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
+          = render "admin/shared/history_list", record: record, f: f
+    / /.card
+#render-upload-midia-place
+

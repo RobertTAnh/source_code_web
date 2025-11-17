@@ -1,0 +1,20 @@
+%tr.comment-replies.accordian-body.collapse{class: "comment_replies_#{reply.parent_id}", id: "reply_#{reply.id}" }
+  %td
+  %td.text-truncate.reply_content
+    %div{ style: "margin-left: 50px"}= reply.content
+  %td
+  %td
+  %td
+  %td
+  %td= reply.status
+  %td
+  %td= reply.created_at.strftime("%H:%M %d/%m/%Y")
+  %td
+    %a.btn.btn-primary{data: { id: reply.id, toggle: "modal", target: "#editReplyModal" } }
+      %i.bi.bi-pencil{data: { toggle: 'tooltip',placement: 'top', title: 'Edit' } }
+    %a.btn.btn-outline-warning.mr-1.update-comment{data: { id: reply.id, status: 'uncensored', toggle: 'tooltip', placement: 'top', title: 'Uncensored' }, class: reply.uncensored? ? "d-none" : ""}
+      %i.bi.bi-stopwatch
+    %a.btn.btn-outline-success.mr-1.update-comment{data: { id: reply.id, status: 'published', toggle: 'tooltip', placement: 'top', title: 'Publish' }, class: reply.published? ? "d-none" : ""}
+      %i.bi.bi-person-check
+    %a.btn.btn-outline-danger.mr-1.update-comment{data: { id: reply.id, status: 'rejected', toggle: 'tooltip', placement: 'top', title: 'Reject' }, class: reply.rejected? ? "d-none" : ""}
+      %i.bi.bi-x-circle

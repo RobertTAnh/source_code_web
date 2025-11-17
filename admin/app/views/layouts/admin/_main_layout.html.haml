@@ -1,0 +1,9 @@
+.wrapper
+
+  = render 'layouts/admin/components/navbar'
+  = render 'layouts/admin/components/main_sidebar'
+
+  .content-wrapper
+    = yield
+
+  = render 'layouts/admin/components/footer'

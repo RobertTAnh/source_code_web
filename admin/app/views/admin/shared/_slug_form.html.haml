@@ -1,0 +1,11 @@
+.form-group
+  = f.label :slug
+  = f.text_field :slug, class: "form-control"
+.form-group
+  = f.label :status
+  = f.select :status, options_for_select([["Published", "published"], ["Unpublished", "unpublished"]], record.status), {}, {class: "form-control record-status-field"}
+= f.fields_for :content do |cf|
+  .form-group
+    = cf.label :seo_index
+    = cf.select :seo_index, options_for_select([["Index", true], ["NoIndex", false]], record.content.seo_index), {}, {class: "form-control"}
+

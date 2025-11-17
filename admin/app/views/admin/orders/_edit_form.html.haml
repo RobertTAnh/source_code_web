@@ -1,0 +1,61 @@
+= form_for record, data: {turbo: false} do |f|
+  .mb-2
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', order_path(record), class: "btn btn-default"
+  - if @errors&.any?
+    = render "admin/shared/errors", errors: @errors
+  .card.card-primary.card-outline.card-outline-tabs
+    .card-body
+      .row
+        .col-sm-6
+          .form-group
+            = f.label :customer_name
+            = f.text_field :customer_name, class: "form-control"
+          .form-group
+            = f.label :customer_email
+            = f.text_field :customer_email, class: "form-control"
+          .form-group
+            = f.label :customer_phone
+            = f.text_field :customer_phone, class: "form-control"
+          .form-group
+            = f.label :payment_method
+            = f.text_field :payment_method, class: "form-control"
+          .form-group
+            = f.label :shipping_method
+            = f.text_field :shipping_method, class: "form-control"
+          .form-group
+            = f.label :invoice_required
+            = f.select :invoice_required, options_for_select([["Yes", true], ["No", false]], record.invoice_required), {}, {class: "form-control"}
+          .form-group
+            = f.label :status
+            = f.select :status, options_for_select([["draft", "draft"], ["created", "created"]], record.status), {}, {class: "form-control"}
+        .col-sm-6.bd-l
+          = f.label :shipping_address
+          .form-wrapper
+            .form-group
+              = f.label :address
+              = f.text_field "shipping_address[address]", class: "form-control", value: record.shipping_address && record.shipping_address['address']
+            .form-group
+              = f.label :province
+              = f.text_field "shipping_address[province]", class: "form-control", value: record.shipping_address && record.shipping_address['province']
+            .form-group
+              = f.label :district
+              = f.text_field "shipping_address[district]", class: "form-control", value: record.shipping_address && record.shipping_address['district']
+            .form-group
+              = f.label :ward
+              = f.text_field "shipping_address[ward]", class: "form-control", value: record.shipping_address && record.shipping_address['ward']
+
+          = f.label :invoice
+          .form-wrapper
+            .form-group
+              = f.label :company_name
+              = f.text_field "invoice_data[company_name]", class: "form-control", value: record.invoice_data && record.invoice_data['company_name']
+            .form-group
+              = f.label :tax_number
+              = f.text_field "invoice_data[tax_number]", class: "form-control", value: record.invoice_data && record.invoice_data['tax_number']
+            .form-group
+              = f.label :address
+              = f.text_field "invoice_data[address]", class: "form-control", value: record.invoice_data && record.invoice_data['address']
+            .form-group
+              = f.label :note
+              = f.text_field "invoice_data[note]", class: "form-control", value: record.invoice_data && record.invoice_data['note']

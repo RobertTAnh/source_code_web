@@ -1,0 +1,12 @@
+.row
+  .col-11
+    .row
+      - fields.each do |field|
+        .form-group.col
+          = f.label field['name']
+          = f.text_field :"data[][#{field['key']}]", class: "form-control", value: ele[field['key']]
+  .col-1
+    %label Delete
+    %br
+    = button_tag class: "btn btn-danger", onclick: "removeElement#{element_id}(this, '#{element_id}')", type: "button" do
+      %i.fa-solid.fa-trash

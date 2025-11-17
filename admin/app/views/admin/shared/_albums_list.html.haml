@@ -1,0 +1,41 @@
+.content-header
+
+%section.content
+  .container-fluid
+    .mb-2
+      = link_to 'Back', send("edit_#{record.class.name.underscore}_path"), class: "btn btn-default"
+    .row
+      .col-12
+        .card
+          .card-header
+            .card-tools.float-right
+              %a.btn.btn-primary{data: { target: "#albumFormModal", toggle: "modal"}}
+                %span New
+                %i.bi.bi-plus
+            .card-tools.float-left
+              %div
+                %span{ style: "font-size: 1.6rem; font-weight: 500; margin-right: 10px;"}= "#{record.class.name}: #{record.name} Albums"
+
+          .card-body.table-responsive.p-0
+            %table.table.table-hover.text-nowrap.table-head-fixed.limit-width-table
+              %thead
+                %tr
+                  %th{style: "max-width: 25%"} Name
+                  %th{style: "max-width: 25%"} Slug
+                  %th{style: "max-width: 25%"} Total Files
+                  %th{style: "max-width: 25%"} Created At
+                  %th Actions
+              %tbody
+                - record.albums.each do |album|
+                  %tr
+                    %td= link_to album.name, edit_album_path(album)
+                    %td= album.slug
+                    %td= album.files.count
+                    %td= album.created_at
+                    %td
+                      = link_to edit_album_path(album), class: "btn btn-outline-info mr-1" do
+                        %i.bi.bi-pencil
+                      = link_to album_path(album), class: "btn btn-outline-danger mr-1", method: :delete,  data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do
+                        %i.bi.bi-trash
+
+= render "admin/shared/album_form_modal", record: record

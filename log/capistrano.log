@@ -1,0 +1,97 @@
+# Logfile created on 2025-11-17 15:46:53 +0700 by logger.rb/v1.7.0
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:46:53 +0700 cap production deploy:initial
+  INFO ---------------------------------------------------------------------------
+ DEBUG [25ec96f1] Running ~/.rvm/bin/rvm version as deploy@103.145.63.218
+ DEBUG [25ec96f1] Command: ~/.rvm/bin/rvm version
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:48:25 +0700 cap production deploy:initial
+  INFO ---------------------------------------------------------------------------
+ DEBUG [d1f52b5f] Running [ -d ~/.rvm ] as deploy@103.145.63.218
+ DEBUG [d1f52b5f] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:50:44 +0700 cap production deploy:initial
+  INFO ---------------------------------------------------------------------------
+ DEBUG [ee4b9aa5] Running [ -d ~/.rvm ] as deploy@103.145.63.218
+ DEBUG [ee4b9aa5] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:50:48 +0700 cap production deploy:initial
+  INFO ---------------------------------------------------------------------------
+ DEBUG [b16c546f] Running [ -d ~/.rvm ] as deploy@103.145.63.218
+ DEBUG [b16c546f] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:52:03 +0700 cap production deploy:initial
+  INFO ---------------------------------------------------------------------------
+ DEBUG [fafb6dd3] Running [ -d ~/.rvm ] as deploy@103.145.63.218
+ DEBUG [fafb6dd3] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:57:00 +0700 cap production deploy:initial
+  INFO ---------------------------------------------------------------------------
+ DEBUG [b4e76a14] Running [ -d ~/.rvm ] as ubuntu@103.145.63.218
+ DEBUG [b4e76a14] Command: [ -d ~/.rvm ]
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:57:09 +0700 cap production deploy:initial
+  INFO ---------------------------------------------------------------------------
+ DEBUG [155fdfd8] Running [ -d ~/.rvm ] as ubuntu@103.145.63.218
+ DEBUG [155fdfd8] Command: [ -d ~/.rvm ]
+ DEBUG [155fdfd8] Finished in 95.446 seconds with exit status 0 (successful).
+ DEBUG [b3ccfbc8] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [b3ccfbc8] Command: ~/.rvm/bin/rvm version
+ DEBUG [b3ccfbc8] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [b3ccfbc8] Finished in 0.378 seconds with exit status 0 (successful).
+ DEBUG [ae79ecba] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [ae79ecba] Command: ~/.rvm/bin/rvm current
+ DEBUG [ae79ecba] 	ruby-3.1.2
+ DEBUG [ae79ecba] Finished in 0.320 seconds with exit status 0 (successful).
+ DEBUG [01f461ea] Running ~/.rvm/bin/rvm default do ruby --version as ubuntu@103.145.63.218
+ DEBUG [01f461ea] Command: ~/.rvm/bin/rvm default do ruby --version
+ DEBUG [01f461ea] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [01f461ea] Finished in 0.454 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 15:59:01 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [59246057] Running [ -d ~/.rvm ] as ubuntu@103.145.63.218
+ DEBUG [59246057] Command: [ -d ~/.rvm ]
+ DEBUG [59246057] Finished in 6.497 seconds with exit status 0 (successful).
+ DEBUG [78c70940] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [78c70940] Command: ~/.rvm/bin/rvm version
+ DEBUG [78c70940] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [78c70940] Finished in 0.318 seconds with exit status 0 (successful).
+ DEBUG [9881bff2] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [9881bff2] Command: ~/.rvm/bin/rvm current
+ DEBUG [9881bff2] 	ruby-3.1.2
+ DEBUG [9881bff2] Finished in 0.317 seconds with exit status 0 (successful).
+ DEBUG [33b470c7] Running ~/.rvm/bin/rvm default do ruby --version as ubuntu@103.145.63.218
+ DEBUG [33b470c7] Command: ~/.rvm/bin/rvm default do ruby --version
+ DEBUG [33b470c7] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [33b470c7] Finished in 0.470 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 16:02:11 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [0402a15f] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [0402a15f] Command: ~/.rvm/bin/rvm version
+ DEBUG [0402a15f] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [0402a15f] Finished in 7.076 seconds with exit status 0 (successful).
+ DEBUG [3f30a8b5] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [3f30a8b5] Command: ~/.rvm/bin/rvm current
+ DEBUG [3f30a8b5] 	ruby-3.1.2
+ DEBUG [3f30a8b5] Finished in 0.291 seconds with exit status 0 (successful).
+ DEBUG [2ab9b2b6] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as ubuntu@103.145.63.218
+ DEBUG [2ab9b2b6] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [2ab9b2b6] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [2ab9b2b6] Finished in 0.499 seconds with exit status 0 (successful).
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-17 16:06:35 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [be709b0d] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [be709b0d] Command: ~/.rvm/bin/rvm version
+ DEBUG [be709b0d] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [be709b0d] Finished in 6.337 seconds with exit status 0 (successful).
+ DEBUG [7ba93975] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [7ba93975] Command: ~/.rvm/bin/rvm current
+ DEBUG [7ba93975] 	ruby-3.1.2
+ DEBUG [7ba93975] Finished in 0.277 seconds with exit status 0 (successful).
+ DEBUG [eb969e0b] Running ~/.rvm/bin/rvm 3.1.2 do ruby --version as ubuntu@103.145.63.218
+ DEBUG [eb969e0b] Command: ~/.rvm/bin/rvm 3.1.2 do ruby --version
+ DEBUG [eb969e0b] 	ruby 3.1.2p20 (2022-04-12 revision 4491bb740a) [x86_64-linux]
+ DEBUG [eb969e0b] Finished in 0.483 seconds with exit status 0 (successful).

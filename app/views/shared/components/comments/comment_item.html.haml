@@ -1,0 +1,28 @@
+.media-block
+  .media-left
+    %i.bi.bi-person-square{style: 'font-size: 40px'}
+  .media-body
+    .mar-btm
+      %p.btn-link.text-semibold.media-heading.box-inline.rating.text-decoration-none
+        = comment.name
+        - if comment.is_admin
+          %span.badge.badge-warning
+            Quản trị viên
+        - elsif comment.uncensored?
+          %span.badge.badge-info
+            Đang chờ duyệt
+        - else
+          - (1..5).each do |star|
+            - if star <= comment.rate
+              %span.fa.fa-star.checked
+            - else
+              %span.fa.fa-star-o
+        [
+        =time_ago_in_words(comment.created_at) + ' ago'
+        ]
+    %p= comment.content
+    %hr/
+    - if children.present?
+      %div
+        - children.each do |child|
+          = render_view("components/comments/comment_item", locals: {comment: child, children: []})

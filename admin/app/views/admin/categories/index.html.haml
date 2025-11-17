@@ -1,0 +1,12 @@
+.content-header
+
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        .mb-2
+          = link_to 'Back', 'javascript:window.history.back()', class: "btn btn-default"
+
+    .row
+      .col-12
+        = render "admin/categories/list", records: @records

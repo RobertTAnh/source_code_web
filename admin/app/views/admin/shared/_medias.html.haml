@@ -1,0 +1,20 @@
+.row
+  .col-sm-12
+    .d-flex.align-items-start
+      #featured-tab.nav.flex-column.nav-pills.me-3{"aria-orientation" => "vertical", :role => "tablist"}
+        %a#featured-image-tab.nav-link.active{href: "#featured-image", "aria-controls" => "featured-image", "aria-selected" => "true", "data-bs-target" => "#featured-image", "data-toggle" => "pill", :role => "tab"} Featured Images
+        %a#general-medias-tab.nav-link{href: "#general-medias", "aria-controls" => "general-medias", "aria-selected" => "false", "data-bs-target" => "#general-medias", "data-toggle" => "pill", :role => "tab"} General Medias
+      #v-pills-tabContent.tab-content.px-2{style: "width: 85%"}
+        #featured-image.tab-pane.fade.show.active{"aria-labelledby" => "featured-image", :role => "tabpanel"}
+          = render "admin/shared/medias_list", type: "featured_images", images: get_featured_images(record)
+        #general-medias.tab-pane.fade{"aria-labelledby" => "general-medias", :role => "tabpanel"}
+          = render "admin/shared/medias_list", type: "general_medias", images: get_general_medias(record)
+:javascript
+  function copyToClipboard(text) {
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+  }

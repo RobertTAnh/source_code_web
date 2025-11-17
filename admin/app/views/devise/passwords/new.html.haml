@@ -1,0 +1,20 @@
+%section.vh-100{:style => "background-color: #9A616D;"}
+  .container.py-5.h-100
+    .row.d-flex.justify-content-center.align-items-center.h-100
+      .col.col-xl-7
+        .card{:style => "border-radius: 1rem; border: none;"}
+          .row.g-0
+            .col-md-12.d-flex.align-items-center
+              .card-body.p-4.p-lg-5.text-black
+                = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+                  .d-flex.align-items-center.mb-3.pb-1
+                    %i.fas.fa-cubes.fa-2x.me-3{:style => "color: #ff6219;"}
+                    %span.h1.fw-bold.mb-0= web_config('website.name')
+                  %h5.fw-normal.mb-3.pb-3{:style => "letter-spacing: 1px;"} Reset your password
+                  = render "devise/shared/error_messages", resource: resource
+                  .form-outline.mb-4
+                    %label.form-label.mb-0{:for => "email_field"} Email address
+                    = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg", id: "email_field"
+                  .pt-1.mb-4
+                    = f.submit "Submit", class: "btn btn-dark btn-lg btn-block"
+                  = link_to "Login", new_session_path(resource_name), class: "small text-muted"

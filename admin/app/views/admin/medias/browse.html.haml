@@ -1,0 +1,33 @@
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Admin
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "admin/admin", media: "all", "data-turbo-track": "reload"
+    = javascript_include_tag "admin/admin", "data-turbo-track": "reload", defer: true
+  %body
+    .mx-auto{ style: "width: 90%;"}
+      .card.mt-2.mr-2.float-left.hoverable.align-items-center{ style: "width: 11rem;height: 150px;"}
+        .card-body.align-middle.mx-auto.px-100{ style: "font-size: 80%;" }
+          = form_tag "/admin/medias/upload?record_type=#{params[:record_type]}&record_id=#{params[:record_id]}&for=content",
+            enctype: "multipart/form-data", method: "POST", format: 'json', id: "browse-upload", data: {ckeditorfuncnum: params[:CKEditorFuncNum]} do
+            = file_field_tag :upload, id: "upload-file", class: "opacity-0 zindex-1 absolute", onchange: "handleUploadBrowse(this);"
+            %label{ for: "upload-file"}
+              %i.bi.bi-cloud-upload{ style: "font-size: 40px; color: #0d6efd;"}
+              %p Upload
+
+      #append-echo
+      - @files.each do |file|
+        .card.mt-2.mr-2.float-left.hoverable{ style: "width: 11rem;", onclick: "browseItemClick(this, #{params[:CKEditorFuncNum]}, '#{file[:url]}');"}
+          %a.btn.btn-danger.ck-delete-btn{onclick: "handleDeleteImage(event,this, '#{file[:key]}');"}
+            %i.bi.bi-trash
+          - if file[:blob].video?
+            = video_tag file[:url], class: "card-img-top"
+          - elsif file[:blob].image?
+            %img.card-img-top{:alt => file[:filename], :src => file[:url]}/
+
+          .card-body.p-2{ style: "font-size: 80%;" }
+            %p.card-text= file[:filename]
+          .card-footer.p-2
+            %small.text-muted= file[:created_at]

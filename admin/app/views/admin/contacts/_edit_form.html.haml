@@ -1,0 +1,25 @@
+= form_for record, data: {turbo: false} do |f|
+  .mb-2
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', contacts_path, class: "btn btn-default"
+  - if @errors&.any?
+    = render "admin/shared/errors", errors: @errors
+  .card.card-primary.card-outline.card-outline-tabs
+    .card-body
+      .row
+        .col-sm-6
+          .form-group
+            = f.label :name
+            = f.text_field :name, class: "form-control"
+          .form-group
+            = f.label :email
+            = f.email_field :email, class: "form-control"
+          .form-group
+            = f.label :phone
+            = f.text_field :phone, class: "form-control"
+          .form-group
+            = f.label :note
+            = f.text_area :note, class: "form-control"
+          .form-group
+            = f.label :extra
+            = f.text_area :extra, class: "form-control"

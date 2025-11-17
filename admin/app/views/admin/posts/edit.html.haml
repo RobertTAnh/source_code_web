@@ -1,0 +1,9 @@
+.content-header
+/ Main content
+%section.content
+  .container-fluid
+    .row
+      .col-12
+        = render "admin/shared/edit_form", record: @record,
+          back_url: posts_path, tabs: ["default", "category", "content", "custom_html", "additional_category",
+          "medias", "metadata", "tracking", "global_slug", "extra_fields", "albums", "history"]

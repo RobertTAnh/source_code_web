@@ -1,0 +1,31 @@
+.row
+  .col-12
+    = f.fields_for :content do |cf|
+      .form-group
+        = cf.label :meta_title
+        %span#meta_title_character_count
+        = cf.text_field :meta_title, class: "form-control", onkeyup: "showCharacterCount(this,60,'meta_title_character_count')"
+      -# .form-group
+      -#   = cf.label :meta_keywords
+      -#   = cf.text_field :meta_keywords, class: "form-control"
+      .form-group
+        = cf.label :meta_description
+        %span#meta_description_character_count
+        = cf.text_area :meta_description, class: "form-control",rows: 3, onKeyUp: "showCharacterCount(this, 160, 'meta_description_character_count')"
+      .form-group
+        = cf.label :meta_image
+        = cf.file_field :meta_image,  class: "dropify", "data-height": "600", "data-default-file": @record&.content&.meta_image_url, style: "opacity: 0;", "data-max-file-size": "#{max_image_size_in_mb}M"
+      .form-group
+        = cf.label :seo_schema, 'Schema'
+        = cf.text_area :seo_schema, class: "form-control", rows: 5, value: json_input_display(@record&.content&.seo_schema)
+      .form-group
+        = cf.label :seo_schema_breadcumb, 'Schema breadcumb'
+        = cf.text_area :seo_schema_breadcumb, class: "form-control", rows: 5, value: json_input_display(@record&.content&.seo_schema_breadcumb)
+:javascript
+  function showCharacterCount(e, maximum, id){
+    if(e.value.length >= maximum){
+      document.getElementById(id).innerHTML = `<i style="color: red">* ${e.value.length} characters </i>`
+    }else{
+      document.getElementById(id).innerHTML = `<i>* ${e.value.length} characters </i>`
+    }
+  }

@@ -1,0 +1,13 @@
+- if (record.is_a? Category) && params.present?
+  - kind = params[:kind].present? ? params[:kind] : record.kind
+  - select_list = Category.all_tag_names(kind)
+- else
+  - select_list = record.class.all_tag_names
+.form-group
+  = form.label :tags
+  = form.select(:tags, select_list.collect {|name| [name, name] }, {selected: record.tag_names}, {class: "form-control", id: "list-tagables", multiple: true})
+
+:javascript
+  document.addEventListener("turbo:load", function() {
+    $("#list-tagables").select2({tags: true});
+  });

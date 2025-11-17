@@ -1,0 +1,21 @@
+.form-container
+  - if @errors&.any?
+    = render "admin/shared/errors", errors: @errors
+
+  = form_for @record, data: {turbo: false} do |f|
+    .form-group
+      %label Name
+      = f.text_field :name, class: 'form-control', placeholder: 'Category name'
+    .form-group
+      %label Slug
+      = f.text_field :slug, class: 'form-control', placeholder: 'Auto generated'
+    .form-group
+      %label Kind
+      = f.text_field :kind, class: 'form-control', readonly: true, value: @record.kind || params[:kind]
+    .form-group
+      = f.label :parent
+      = f.select :parent_id, options_for_select(Category.where(depth: [1,2,3], kind: params[:kind]).pluck(:name, :id), record.parent_id || params[:parent_id]), {include_blank: "No parent"}, { class: "form-control" }
+    = render "admin/shared/tag_form_select", form: f, record: @record
+
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', categories_path(kind: params[:kind]), class: "btn btn-default"

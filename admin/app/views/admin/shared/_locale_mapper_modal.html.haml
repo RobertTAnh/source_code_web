@@ -1,0 +1,56 @@
+#localeMapperModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "exampleModalLongTitle", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5.modal-title Locale mapper
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        %form#locale-mapper-form
+          .container
+            .row
+              .form-group
+                .form-check
+                  %input.form-check-input{name: "kind", type: "radio", value: "create_new_record", id: "radio-create_new_record"}
+                  %label.form-check-label{for: "radio-create_new_record"} Create new record
+            .row
+              .form-check
+                %input.form-check-input{name: "kind", type: "radio", value: "link_existed_record", id: "radio-link_existed_record", checked: true}
+                %label.form-check-label{for: "radio-link_existed_record"} Link to an existed record
+            .row
+              .input-group
+                %input{type: "text", class: "form-control", placeholder: "Enter slug", name: "slug", id: "slug-input", required: true}
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-primary{:type => "button", onclick: "handleSubmit()"} Submit
+
+:javascript
+  $(document).ready(function(){
+    $('#localeMapperModal').on('show.bs.modal', function(e) {
+      var locale = $(e.relatedTarget).data('locale');
+      $('#localeMapperModal').attr("data-locale", locale)
+    });
+    $('input[type=radio][name=kind]').change(function() {
+      if (this.value == 'link_existed_record') {
+        $("#slug-input").removeAttr("disabled")
+      }
+      else if (this.value == 'create_new_record') {
+        $("#slug-input").attr("disabled", true)
+      }
+    });
+  }) 
+
+  function handleSubmit(){
+    kind = $('input[type=radio][name=kind]:checked').val()
+    locale = $('#localeMapperModal').attr('data-locale')
+    if(kind == 'link_existed_record'){
+      slug = $("#slug-input").val()
+      if(slug.trim().length == 0){
+        alert("Please enter slug!")
+        return
+      }
+      Turbo.visit(`?locale_redirect=${locale}&locale_slug=${slug}`)
+    }else{
+      Turbo.visit(`?locale_redirect=${locale}`)
+    }
+  }
