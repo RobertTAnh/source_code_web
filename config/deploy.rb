@@ -13,7 +13,7 @@ set :deploy_to,       "/home/#{fetch(:user)}/#{fetch(:application)}"
 # Git / Branch
 # -------------------------------
 set :branch,          'master'
-set :deploy_via,      :remote_cache
+set :deploy_via,      :copy
 
 # -------------------------------
 # RVM
