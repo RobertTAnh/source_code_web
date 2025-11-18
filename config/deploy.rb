@@ -26,7 +26,12 @@ set :rvm_custom_path, '~/.rvm'  # thêm vào dưới rvm_ruby_version
 # Linked Files & Directories
 # -------------------------------
 # Linked Files & Directories
-set :linked_files, %w[.env config/database.yml]
+set :linked_files, %w[
+  .env.production
+  config/database.yml
+  config/credentials/production.key
+  config/credentials/production.yml.enc
+]
 
 set :linked_dirs, %w[
   log
