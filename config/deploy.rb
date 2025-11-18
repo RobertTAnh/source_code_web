@@ -5,7 +5,7 @@
 # Basic Settings
 # -------------------------------
 set :application,     'mopxopminhphat'
-set :repo_url,        'git@gitlab.com:fagotek/waker.git'
+set :repo_url,        'git@gitlab.com:fagotek/waker_deploy.git'
 set :user,            'ubuntu'
 set :deploy_to,       "/home/#{fetch(:user)}/#{fetch(:application)}"
 
