@@ -3471,3 +3471,49 @@
  DEBUG [db92b734] Command: [ -f /home/ubuntu/mopxopminhphat/shared/puma.rb ]
  DEBUG [db92b734] Finished in 0.060 seconds with exit status 1 (failed).
   WARN puma.rb NOT FOUND!
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-18 11:16:16 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [c345926e] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [c345926e] Command: ~/.rvm/bin/rvm version
+ DEBUG [c345926e] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [c345926e] Finished in 4.706 seconds with exit status 0 (successful).
+ DEBUG [be57b8a3] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [be57b8a3] Command: ~/.rvm/bin/rvm current
+ DEBUG [be57b8a3] 	ruby-3.2.4
+ DEBUG [be57b8a3] Finished in 0.303 seconds with exit status 0 (successful).
+ DEBUG [0ff28d8e] Running ~/.rvm/bin/rvm 3.2.4 do ruby --version as ubuntu@103.145.63.218
+ DEBUG [0ff28d8e] Command: ~/.rvm/bin/rvm 3.2.4 do ruby --version
+ DEBUG [0ff28d8e] 	ruby 3.2.4 (2024-04-23 revision af471c0e01) [x86_64-linux]
+ DEBUG [0ff28d8e] Finished in 0.511 seconds with exit status 0 (successful).
+  INFO [58202bc4] Running /usr/bin/env mkdir -p /tmp as ubuntu@103.145.63.218
+ DEBUG [58202bc4] Command: /usr/bin/env mkdir -p /tmp
+  INFO [58202bc4] Finished in 0.022 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-0729419dbd8477a91a18.sh 0.0%
+  INFO Uploading /tmp/git-ssh-0729419dbd8477a91a18.sh 100.0%
+  INFO [84bd69ce] Running /usr/bin/env chmod 700 /tmp/git-ssh-0729419dbd8477a91a18.sh as ubuntu@103.145.63.218
+ DEBUG [84bd69ce] Command: /usr/bin/env chmod 700 /tmp/git-ssh-0729419dbd8477a91a18.sh
+  INFO [84bd69ce] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [b2e1a98f] Running /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker.git HEAD as ubuntu@103.145.63.218
+ DEBUG [b2e1a98f] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0729419dbd8477a91a18.sh" ; /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker.git HEAD )
+ DEBUG [b2e1a98f] 	512ba72c8a1622b911e73ca6e9f6703b03950b3d	HEAD
+  INFO [b2e1a98f] Finished in 3.200 seconds with exit status 0 (successful).
+  INFO [29c57fdd] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases as ubuntu@103.145.63.218
+ DEBUG [29c57fdd] Command: /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases
+  INFO [29c57fdd] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [0d1c3fc5] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets as ubuntu@103.145.63.218
+ DEBUG [0d1c3fc5] Command: /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets
+  INFO [0d1c3fc5] Finished in 0.055 seconds with exit status 0 (successful).
+  INFO [96d7aa4f] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config as ubuntu@103.145.63.218
+ DEBUG [96d7aa4f] Command: /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config
+  INFO [96d7aa4f] Finished in 0.097 seconds with exit status 0 (successful).
+ DEBUG [fc8fd1e4] Running [ -f /home/ubuntu/mopxopminhphat/shared/.env ] as ubuntu@103.145.63.218
+ DEBUG [fc8fd1e4] Command: [ -f /home/ubuntu/mopxopminhphat/shared/.env ]
+ DEBUG [fc8fd1e4] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [62f1fd72] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [62f1fd72] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ]
+ DEBUG [62f1fd72] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [5a150ea9] Running [ -f /home/ubuntu/mopxopminhphat/shared/puma.rb ] as ubuntu@103.145.63.218
+ DEBUG [5a150ea9] Command: [ -f /home/ubuntu/mopxopminhphat/shared/puma.rb ]
+ DEBUG [5a150ea9] Finished in 0.068 seconds with exit status 1 (failed).
+  WARN puma.rb NOT FOUND!

@@ -17,7 +17,7 @@ gem "pg", "~> 1.1"
 # Use the Puma web server [https://github.com/puma/puma]
 # TODO: Error with capistrano when using puma 5.0: invalid option: --daemon
 # gem "puma", "~> 5.0"
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 5.6'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -81,7 +81,7 @@ group :development do
   gem 'capistrano-rvm',     require: false
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano3-puma', '~> 5.1.0'
+  gem 'capistrano3-puma', '~> 6.0.0'
 end
 
 gem 'admin', path: 'admin'
