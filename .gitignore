@@ -43,3 +43,5 @@
 !/app/views/themes/demo/
 
 .env*.local
+.env
+/config/credentials/production.key
