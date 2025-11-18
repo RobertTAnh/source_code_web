@@ -23,7 +23,10 @@ set :rvm_ruby_version, '3.2.4@mopxopminhphat' # sửa theo ruby bạn dùng
 set :rvm_custom_path, '~/.rvm'  # thêm vào dưới rvm_ruby_version
 
 # -------------------------------
-# Linked Files & Directories
+# default_env
+set :default_env, { "RAILS_MASTER_KEY" => "#{shared_path}/config/credentials/production.key" }
+
+
 # -------------------------------
 # Linked Files & Directories
 set :linked_files, %w[
