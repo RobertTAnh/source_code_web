@@ -45,4 +45,4 @@ log/*
 
 .env*.local
 .env
-/config/credentials/*
+/config/credentials/production.key
