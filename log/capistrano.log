@@ -11375,3 +11375,1299 @@ Caused by:
 /home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
  DEBUG [0db215d3] 	Tasks: TOP => environment
  DEBUG [0db215d3] 	(See full trace by running task with --trace)
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-18 15:34:54 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [06bda7eb] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [06bda7eb] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm version )
+ DEBUG [06bda7eb] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [06bda7eb] Finished in 9.223 seconds with exit status 0 (successful).
+ DEBUG [359a4bc4] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [359a4bc4] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm current )
+ DEBUG [359a4bc4] 	ruby-3.2.4
+ DEBUG [359a4bc4] Finished in 0.307 seconds with exit status 0 (successful).
+ DEBUG [260335de] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version as ubuntu@103.145.63.218
+ DEBUG [260335de] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version )
+ DEBUG [260335de] 	ruby 3.2.4 (2024-04-23 revision af471c0e01) [x86_64-linux]
+ DEBUG [260335de] Finished in 0.820 seconds with exit status 0 (successful).
+  INFO [885a7c80] Running /usr/bin/env mkdir -p /tmp as ubuntu@103.145.63.218
+ DEBUG [885a7c80] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /tmp )
+  INFO [885a7c80] Finished in 0.026 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh 0.0%
+  INFO Uploading /tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh 100.0%
+  INFO [9b57adf7] Running /usr/bin/env chmod 700 /tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh as ubuntu@103.145.63.218
+ DEBUG [9b57adf7] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env chmod 700 /tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh )
+  INFO [9b57adf7] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [388e7527] Running /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD as ubuntu@103.145.63.218
+ DEBUG [388e7527] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh" ; /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD )
+ DEBUG [388e7527] 	ac6a64d1cc1de717b177cadab1a89c4debf4a38f	HEAD
+  INFO [388e7527] Finished in 2.886 seconds with exit status 0 (successful).
+  INFO [b8500541] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases as ubuntu@103.145.63.218
+ DEBUG [b8500541] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases )
+  INFO [b8500541] Finished in 0.032 seconds with exit status 0 (successful).
+  INFO [cb50bf45] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets as ubuntu@103.145.63.218
+ DEBUG [cb50bf45] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets )
+  INFO [cb50bf45] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [75beb87f] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials as ubuntu@103.145.63.218
+ DEBUG [75beb87f] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials )
+  INFO [75beb87f] Finished in 0.027 seconds with exit status 0 (successful).
+ DEBUG [5430985c] Running [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [5430985c] Command: [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ]
+ DEBUG [5430985c] Finished in 0.058 seconds with exit status 0 (successful).
+ DEBUG [384c5f0d] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [384c5f0d] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ]
+ DEBUG [384c5f0d] Finished in 0.017 seconds with exit status 0 (successful).
+ DEBUG [5b305ab3] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [5b305ab3] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ]
+ DEBUG [5b305ab3] Finished in 0.068 seconds with exit status 0 (successful).
+ DEBUG [815f7150] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [815f7150] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ]
+ DEBUG [815f7150] Finished in 0.016 seconds with exit status 0 (successful).
+ DEBUG [13649c47] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION ] as ubuntu@103.145.63.218
+ DEBUG [13649c47] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION ]
+ DEBUG [13649c47] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [97437a97] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [97437a97] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null )
+ DEBUG [97437a97] 	78dd7fb726d16d847b0f093ff853c2fdcffa64b9
+ DEBUG [97437a97] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [69e40f24] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ] as ubuntu@103.145.63.218
+ DEBUG [69e40f24] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ]
+ DEBUG [69e40f24] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [df7e28de] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [df7e28de] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null )
+ DEBUG [df7e28de] 	1763452524
+ DEBUG [df7e28de] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [f09559f5] Running [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ] as ubuntu@103.145.63.218
+ DEBUG [f09559f5] Command: [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ]
+ DEBUG [f09559f5] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/ubuntu/mopxopminhphat/repo
+ DEBUG [9fa21d74] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [9fa21d74] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [9fa21d74] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [26048617] Running /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git as ubuntu@103.145.63.218
+ DEBUG [26048617] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh" ; /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git )
+  INFO [26048617] Finished in 0.107 seconds with exit status 0 (successful).
+  INFO [effc4de6] Running /usr/bin/env git remote update --prune as ubuntu@103.145.63.218
+ DEBUG [effc4de6] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [effc4de6] 	Fetching origin
+ DEBUG [effc4de6] 	From gitlab.com:fagotek/waker_deploy
+   78dd7fb..ac6a64d  master     -> master
+  INFO [effc4de6] Finished in 3.647 seconds with exit status 0 (successful).
+ DEBUG [8e346047] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [8e346047] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [8e346047] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [ca8a7566] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083507 as ubuntu@103.145.63.218
+ DEBUG [ca8a7566] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083507 )
+  INFO [ca8a7566] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [0e7bbb87] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118083507 as ubuntu@103.145.63.218
+ DEBUG [0e7bbb87] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118083507 )
+  INFO [0e7bbb87] Finished in 0.423 seconds with exit status 0 (successful).
+ DEBUG [e9939cd7] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [e9939cd7] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [e9939cd7] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [ebc979b5] Running /usr/bin/env git rev-list --max-count=1 master as ubuntu@103.145.63.218
+ DEBUG [ebc979b5] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [ebc979b5] 	ac6a64d1cc1de717b177cadab1a89c4debf4a38f
+ DEBUG [ebc979b5] Finished in 0.022 seconds with exit status 0 (successful).
+ DEBUG [e31cca6e] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [e31cca6e] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi
+ DEBUG [e31cca6e] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [683fa898] Running /usr/bin/env echo "ac6a64d1cc1de717b177cadab1a89c4debf4a38f" > REVISION as ubuntu@103.145.63.218
+ DEBUG [683fa898] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083507 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "ac6a64d1cc1de717b177cadab1a89c4debf4a38f" > REVISION )
+  INFO [683fa898] Finished in 0.027 seconds with exit status 0 (successful).
+ DEBUG [648ad358] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [648ad358] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [648ad358] Finished in 0.054 seconds with exit status 0 (successful).
+ DEBUG [557c1c98] Running /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master as ubuntu@103.145.63.218
+ DEBUG [557c1c98] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-61d50a60c2c0fb0e3b6f.sh" ; /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master )
+ DEBUG [557c1c98] 	1763454885
+ DEBUG [557c1c98] Finished in 0.028 seconds with exit status 0 (successful).
+ DEBUG [d3624a6f] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [d3624a6f] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi
+ DEBUG [d3624a6f] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [35b7652d] Running /usr/bin/env echo "1763454885" > REVISION_TIME as ubuntu@103.145.63.218
+ DEBUG [35b7652d] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083507 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "1763454885" > REVISION_TIME )
+  INFO [35b7652d] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [ef0a09e5] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083507 /home/ubuntu/mopxopminhphat/releases/20251118083507/config /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials as ubuntu@103.145.63.218
+ DEBUG [ef0a09e5] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083507 /home/ubuntu/mopxopminhphat/releases/20251118083507/config /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials )
+  INFO [ef0a09e5] Finished in 0.058 seconds with exit status 0 (successful).
+ DEBUG [cefcc3ed] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [cefcc3ed] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/.env.production ]
+ DEBUG [cefcc3ed] Finished in 0.012 seconds with exit status 1 (failed).
+ DEBUG [334dff66] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [334dff66] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/.env.production ]
+ DEBUG [334dff66] Finished in 0.064 seconds with exit status 1 (failed).
+  INFO [f8911eba] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118083507/.env.production as ubuntu@103.145.63.218
+ DEBUG [f8911eba] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118083507/.env.production )
+  INFO [f8911eba] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [0854f86c] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [0854f86c] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml ]
+ DEBUG [0854f86c] Finished in 0.066 seconds with exit status 1 (failed).
+ DEBUG [6f29589b] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [6f29589b] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml ]
+ DEBUG [6f29589b] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [3e91db88] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [3e91db88] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml )
+  INFO [3e91db88] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [0891bd2a] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [0891bd2a] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118083507/config/database.yml )
+  INFO [0891bd2a] Finished in 0.022 seconds with exit status 0 (successful).
+ DEBUG [90e9e7d1] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [90e9e7d1] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.key ]
+ DEBUG [90e9e7d1] Finished in 0.058 seconds with exit status 1 (failed).
+ DEBUG [79d8fdb1] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [79d8fdb1] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.key ]
+ DEBUG [79d8fdb1] Finished in 0.019 seconds with exit status 1 (failed).
+  INFO [312da89c] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.key as ubuntu@103.145.63.218
+ DEBUG [312da89c] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.key )
+  INFO [312da89c] Finished in 0.066 seconds with exit status 0 (successful).
+ DEBUG [d3305cbb] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [d3305cbb] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc ]
+ DEBUG [d3305cbb] Finished in 0.014 seconds with exit status 1 (failed).
+ DEBUG [1abd5189] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [1abd5189] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc ]
+ DEBUG [1abd5189] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [5cf74c56] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [5cf74c56] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc )
+  INFO [5cf74c56] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [e779ddd0] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [e779ddd0] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118083507/config/credentials/production.yml.enc )
+  INFO [e779ddd0] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [5eaa8c88] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083507 /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp /home/ubuntu/mopxopminhphat/releases/20251118083507/public as ubuntu@103.145.63.218
+ DEBUG [5eaa8c88] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083507 /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp /home/ubuntu/mopxopminhphat/releases/20251118083507/public )
+  INFO [5eaa8c88] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [6b40c34d] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/log ] as ubuntu@103.145.63.218
+ DEBUG [6b40c34d] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/log ]
+ DEBUG [6b40c34d] Finished in 0.059 seconds with exit status 1 (failed).
+ DEBUG [73c3a279] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/log ] as ubuntu@103.145.63.218
+ DEBUG [73c3a279] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/log ]
+ DEBUG [73c3a279] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [001f2bd3] Running /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118083507/log as ubuntu@103.145.63.218
+ DEBUG [001f2bd3] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118083507/log )
+  INFO [001f2bd3] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [1ef3220f] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118083507/log as ubuntu@103.145.63.218
+ DEBUG [1ef3220f] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118083507/log )
+  INFO [1ef3220f] Finished in 0.028 seconds with exit status 0 (successful).
+ DEBUG [1f4cd09f] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [1f4cd09f] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/pids ]
+ DEBUG [1f4cd09f] Finished in 0.055 seconds with exit status 1 (failed).
+ DEBUG [c795e585] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [c795e585] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/pids ]
+ DEBUG [c795e585] Finished in 0.018 seconds with exit status 1 (failed).
+  INFO [04ce7b61] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/pids as ubuntu@103.145.63.218
+ DEBUG [04ce7b61] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/pids )
+  INFO [04ce7b61] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [06718572] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [06718572] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/cache ]
+ DEBUG [06718572] Finished in 0.015 seconds with exit status 1 (failed).
+ DEBUG [d9422153] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [d9422153] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/cache ]
+ DEBUG [d9422153] Finished in 0.059 seconds with exit status 1 (failed).
+  INFO [2d5b5259] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/cache as ubuntu@103.145.63.218
+ DEBUG [2d5b5259] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/cache )
+  INFO [2d5b5259] Finished in 0.023 seconds with exit status 0 (successful).
+ DEBUG [72372989] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [72372989] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/sockets ]
+ DEBUG [72372989] Finished in 0.054 seconds with exit status 1 (failed).
+ DEBUG [9c9ee880] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [9c9ee880] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/sockets ]
+ DEBUG [9c9ee880] Finished in 0.016 seconds with exit status 1 (failed).
+  INFO [99e31d9c] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/sockets as ubuntu@103.145.63.218
+ DEBUG [99e31d9c] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118083507/tmp/sockets )
+  INFO [99e31d9c] Finished in 0.056 seconds with exit status 0 (successful).
+ DEBUG [c1da4a25] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/system ] as ubuntu@103.145.63.218
+ DEBUG [c1da4a25] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/system ]
+ DEBUG [c1da4a25] Finished in 0.017 seconds with exit status 1 (failed).
+ DEBUG [d5997c78] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/system ] as ubuntu@103.145.63.218
+ DEBUG [d5997c78] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/system ]
+ DEBUG [d5997c78] Finished in 0.061 seconds with exit status 1 (failed).
+  INFO [0c741f04] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118083507/public/system as ubuntu@103.145.63.218
+ DEBUG [0c741f04] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118083507/public/system )
+  INFO [0c741f04] Finished in 0.022 seconds with exit status 0 (successful).
+ DEBUG [f9577221] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [f9577221] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/uploads ]
+ DEBUG [f9577221] Finished in 0.061 seconds with exit status 1 (failed).
+ DEBUG [83bf08ed] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [83bf08ed] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/uploads ]
+ DEBUG [83bf08ed] Finished in 0.017 seconds with exit status 1 (failed).
+  INFO [708e7de6] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118083507/public/uploads as ubuntu@103.145.63.218
+ DEBUG [708e7de6] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118083507/public/uploads )
+  INFO [708e7de6] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [1fda2018] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [1fda2018] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/storage ]
+ DEBUG [1fda2018] Finished in 0.018 seconds with exit status 1 (failed).
+ DEBUG [9f1f11b5] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [9f1f11b5] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/storage ]
+ DEBUG [9f1f11b5] Finished in 0.058 seconds with exit status 1 (failed).
+  INFO [48452614] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118083507/public/storage as ubuntu@103.145.63.218
+ DEBUG [48452614] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118083507/public/storage )
+  INFO [48452614] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [30c60cb1] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [30c60cb1] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083507/public/assets ]
+ DEBUG [30c60cb1] Finished in 0.132 seconds with exit status 1 (failed).
+ DEBUG [366848d8] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [366848d8] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083507/public/assets ]
+ DEBUG [366848d8] Finished in 0.018 seconds with exit status 1 (failed).
+  INFO [56de306e] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118083507/public/assets as ubuntu@103.145.63.218
+ DEBUG [56de306e] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118083507/public/assets )
+  INFO [56de306e] Finished in 0.065 seconds with exit status 0 (successful).
+ DEBUG [d5181580] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [d5181580] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi
+ DEBUG [d5181580] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [a2af3cfd] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true as ubuntu@103.145.63.218
+ DEBUG [a2af3cfd] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083507 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true )
+  INFO [a2af3cfd] Finished in 0.918 seconds with exit status 0 (successful).
+  INFO [02bbd9fd] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle as ubuntu@103.145.63.218
+ DEBUG [02bbd9fd] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083507 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle )
+  INFO [02bbd9fd] Finished in 0.818 seconds with exit status 0 (successful).
+  INFO [4da7f57c] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test as ubuntu@103.145.63.218
+ DEBUG [4da7f57c] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083507 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test )
+  INFO [4da7f57c] Finished in 0.955 seconds with exit status 0 (successful).
+ DEBUG [6b7bcf66] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [6b7bcf66] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi
+ DEBUG [6b7bcf66] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [7c5dea16] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check as ubuntu@103.145.63.218
+ DEBUG [7c5dea16] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083507 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check )
+ DEBUG [7c5dea16] 	The Gemfile's dependencies are satisfied
+ DEBUG [7c5dea16] Finished in 1.068 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+ DEBUG [f1f55e6c] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [f1f55e6c] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083507; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083507'" 1>&2; false; fi
+ DEBUG [f1f55e6c] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [f8f9f332] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile as ubuntu@103.145.63.218
+ DEBUG [f8f9f332] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083507 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" RAILS_ENV="production" RAILS_GROUPS="" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile )
+ DEBUG [f8f9f332] 	rake aborted!
+ DEBUG [f8f9f332] 	ActiveSupport::MessageEncryptor::InvalidMessage: ActiveSupport::MessageEncryptor::InvalidMessage (ActiveSupport::MessageEncryptor::InvalidMessage)
+ DEBUG [f8f9f332] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:209:in `rescue in _decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:186:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118083507/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [f8f9f332] 	
+Caused by:
+ DEBUG [f8f9f332] 	ArgumentError: key must be 16 bytes (ArgumentError)
+
+        cipher.key = @secret
+                     ^^^^^^^
+ DEBUG [f8f9f332] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `key='
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118083507/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [f8f9f332] 	Tasks: TOP => environment
+ DEBUG [f8f9f332] 	(See full trace by running task with --trace)
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-18 15:36:18 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [4e325a2c] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [4e325a2c] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm version )
+ DEBUG [4e325a2c] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [4e325a2c] Finished in 6.674 seconds with exit status 0 (successful).
+ DEBUG [3e948785] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [3e948785] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm current )
+ DEBUG [3e948785] 	ruby-3.2.4
+ DEBUG [3e948785] Finished in 0.302 seconds with exit status 0 (successful).
+ DEBUG [b44868c1] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version as ubuntu@103.145.63.218
+ DEBUG [b44868c1] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version )
+ DEBUG [b44868c1] 	ruby 3.2.4 (2024-04-23 revision af471c0e01) [x86_64-linux]
+ DEBUG [b44868c1] Finished in 0.616 seconds with exit status 0 (successful).
+  INFO [bcb0058f] Running /usr/bin/env mkdir -p /tmp as ubuntu@103.145.63.218
+ DEBUG [bcb0058f] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /tmp )
+  INFO [bcb0058f] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-8e994547fb386a8d68f8.sh 0.0%
+  INFO Uploading /tmp/git-ssh-8e994547fb386a8d68f8.sh 100.0%
+  INFO [d377acb9] Running /usr/bin/env chmod 700 /tmp/git-ssh-8e994547fb386a8d68f8.sh as ubuntu@103.145.63.218
+ DEBUG [d377acb9] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env chmod 700 /tmp/git-ssh-8e994547fb386a8d68f8.sh )
+  INFO [d377acb9] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [ac72ba34] Running /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD as ubuntu@103.145.63.218
+ DEBUG [ac72ba34] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8e994547fb386a8d68f8.sh" ; /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD )
+ DEBUG [ac72ba34] 	ef81dfd709a8f997614e9c6271d00c8d91ba7391	HEAD
+  INFO [ac72ba34] Finished in 2.991 seconds with exit status 0 (successful).
+  INFO [67435a43] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases as ubuntu@103.145.63.218
+ DEBUG [67435a43] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases )
+  INFO [67435a43] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [90291ec2] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets as ubuntu@103.145.63.218
+ DEBUG [90291ec2] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets )
+  INFO [90291ec2] Finished in 0.045 seconds with exit status 0 (successful).
+  INFO [1136cd45] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials as ubuntu@103.145.63.218
+ DEBUG [1136cd45] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials )
+  INFO [1136cd45] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [b7376c9e] Running [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [b7376c9e] Command: [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ]
+ DEBUG [b7376c9e] Finished in 0.065 seconds with exit status 0 (successful).
+ DEBUG [3f1e53ab] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [3f1e53ab] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ]
+ DEBUG [3f1e53ab] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [c08b62a0] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [c08b62a0] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ]
+ DEBUG [c08b62a0] Finished in 0.067 seconds with exit status 0 (successful).
+ DEBUG [8d1c96fd] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [8d1c96fd] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ]
+ DEBUG [8d1c96fd] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [4a7184a6] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION ] as ubuntu@103.145.63.218
+ DEBUG [4a7184a6] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION ]
+ DEBUG [4a7184a6] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [916ac7db] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [916ac7db] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null )
+ DEBUG [916ac7db] 	78dd7fb726d16d847b0f093ff853c2fdcffa64b9
+ DEBUG [916ac7db] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [0d4d3ff6] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ] as ubuntu@103.145.63.218
+ DEBUG [0d4d3ff6] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ]
+ DEBUG [0d4d3ff6] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [5c19dde9] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [5c19dde9] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null )
+ DEBUG [5c19dde9] 	1763452524
+ DEBUG [5c19dde9] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [7f633927] Running [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ] as ubuntu@103.145.63.218
+ DEBUG [7f633927] Command: [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ]
+ DEBUG [7f633927] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/ubuntu/mopxopminhphat/repo
+ DEBUG [668d9ffe] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [668d9ffe] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [668d9ffe] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [e018c234] Running /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git as ubuntu@103.145.63.218
+ DEBUG [e018c234] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8e994547fb386a8d68f8.sh" ; /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git )
+  INFO [e018c234] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [f764f500] Running /usr/bin/env git remote update --prune as ubuntu@103.145.63.218
+ DEBUG [f764f500] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8e994547fb386a8d68f8.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [f764f500] 	Fetching origin
+ DEBUG [f764f500] 	From gitlab.com:fagotek/waker_deploy
+   ac6a64d..ef81dfd  master     -> master
+  INFO [f764f500] Finished in 2.665 seconds with exit status 0 (successful).
+ DEBUG [d636ba98] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [d636ba98] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [d636ba98] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [9576d2d8] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083630 as ubuntu@103.145.63.218
+ DEBUG [9576d2d8] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8e994547fb386a8d68f8.sh" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083630 )
+  INFO [9576d2d8] Finished in 0.104 seconds with exit status 0 (successful).
+  INFO [ede2569d] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118083630 as ubuntu@103.145.63.218
+ DEBUG [ede2569d] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8e994547fb386a8d68f8.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118083630 )
+  INFO [ede2569d] Finished in 0.190 seconds with exit status 0 (successful).
+ DEBUG [eaad0ce5] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [eaad0ce5] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [eaad0ce5] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [cbc481aa] Running /usr/bin/env git rev-list --max-count=1 master as ubuntu@103.145.63.218
+ DEBUG [cbc481aa] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8e994547fb386a8d68f8.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [cbc481aa] 	ef81dfd709a8f997614e9c6271d00c8d91ba7391
+ DEBUG [cbc481aa] Finished in 0.023 seconds with exit status 0 (successful).
+ DEBUG [2ca041cd] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [2ca041cd] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi
+ DEBUG [2ca041cd] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [f4014e1d] Running /usr/bin/env echo "ef81dfd709a8f997614e9c6271d00c8d91ba7391" > REVISION as ubuntu@103.145.63.218
+ DEBUG [f4014e1d] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083630 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "ef81dfd709a8f997614e9c6271d00c8d91ba7391" > REVISION )
+  INFO [f4014e1d] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [5b2f17cb] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [5b2f17cb] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [5b2f17cb] Finished in 0.057 seconds with exit status 0 (successful).
+ DEBUG [4a84ebaf] Running /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master as ubuntu@103.145.63.218
+ DEBUG [4a84ebaf] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-8e994547fb386a8d68f8.sh" ; /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master )
+ DEBUG [4a84ebaf] 	1763454970
+ DEBUG [4a84ebaf] Finished in 0.022 seconds with exit status 0 (successful).
+ DEBUG [6e5c54da] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [6e5c54da] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi
+ DEBUG [6e5c54da] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [3921599e] Running /usr/bin/env echo "1763454970" > REVISION_TIME as ubuntu@103.145.63.218
+ DEBUG [3921599e] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083630 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "1763454970" > REVISION_TIME )
+  INFO [3921599e] Finished in 0.027 seconds with exit status 0 (successful).
+  INFO [9f9a0f18] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083630 /home/ubuntu/mopxopminhphat/releases/20251118083630/config /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials as ubuntu@103.145.63.218
+ DEBUG [9f9a0f18] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083630 /home/ubuntu/mopxopminhphat/releases/20251118083630/config /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials )
+  INFO [9f9a0f18] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [308be41e] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [308be41e] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/.env.production ]
+ DEBUG [308be41e] Finished in 0.017 seconds with exit status 1 (failed).
+ DEBUG [b2f9eed5] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [b2f9eed5] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/.env.production ]
+ DEBUG [b2f9eed5] Finished in 0.065 seconds with exit status 1 (failed).
+  INFO [4cb9583e] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118083630/.env.production as ubuntu@103.145.63.218
+ DEBUG [4cb9583e] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118083630/.env.production )
+  INFO [4cb9583e] Finished in 0.031 seconds with exit status 0 (successful).
+ DEBUG [639149b0] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [639149b0] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml ]
+ DEBUG [639149b0] Finished in 0.061 seconds with exit status 1 (failed).
+ DEBUG [94d65a6e] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [94d65a6e] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml ]
+ DEBUG [94d65a6e] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [a1897186] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [a1897186] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml )
+  INFO [a1897186] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [900f24e9] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [900f24e9] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118083630/config/database.yml )
+  INFO [900f24e9] Finished in 0.023 seconds with exit status 0 (successful).
+ DEBUG [d20ba6ba] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [d20ba6ba] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.key ]
+ DEBUG [d20ba6ba] Finished in 0.063 seconds with exit status 1 (failed).
+ DEBUG [489c4975] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [489c4975] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.key ]
+ DEBUG [489c4975] Finished in 0.025 seconds with exit status 1 (failed).
+  INFO [18b21dff] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.key as ubuntu@103.145.63.218
+ DEBUG [18b21dff] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.key )
+  INFO [18b21dff] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [1b27fdf2] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [1b27fdf2] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc ]
+ DEBUG [1b27fdf2] Finished in 0.019 seconds with exit status 1 (failed).
+ DEBUG [bdc6ae91] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [bdc6ae91] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc ]
+ DEBUG [bdc6ae91] Finished in 0.068 seconds with exit status 0 (successful).
+  INFO [c0177482] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [c0177482] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc )
+  INFO [c0177482] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [3d08dfd6] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [3d08dfd6] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118083630/config/credentials/production.yml.enc )
+  INFO [3d08dfd6] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [39cb68a8] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083630 /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp /home/ubuntu/mopxopminhphat/releases/20251118083630/public as ubuntu@103.145.63.218
+ DEBUG [39cb68a8] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118083630 /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp /home/ubuntu/mopxopminhphat/releases/20251118083630/public )
+  INFO [39cb68a8] Finished in 0.024 seconds with exit status 0 (successful).
+ DEBUG [52e782c2] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/log ] as ubuntu@103.145.63.218
+ DEBUG [52e782c2] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/log ]
+ DEBUG [52e782c2] Finished in 0.060 seconds with exit status 1 (failed).
+ DEBUG [529f1f84] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/log ] as ubuntu@103.145.63.218
+ DEBUG [529f1f84] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/log ]
+ DEBUG [529f1f84] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [c549d239] Running /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118083630/log as ubuntu@103.145.63.218
+ DEBUG [c549d239] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118083630/log )
+  INFO [c549d239] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [0b73d701] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118083630/log as ubuntu@103.145.63.218
+ DEBUG [0b73d701] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118083630/log )
+  INFO [0b73d701] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [9f33cb6d] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [9f33cb6d] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/pids ]
+ DEBUG [9f33cb6d] Finished in 0.057 seconds with exit status 1 (failed).
+ DEBUG [5aa9015b] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [5aa9015b] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/pids ]
+ DEBUG [5aa9015b] Finished in 0.016 seconds with exit status 1 (failed).
+  INFO [7505de5f] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/pids as ubuntu@103.145.63.218
+ DEBUG [7505de5f] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/pids )
+  INFO [7505de5f] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [42e3b5b3] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [42e3b5b3] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/cache ]
+ DEBUG [42e3b5b3] Finished in 0.015 seconds with exit status 1 (failed).
+ DEBUG [2ccdf730] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [2ccdf730] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/cache ]
+ DEBUG [2ccdf730] Finished in 0.059 seconds with exit status 1 (failed).
+  INFO [ad883fe9] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/cache as ubuntu@103.145.63.218
+ DEBUG [ad883fe9] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/cache )
+  INFO [ad883fe9] Finished in 0.030 seconds with exit status 0 (successful).
+ DEBUG [20c03468] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [20c03468] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/sockets ]
+ DEBUG [20c03468] Finished in 0.063 seconds with exit status 1 (failed).
+ DEBUG [905df187] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [905df187] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/sockets ]
+ DEBUG [905df187] Finished in 0.020 seconds with exit status 1 (failed).
+  INFO [9e989b4d] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/sockets as ubuntu@103.145.63.218
+ DEBUG [9e989b4d] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118083630/tmp/sockets )
+  INFO [9e989b4d] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [b9bf1bc7] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/system ] as ubuntu@103.145.63.218
+ DEBUG [b9bf1bc7] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/system ]
+ DEBUG [b9bf1bc7] Finished in 0.018 seconds with exit status 1 (failed).
+ DEBUG [5aaccf2c] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/system ] as ubuntu@103.145.63.218
+ DEBUG [5aaccf2c] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/system ]
+ DEBUG [5aaccf2c] Finished in 0.064 seconds with exit status 1 (failed).
+  INFO [a15f563c] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118083630/public/system as ubuntu@103.145.63.218
+ DEBUG [a15f563c] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118083630/public/system )
+  INFO [a15f563c] Finished in 0.032 seconds with exit status 0 (successful).
+ DEBUG [5d51f910] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [5d51f910] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/uploads ]
+ DEBUG [5d51f910] Finished in 0.234 seconds with exit status 1 (failed).
+ DEBUG [0dde0aca] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [0dde0aca] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/uploads ]
+ DEBUG [0dde0aca] Finished in 0.021 seconds with exit status 1 (failed).
+  INFO [af1a90a6] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118083630/public/uploads as ubuntu@103.145.63.218
+ DEBUG [af1a90a6] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118083630/public/uploads )
+  INFO [af1a90a6] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [c6cf4b55] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [c6cf4b55] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/storage ]
+ DEBUG [c6cf4b55] Finished in 0.025 seconds with exit status 1 (failed).
+ DEBUG [c7ab316d] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [c7ab316d] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/storage ]
+ DEBUG [c7ab316d] Finished in 0.060 seconds with exit status 1 (failed).
+  INFO [f9f83bde] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118083630/public/storage as ubuntu@103.145.63.218
+ DEBUG [f9f83bde] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118083630/public/storage )
+  INFO [f9f83bde] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [2e14c493] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [2e14c493] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118083630/public/assets ]
+ DEBUG [2e14c493] Finished in 0.065 seconds with exit status 1 (failed).
+ DEBUG [df939f4d] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [df939f4d] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118083630/public/assets ]
+ DEBUG [df939f4d] Finished in 0.026 seconds with exit status 1 (failed).
+  INFO [dbd9e311] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118083630/public/assets as ubuntu@103.145.63.218
+ DEBUG [dbd9e311] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118083630/public/assets )
+  INFO [dbd9e311] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [d7cec44d] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [d7cec44d] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi
+ DEBUG [d7cec44d] Finished in 0.015 seconds with exit status 0 (successful).
+  INFO [1bccc2dd] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true as ubuntu@103.145.63.218
+ DEBUG [1bccc2dd] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083630 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true )
+  INFO [1bccc2dd] Finished in 0.995 seconds with exit status 0 (successful).
+  INFO [e123538f] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle as ubuntu@103.145.63.218
+ DEBUG [e123538f] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083630 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle )
+  INFO [e123538f] Finished in 0.931 seconds with exit status 0 (successful).
+  INFO [3e60de15] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test as ubuntu@103.145.63.218
+ DEBUG [3e60de15] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083630 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test )
+  INFO [3e60de15] Finished in 0.925 seconds with exit status 0 (successful).
+ DEBUG [04448aaa] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [04448aaa] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi
+ DEBUG [04448aaa] Finished in 0.017 seconds with exit status 0 (successful).
+ DEBUG [fde05b37] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check as ubuntu@103.145.63.218
+ DEBUG [fde05b37] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083630 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check )
+ DEBUG [fde05b37] 	The Gemfile's dependencies are satisfied
+ DEBUG [fde05b37] Finished in 1.108 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+ DEBUG [bb2fe9d9] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [bb2fe9d9] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118083630; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118083630'" 1>&2; false; fi
+ DEBUG [bb2fe9d9] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [34e77e0c] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile as ubuntu@103.145.63.218
+ DEBUG [34e77e0c] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118083630 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" RAILS_ENV="production" RAILS_GROUPS="" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile )
+ DEBUG [34e77e0c] 	rake aborted!
+ DEBUG [34e77e0c] 	ActiveSupport::MessageEncryptor::InvalidMessage: ActiveSupport::MessageEncryptor::InvalidMessage (ActiveSupport::MessageEncryptor::InvalidMessage)
+ DEBUG [34e77e0c] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:209:in `rescue in _decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:186:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118083630/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [34e77e0c] 	
+Caused by:
+ DEBUG [34e77e0c] 	ArgumentError: key must be 16 bytes (ArgumentError)
+
+        cipher.key = @secret
+                     ^^^^^^^
+ DEBUG [34e77e0c] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `key='
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118083630/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [34e77e0c] 	Tasks: TOP => environment
+ DEBUG [34e77e0c] 	(See full trace by running task with --trace)
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-18 15:42:15 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [4ab324e1] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [4ab324e1] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm version )
+ DEBUG [4ab324e1] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [4ab324e1] Finished in 5.944 seconds with exit status 0 (successful).
+ DEBUG [ea3fc051] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [ea3fc051] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm current )
+ DEBUG [ea3fc051] 	ruby-3.2.4
+ DEBUG [ea3fc051] Finished in 0.306 seconds with exit status 0 (successful).
+ DEBUG [51319d5d] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version as ubuntu@103.145.63.218
+ DEBUG [51319d5d] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version )
+ DEBUG [51319d5d] 	ruby 3.2.4 (2024-04-23 revision af471c0e01) [x86_64-linux]
+ DEBUG [51319d5d] Finished in 0.818 seconds with exit status 0 (successful).
+  INFO [a1f1f42c] Running /usr/bin/env mkdir -p /tmp as ubuntu@103.145.63.218
+ DEBUG [a1f1f42c] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /tmp )
+  INFO [a1f1f42c] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-91bc6ce66a1ff7e22584.sh 0.0%
+  INFO Uploading /tmp/git-ssh-91bc6ce66a1ff7e22584.sh 100.0%
+  INFO [d68dff26] Running /usr/bin/env chmod 700 /tmp/git-ssh-91bc6ce66a1ff7e22584.sh as ubuntu@103.145.63.218
+ DEBUG [d68dff26] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env chmod 700 /tmp/git-ssh-91bc6ce66a1ff7e22584.sh )
+  INFO [d68dff26] Finished in 0.026 seconds with exit status 0 (successful).
+  INFO [71565dbd] Running /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD as ubuntu@103.145.63.218
+ DEBUG [71565dbd] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-91bc6ce66a1ff7e22584.sh" ; /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD )
+ DEBUG [71565dbd] 	ef81dfd709a8f997614e9c6271d00c8d91ba7391	HEAD
+  INFO [71565dbd] Finished in 2.956 seconds with exit status 0 (successful).
+  INFO [6a0f7422] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases as ubuntu@103.145.63.218
+ DEBUG [6a0f7422] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases )
+  INFO [6a0f7422] Finished in 0.030 seconds with exit status 0 (successful).
+  INFO [2326b432] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets as ubuntu@103.145.63.218
+ DEBUG [2326b432] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets )
+  INFO [2326b432] Finished in 0.054 seconds with exit status 0 (successful).
+  INFO [9caaf172] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials as ubuntu@103.145.63.218
+ DEBUG [9caaf172] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials )
+  INFO [9caaf172] Finished in 0.017 seconds with exit status 0 (successful).
+ DEBUG [fdc565fb] Running [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [fdc565fb] Command: [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ]
+ DEBUG [fdc565fb] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [ab042e96] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [ab042e96] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ]
+ DEBUG [ab042e96] Finished in 0.015 seconds with exit status 0 (successful).
+ DEBUG [e7a03256] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [e7a03256] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ]
+ DEBUG [e7a03256] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [0a99c1ac] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [0a99c1ac] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ]
+ DEBUG [0a99c1ac] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [3deb2c45] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION ] as ubuntu@103.145.63.218
+ DEBUG [3deb2c45] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION ]
+ DEBUG [3deb2c45] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [b0d69b7f] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [b0d69b7f] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null )
+ DEBUG [b0d69b7f] 	78dd7fb726d16d847b0f093ff853c2fdcffa64b9
+ DEBUG [b0d69b7f] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [088ebd1f] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ] as ubuntu@103.145.63.218
+ DEBUG [088ebd1f] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ]
+ DEBUG [088ebd1f] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [b60903a2] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [b60903a2] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null )
+ DEBUG [b60903a2] 	1763452524
+ DEBUG [b60903a2] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [6292f475] Running [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ] as ubuntu@103.145.63.218
+ DEBUG [6292f475] Command: [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ]
+ DEBUG [6292f475] Finished in 0.057 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/ubuntu/mopxopminhphat/repo
+ DEBUG [634364f2] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [634364f2] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [634364f2] Finished in 0.018 seconds with exit status 0 (successful).
+  INFO [b4ae7c03] Running /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git as ubuntu@103.145.63.218
+ DEBUG [b4ae7c03] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-91bc6ce66a1ff7e22584.sh" ; /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git )
+  INFO [b4ae7c03] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [0f674da2] Running /usr/bin/env git remote update --prune as ubuntu@103.145.63.218
+ DEBUG [0f674da2] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-91bc6ce66a1ff7e22584.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [0f674da2] 	Fetching origin
+  INFO [0f674da2] Finished in 3.033 seconds with exit status 0 (successful).
+ DEBUG [71b023a0] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [71b023a0] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [71b023a0] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [1291a9bd] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084226 as ubuntu@103.145.63.218
+ DEBUG [1291a9bd] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-91bc6ce66a1ff7e22584.sh" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084226 )
+  INFO [1291a9bd] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [6dbbabc0] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118084226 as ubuntu@103.145.63.218
+ DEBUG [6dbbabc0] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-91bc6ce66a1ff7e22584.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118084226 )
+  INFO [6dbbabc0] Finished in 0.409 seconds with exit status 0 (successful).
+ DEBUG [babe32a5] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [babe32a5] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [babe32a5] Finished in 0.074 seconds with exit status 0 (successful).
+ DEBUG [638895ed] Running /usr/bin/env git rev-list --max-count=1 master as ubuntu@103.145.63.218
+ DEBUG [638895ed] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-91bc6ce66a1ff7e22584.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [638895ed] 	ef81dfd709a8f997614e9c6271d00c8d91ba7391
+ DEBUG [638895ed] Finished in 0.031 seconds with exit status 0 (successful).
+ DEBUG [ea7b43e0] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [ea7b43e0] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi
+ DEBUG [ea7b43e0] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [b0cf3e2c] Running /usr/bin/env echo "ef81dfd709a8f997614e9c6271d00c8d91ba7391" > REVISION as ubuntu@103.145.63.218
+ DEBUG [b0cf3e2c] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084226 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "ef81dfd709a8f997614e9c6271d00c8d91ba7391" > REVISION )
+  INFO [b0cf3e2c] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [ef1ad551] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [ef1ad551] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [ef1ad551] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [25762097] Running /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master as ubuntu@103.145.63.218
+ DEBUG [25762097] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-91bc6ce66a1ff7e22584.sh" ; /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master )
+ DEBUG [25762097] 	1763454970
+ DEBUG [25762097] Finished in 0.023 seconds with exit status 0 (successful).
+ DEBUG [fdb859cd] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [fdb859cd] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi
+ DEBUG [fdb859cd] Finished in 0.055 seconds with exit status 0 (successful).
+  INFO [f3724157] Running /usr/bin/env echo "1763454970" > REVISION_TIME as ubuntu@103.145.63.218
+ DEBUG [f3724157] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084226 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "1763454970" > REVISION_TIME )
+  INFO [f3724157] Finished in 0.022 seconds with exit status 0 (successful).
+  INFO [b7a73f7b] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084226 /home/ubuntu/mopxopminhphat/releases/20251118084226/config /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials as ubuntu@103.145.63.218
+ DEBUG [b7a73f7b] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084226 /home/ubuntu/mopxopminhphat/releases/20251118084226/config /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials )
+  INFO [b7a73f7b] Finished in 0.066 seconds with exit status 0 (successful).
+ DEBUG [ac39004e] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [ac39004e] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/.env.production ]
+ DEBUG [ac39004e] Finished in 0.024 seconds with exit status 1 (failed).
+ DEBUG [a2150b0a] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [a2150b0a] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/.env.production ]
+ DEBUG [a2150b0a] Finished in 0.069 seconds with exit status 1 (failed).
+  INFO [b3281311] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118084226/.env.production as ubuntu@103.145.63.218
+ DEBUG [b3281311] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118084226/.env.production )
+  INFO [b3281311] Finished in 0.034 seconds with exit status 0 (successful).
+ DEBUG [df38c817] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [df38c817] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml ]
+ DEBUG [df38c817] Finished in 0.057 seconds with exit status 1 (failed).
+ DEBUG [1fbe12f9] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [1fbe12f9] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml ]
+ DEBUG [1fbe12f9] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [f3fbd587] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [f3fbd587] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml )
+  INFO [f3fbd587] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [aa2409f9] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [aa2409f9] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118084226/config/database.yml )
+  INFO [aa2409f9] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [3e27dc5a] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [3e27dc5a] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.key ]
+ DEBUG [3e27dc5a] Finished in 0.061 seconds with exit status 1 (failed).
+ DEBUG [795bf951] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [795bf951] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.key ]
+ DEBUG [795bf951] Finished in 0.031 seconds with exit status 1 (failed).
+  INFO [d942925e] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.key as ubuntu@103.145.63.218
+ DEBUG [d942925e] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.key )
+  INFO [d942925e] Finished in 0.249 seconds with exit status 0 (successful).
+ DEBUG [f8716a7d] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [f8716a7d] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc ]
+ DEBUG [f8716a7d] Finished in 0.019 seconds with exit status 1 (failed).
+ DEBUG [797d0a0d] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [797d0a0d] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc ]
+ DEBUG [797d0a0d] Finished in 0.071 seconds with exit status 0 (successful).
+  INFO [a6692804] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [a6692804] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc )
+  INFO [a6692804] Finished in 0.028 seconds with exit status 0 (successful).
+  INFO [7b45a643] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [7b45a643] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118084226/config/credentials/production.yml.enc )
+  INFO [7b45a643] Finished in 0.069 seconds with exit status 0 (successful).
+  INFO [d7c12d4d] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084226 /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp /home/ubuntu/mopxopminhphat/releases/20251118084226/public as ubuntu@103.145.63.218
+ DEBUG [d7c12d4d] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084226 /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp /home/ubuntu/mopxopminhphat/releases/20251118084226/public )
+  INFO [d7c12d4d] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [71718a08] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/log ] as ubuntu@103.145.63.218
+ DEBUG [71718a08] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/log ]
+ DEBUG [71718a08] Finished in 0.056 seconds with exit status 1 (failed).
+ DEBUG [11e71be9] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/log ] as ubuntu@103.145.63.218
+ DEBUG [11e71be9] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/log ]
+ DEBUG [11e71be9] Finished in 0.023 seconds with exit status 0 (successful).
+  INFO [9b7ad7a2] Running /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118084226/log as ubuntu@103.145.63.218
+ DEBUG [9b7ad7a2] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118084226/log )
+  INFO [9b7ad7a2] Finished in 0.065 seconds with exit status 0 (successful).
+  INFO [567d405b] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118084226/log as ubuntu@103.145.63.218
+ DEBUG [567d405b] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118084226/log )
+  INFO [567d405b] Finished in 0.025 seconds with exit status 0 (successful).
+ DEBUG [85165f93] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [85165f93] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/pids ]
+ DEBUG [85165f93] Finished in 0.055 seconds with exit status 1 (failed).
+ DEBUG [973eda82] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [973eda82] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/pids ]
+ DEBUG [973eda82] Finished in 0.015 seconds with exit status 1 (failed).
+  INFO [e78a7a58] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/pids as ubuntu@103.145.63.218
+ DEBUG [e78a7a58] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/pids )
+  INFO [e78a7a58] Finished in 0.065 seconds with exit status 0 (successful).
+ DEBUG [7395c328] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [7395c328] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/cache ]
+ DEBUG [7395c328] Finished in 0.023 seconds with exit status 1 (failed).
+ DEBUG [90a4afdc] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [90a4afdc] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/cache ]
+ DEBUG [90a4afdc] Finished in 0.070 seconds with exit status 1 (failed).
+  INFO [67e4308a] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/cache as ubuntu@103.145.63.218
+ DEBUG [67e4308a] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/cache )
+  INFO [67e4308a] Finished in 0.028 seconds with exit status 0 (successful).
+ DEBUG [ea075aab] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [ea075aab] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/sockets ]
+ DEBUG [ea075aab] Finished in 0.061 seconds with exit status 1 (failed).
+ DEBUG [e8f62ea9] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [e8f62ea9] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/sockets ]
+ DEBUG [e8f62ea9] Finished in 0.015 seconds with exit status 1 (failed).
+  INFO [faa90c50] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/sockets as ubuntu@103.145.63.218
+ DEBUG [faa90c50] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118084226/tmp/sockets )
+  INFO [faa90c50] Finished in 0.068 seconds with exit status 0 (successful).
+ DEBUG [bec91531] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/system ] as ubuntu@103.145.63.218
+ DEBUG [bec91531] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/system ]
+ DEBUG [bec91531] Finished in 0.024 seconds with exit status 1 (failed).
+ DEBUG [9bf12836] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/system ] as ubuntu@103.145.63.218
+ DEBUG [9bf12836] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/system ]
+ DEBUG [9bf12836] Finished in 0.063 seconds with exit status 1 (failed).
+  INFO [5d178b2f] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118084226/public/system as ubuntu@103.145.63.218
+ DEBUG [5d178b2f] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118084226/public/system )
+  INFO [5d178b2f] Finished in 0.025 seconds with exit status 0 (successful).
+ DEBUG [2dc5394f] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [2dc5394f] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/uploads ]
+ DEBUG [2dc5394f] Finished in 0.063 seconds with exit status 1 (failed).
+ DEBUG [1a0bf366] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [1a0bf366] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/uploads ]
+ DEBUG [1a0bf366] Finished in 0.018 seconds with exit status 1 (failed).
+  INFO [7bbc5a5d] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118084226/public/uploads as ubuntu@103.145.63.218
+ DEBUG [7bbc5a5d] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118084226/public/uploads )
+  INFO [7bbc5a5d] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [6dcdaba1] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [6dcdaba1] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/storage ]
+ DEBUG [6dcdaba1] Finished in 0.030 seconds with exit status 1 (failed).
+ DEBUG [513c79a8] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [513c79a8] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/storage ]
+ DEBUG [513c79a8] Finished in 0.065 seconds with exit status 1 (failed).
+  INFO [fcce475f] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118084226/public/storage as ubuntu@103.145.63.218
+ DEBUG [fcce475f] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118084226/public/storage )
+  INFO [fcce475f] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [1d3f48f5] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [1d3f48f5] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084226/public/assets ]
+ DEBUG [1d3f48f5] Finished in 0.065 seconds with exit status 1 (failed).
+ DEBUG [aef77290] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [aef77290] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084226/public/assets ]
+ DEBUG [aef77290] Finished in 0.020 seconds with exit status 1 (failed).
+  INFO [1a302f2b] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118084226/public/assets as ubuntu@103.145.63.218
+ DEBUG [1a302f2b] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118084226/public/assets )
+  INFO [1a302f2b] Finished in 0.067 seconds with exit status 0 (successful).
+ DEBUG [ce365525] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [ce365525] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi
+ DEBUG [ce365525] Finished in 0.034 seconds with exit status 0 (successful).
+  INFO [87bea7f7] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true as ubuntu@103.145.63.218
+ DEBUG [87bea7f7] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084226 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true )
+  INFO [87bea7f7] Finished in 0.841 seconds with exit status 0 (successful).
+  INFO [84b429a1] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle as ubuntu@103.145.63.218
+ DEBUG [84b429a1] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084226 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle )
+  INFO [84b429a1] Finished in 0.780 seconds with exit status 0 (successful).
+  INFO [07ccf095] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test as ubuntu@103.145.63.218
+ DEBUG [07ccf095] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084226 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test )
+  INFO [07ccf095] Finished in 0.890 seconds with exit status 0 (successful).
+ DEBUG [83e12eb9] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [83e12eb9] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi
+ DEBUG [83e12eb9] Finished in 0.091 seconds with exit status 0 (successful).
+ DEBUG [cbe540a3] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check as ubuntu@103.145.63.218
+ DEBUG [cbe540a3] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084226 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check )
+ DEBUG [cbe540a3] 	The Gemfile's dependencies are satisfied
+ DEBUG [cbe540a3] Finished in 0.957 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+ DEBUG [dc1ee9a5] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [dc1ee9a5] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084226; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084226'" 1>&2; false; fi
+ DEBUG [dc1ee9a5] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [bee86d21] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile as ubuntu@103.145.63.218
+ DEBUG [bee86d21] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084226 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" RAILS_ENV="production" RAILS_GROUPS="" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile )
+ DEBUG [bee86d21] 	rake aborted!
+ DEBUG [bee86d21] 	ActiveSupport::MessageEncryptor::InvalidMessage: ActiveSupport::MessageEncryptor::InvalidMessage (ActiveSupport::MessageEncryptor::InvalidMessage)
+ DEBUG [bee86d21] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:209:in `rescue in _decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:186:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118084226/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [bee86d21] 	
+Caused by:
+ DEBUG [bee86d21] 	ArgumentError: key must be 16 bytes (ArgumentError)
+
+        cipher.key = @secret
+                     ^^^^^^^
+ DEBUG [bee86d21] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `key='
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118084226/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [bee86d21] 	Tasks: TOP => environment
+ DEBUG [bee86d21] 	(See full trace by running task with --trace)
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-11-18 15:47:48 +0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+ DEBUG [97083281] Running ~/.rvm/bin/rvm version as ubuntu@103.145.63.218
+ DEBUG [97083281] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm version )
+ DEBUG [97083281] 	rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+ DEBUG [97083281] Finished in 6.471 seconds with exit status 0 (successful).
+ DEBUG [2df386ae] Running ~/.rvm/bin/rvm current as ubuntu@103.145.63.218
+ DEBUG [2df386ae] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm current )
+ DEBUG [2df386ae] 	ruby-3.2.4
+ DEBUG [2df386ae] Finished in 0.310 seconds with exit status 0 (successful).
+ DEBUG [f9f4ed0c] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version as ubuntu@103.145.63.218
+ DEBUG [f9f4ed0c] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do ruby --version )
+ DEBUG [f9f4ed0c] 	ruby 3.2.4 (2024-04-23 revision af471c0e01) [x86_64-linux]
+ DEBUG [f9f4ed0c] Finished in 0.818 seconds with exit status 0 (successful).
+  INFO [216f0c37] Running /usr/bin/env mkdir -p /tmp as ubuntu@103.145.63.218
+ DEBUG [216f0c37] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /tmp )
+  INFO [216f0c37] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-ffa5e888cc184863bdea.sh 0.0%
+  INFO Uploading /tmp/git-ssh-ffa5e888cc184863bdea.sh 100.0%
+  INFO [f6451b98] Running /usr/bin/env chmod 700 /tmp/git-ssh-ffa5e888cc184863bdea.sh as ubuntu@103.145.63.218
+ DEBUG [f6451b98] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env chmod 700 /tmp/git-ssh-ffa5e888cc184863bdea.sh )
+  INFO [f6451b98] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [6f864a42] Running /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD as ubuntu@103.145.63.218
+ DEBUG [6f864a42] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ffa5e888cc184863bdea.sh" ; /usr/bin/env git ls-remote git@gitlab.com:fagotek/waker_deploy.git HEAD )
+ DEBUG [6f864a42] 	ef81dfd709a8f997614e9c6271d00c8d91ba7391	HEAD
+  INFO [6f864a42] Finished in 2.873 seconds with exit status 0 (successful).
+  INFO [506315c5] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases as ubuntu@103.145.63.218
+ DEBUG [506315c5] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/releases )
+  INFO [506315c5] Finished in 0.021 seconds with exit status 0 (successful).
+  INFO [231ae51d] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets as ubuntu@103.145.63.218
+ DEBUG [231ae51d] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/shared/public/assets )
+  INFO [231ae51d] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [150c4266] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials as ubuntu@103.145.63.218
+ DEBUG [150c4266] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/shared /home/ubuntu/mopxopminhphat/shared/config /home/ubuntu/mopxopminhphat/shared/config/credentials )
+  INFO [150c4266] Finished in 0.018 seconds with exit status 0 (successful).
+ DEBUG [abc589ec] Running [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [abc589ec] Command: [ -f /home/ubuntu/mopxopminhphat/shared/.env.production ]
+ DEBUG [abc589ec] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [6d04e99c] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [6d04e99c] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/database.yml ]
+ DEBUG [6d04e99c] Finished in 0.016 seconds with exit status 0 (successful).
+ DEBUG [640b271a] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [640b271a] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key ]
+ DEBUG [640b271a] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [3009714c] Running [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [3009714c] Command: [ -f /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc ]
+ DEBUG [3009714c] Finished in 0.017 seconds with exit status 0 (successful).
+ DEBUG [7e1b232e] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION ] as ubuntu@103.145.63.218
+ DEBUG [7e1b232e] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION ]
+ DEBUG [7e1b232e] Finished in 0.056 seconds with exit status 0 (successful).
+ DEBUG [299a76ac] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [299a76ac] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION 2>/dev/null )
+ DEBUG [299a76ac] 	78dd7fb726d16d847b0f093ff853c2fdcffa64b9
+ DEBUG [299a76ac] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [30c7e965] Running [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ] as ubuntu@103.145.63.218
+ DEBUG [30c7e965] Command: [ -f /home/ubuntu/mopxopminhphat/current/REVISION_TIME ]
+ DEBUG [30c7e965] Finished in 0.067 seconds with exit status 0 (successful).
+ DEBUG [85c59c61] Running /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null as ubuntu@103.145.63.218
+ DEBUG [85c59c61] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env cat /home/ubuntu/mopxopminhphat/current/REVISION_TIME 2>/dev/null )
+ DEBUG [85c59c61] 	1763452524
+ DEBUG [85c59c61] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [fb9a6a99] Running [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ] as ubuntu@103.145.63.218
+ DEBUG [fb9a6a99] Command: [ -f /home/ubuntu/mopxopminhphat/repo/HEAD ]
+ DEBUG [fb9a6a99] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /home/ubuntu/mopxopminhphat/repo
+ DEBUG [3417e6dd] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [3417e6dd] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [3417e6dd] Finished in 0.025 seconds with exit status 0 (successful).
+  INFO [27c8cd9f] Running /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git as ubuntu@103.145.63.218
+ DEBUG [27c8cd9f] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ffa5e888cc184863bdea.sh" ; /usr/bin/env git remote set-url origin git@gitlab.com:fagotek/waker_deploy.git )
+  INFO [27c8cd9f] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [82d992c2] Running /usr/bin/env git remote update --prune as ubuntu@103.145.63.218
+ DEBUG [82d992c2] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ffa5e888cc184863bdea.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [82d992c2] 	Fetching origin
+  INFO [82d992c2] Finished in 3.012 seconds with exit status 0 (successful).
+ DEBUG [64b05e1e] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [64b05e1e] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [64b05e1e] Finished in 0.017 seconds with exit status 0 (successful).
+  INFO [b7ab15d0] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084759 as ubuntu@103.145.63.218
+ DEBUG [b7ab15d0] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ffa5e888cc184863bdea.sh" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084759 )
+  INFO [b7ab15d0] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [35648f7f] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118084759 as ubuntu@103.145.63.218
+ DEBUG [35648f7f] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ffa5e888cc184863bdea.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /home/ubuntu/mopxopminhphat/releases/20251118084759 )
+  INFO [35648f7f] Finished in 0.226 seconds with exit status 0 (successful).
+ DEBUG [73f23f82] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [73f23f82] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [73f23f82] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [e7a9130b] Running /usr/bin/env git rev-list --max-count=1 master as ubuntu@103.145.63.218
+ DEBUG [e7a9130b] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ffa5e888cc184863bdea.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [e7a9130b] 	ef81dfd709a8f997614e9c6271d00c8d91ba7391
+ DEBUG [e7a9130b] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [4925518a] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [4925518a] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi
+ DEBUG [4925518a] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [1c59da44] Running /usr/bin/env echo "ef81dfd709a8f997614e9c6271d00c8d91ba7391" > REVISION as ubuntu@103.145.63.218
+ DEBUG [1c59da44] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084759 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "ef81dfd709a8f997614e9c6271d00c8d91ba7391" > REVISION )
+  INFO [1c59da44] Finished in 0.026 seconds with exit status 0 (successful).
+ DEBUG [8e7c5b29] Running if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [8e7c5b29] Command: if test ! -d /home/ubuntu/mopxopminhphat/repo; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/repo'" 1>&2; false; fi
+ DEBUG [8e7c5b29] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [087055e7] Running /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master as ubuntu@103.145.63.218
+ DEBUG [087055e7] Command: cd /home/ubuntu/mopxopminhphat/repo && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ffa5e888cc184863bdea.sh" ; /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" master )
+ DEBUG [087055e7] 	1763454970
+ DEBUG [087055e7] Finished in 0.025 seconds with exit status 0 (successful).
+ DEBUG [8eeef9f7] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [8eeef9f7] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi
+ DEBUG [8eeef9f7] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [354c338d] Running /usr/bin/env echo "1763454970" > REVISION_TIME as ubuntu@103.145.63.218
+ DEBUG [354c338d] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084759 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env echo "1763454970" > REVISION_TIME )
+  INFO [354c338d] Finished in 0.020 seconds with exit status 0 (successful).
+  INFO [7814124b] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084759 /home/ubuntu/mopxopminhphat/releases/20251118084759/config /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials as ubuntu@103.145.63.218
+ DEBUG [7814124b] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084759 /home/ubuntu/mopxopminhphat/releases/20251118084759/config /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials )
+  INFO [7814124b] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [9362cc84] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [9362cc84] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/.env.production ]
+ DEBUG [9362cc84] Finished in 0.014 seconds with exit status 1 (failed).
+ DEBUG [c9cb58f4] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/.env.production ] as ubuntu@103.145.63.218
+ DEBUG [c9cb58f4] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/.env.production ]
+ DEBUG [c9cb58f4] Finished in 0.062 seconds with exit status 1 (failed).
+  INFO [770831ac] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118084759/.env.production as ubuntu@103.145.63.218
+ DEBUG [770831ac] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/.env.production /home/ubuntu/mopxopminhphat/releases/20251118084759/.env.production )
+  INFO [770831ac] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [99fd1270] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [99fd1270] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml ]
+ DEBUG [99fd1270] Finished in 0.063 seconds with exit status 1 (failed).
+ DEBUG [20e45676] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml ] as ubuntu@103.145.63.218
+ DEBUG [20e45676] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml ]
+ DEBUG [20e45676] Finished in 0.013 seconds with exit status 0 (successful).
+  INFO [90bb015e] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [90bb015e] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml )
+  INFO [90bb015e] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [355ec50e] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml as ubuntu@103.145.63.218
+ DEBUG [355ec50e] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/database.yml /home/ubuntu/mopxopminhphat/releases/20251118084759/config/database.yml )
+  INFO [355ec50e] Finished in 0.018 seconds with exit status 0 (successful).
+ DEBUG [3db1387b] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [3db1387b] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.key ]
+ DEBUG [3db1387b] Finished in 0.057 seconds with exit status 1 (failed).
+ DEBUG [b250a40c] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.key ] as ubuntu@103.145.63.218
+ DEBUG [b250a40c] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.key ]
+ DEBUG [b250a40c] Finished in 0.016 seconds with exit status 1 (failed).
+  INFO [5ea937b4] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.key as ubuntu@103.145.63.218
+ DEBUG [5ea937b4] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.key /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.key )
+  INFO [5ea937b4] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [8a5476d9] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [8a5476d9] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc ]
+ DEBUG [8a5476d9] Finished in 0.015 seconds with exit status 1 (failed).
+ DEBUG [c69d00b5] Running [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc ] as ubuntu@103.145.63.218
+ DEBUG [c69d00b5] Command: [ -f /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc ]
+ DEBUG [c69d00b5] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [3f5377a1] Running /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [3f5377a1] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc )
+  INFO [3f5377a1] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [e7a196c2] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc as ubuntu@103.145.63.218
+ DEBUG [e7a196c2] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/config/credentials/production.yml.enc /home/ubuntu/mopxopminhphat/releases/20251118084759/config/credentials/production.yml.enc )
+  INFO [e7a196c2] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [baa2db23] Running /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084759 /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp /home/ubuntu/mopxopminhphat/releases/20251118084759/public as ubuntu@103.145.63.218
+ DEBUG [baa2db23] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env mkdir -p /home/ubuntu/mopxopminhphat/releases/20251118084759 /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp /home/ubuntu/mopxopminhphat/releases/20251118084759/public )
+  INFO [baa2db23] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [0dc8b6b0] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/log ] as ubuntu@103.145.63.218
+ DEBUG [0dc8b6b0] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/log ]
+ DEBUG [0dc8b6b0] Finished in 0.060 seconds with exit status 1 (failed).
+ DEBUG [5718a793] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/log ] as ubuntu@103.145.63.218
+ DEBUG [5718a793] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/log ]
+ DEBUG [5718a793] Finished in 0.019 seconds with exit status 0 (successful).
+  INFO [3f49d95a] Running /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118084759/log as ubuntu@103.145.63.218
+ DEBUG [3f49d95a] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env rm -rf /home/ubuntu/mopxopminhphat/releases/20251118084759/log )
+  INFO [3f49d95a] Finished in 0.068 seconds with exit status 0 (successful).
+  INFO [3ab864e6] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118084759/log as ubuntu@103.145.63.218
+ DEBUG [3ab864e6] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/log /home/ubuntu/mopxopminhphat/releases/20251118084759/log )
+  INFO [3ab864e6] Finished in 0.019 seconds with exit status 0 (successful).
+ DEBUG [258dbdf2] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [258dbdf2] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/pids ]
+ DEBUG [258dbdf2] Finished in 0.128 seconds with exit status 1 (failed).
+ DEBUG [67613b61] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/pids ] as ubuntu@103.145.63.218
+ DEBUG [67613b61] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/pids ]
+ DEBUG [67613b61] Finished in 0.017 seconds with exit status 1 (failed).
+  INFO [a1059f42] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/pids as ubuntu@103.145.63.218
+ DEBUG [a1059f42] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/pids /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/pids )
+  INFO [a1059f42] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [1b08d512] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [1b08d512] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/cache ]
+ DEBUG [1b08d512] Finished in 0.017 seconds with exit status 1 (failed).
+ DEBUG [78325882] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/cache ] as ubuntu@103.145.63.218
+ DEBUG [78325882] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/cache ]
+ DEBUG [78325882] Finished in 0.068 seconds with exit status 1 (failed).
+  INFO [afcd4f1a] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/cache as ubuntu@103.145.63.218
+ DEBUG [afcd4f1a] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/cache /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/cache )
+  INFO [afcd4f1a] Finished in 0.020 seconds with exit status 0 (successful).
+ DEBUG [bfd6e251] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [bfd6e251] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/sockets ]
+ DEBUG [bfd6e251] Finished in 0.066 seconds with exit status 1 (failed).
+ DEBUG [08cf0006] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/sockets ] as ubuntu@103.145.63.218
+ DEBUG [08cf0006] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/sockets ]
+ DEBUG [08cf0006] Finished in 0.024 seconds with exit status 1 (failed).
+  INFO [16a8b3f5] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/sockets as ubuntu@103.145.63.218
+ DEBUG [16a8b3f5] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/tmp/sockets /home/ubuntu/mopxopminhphat/releases/20251118084759/tmp/sockets )
+  INFO [16a8b3f5] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [d40947eb] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/system ] as ubuntu@103.145.63.218
+ DEBUG [d40947eb] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/system ]
+ DEBUG [d40947eb] Finished in 0.016 seconds with exit status 1 (failed).
+ DEBUG [0740fcba] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/system ] as ubuntu@103.145.63.218
+ DEBUG [0740fcba] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/system ]
+ DEBUG [0740fcba] Finished in 0.057 seconds with exit status 1 (failed).
+  INFO [93c9026d] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118084759/public/system as ubuntu@103.145.63.218
+ DEBUG [93c9026d] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/system /home/ubuntu/mopxopminhphat/releases/20251118084759/public/system )
+  INFO [93c9026d] Finished in 0.021 seconds with exit status 0 (successful).
+ DEBUG [4b48dd2d] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [4b48dd2d] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/uploads ]
+ DEBUG [4b48dd2d] Finished in 0.056 seconds with exit status 1 (failed).
+ DEBUG [4e070247] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/uploads ] as ubuntu@103.145.63.218
+ DEBUG [4e070247] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/uploads ]
+ DEBUG [4e070247] Finished in 0.018 seconds with exit status 1 (failed).
+  INFO [e9349525] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118084759/public/uploads as ubuntu@103.145.63.218
+ DEBUG [e9349525] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/uploads /home/ubuntu/mopxopminhphat/releases/20251118084759/public/uploads )
+  INFO [e9349525] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [6faad9ca] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [6faad9ca] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/storage ]
+ DEBUG [6faad9ca] Finished in 0.019 seconds with exit status 1 (failed).
+ DEBUG [1ac808e6] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/storage ] as ubuntu@103.145.63.218
+ DEBUG [1ac808e6] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/storage ]
+ DEBUG [1ac808e6] Finished in 0.063 seconds with exit status 1 (failed).
+  INFO [224538f9] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118084759/public/storage as ubuntu@103.145.63.218
+ DEBUG [224538f9] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/storage /home/ubuntu/mopxopminhphat/releases/20251118084759/public/storage )
+  INFO [224538f9] Finished in 0.018 seconds with exit status 0 (successful).
+ DEBUG [3a892472] Running [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [3a892472] Command: [ -L /home/ubuntu/mopxopminhphat/releases/20251118084759/public/assets ]
+ DEBUG [3a892472] Finished in 0.063 seconds with exit status 1 (failed).
+ DEBUG [beaab1e8] Running [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/assets ] as ubuntu@103.145.63.218
+ DEBUG [beaab1e8] Command: [ -d /home/ubuntu/mopxopminhphat/releases/20251118084759/public/assets ]
+ DEBUG [beaab1e8] Finished in 0.018 seconds with exit status 1 (failed).
+  INFO [627a0282] Running /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118084759/public/assets as ubuntu@103.145.63.218
+ DEBUG [627a0282] Command: ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; /usr/bin/env ln -s /home/ubuntu/mopxopminhphat/shared/public/assets /home/ubuntu/mopxopminhphat/releases/20251118084759/public/assets )
+  INFO [627a0282] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [80df0262] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [80df0262] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi
+ DEBUG [80df0262] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [7025a702] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true as ubuntu@103.145.63.218
+ DEBUG [7025a702] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084759 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local deployment true )
+  INFO [7025a702] Finished in 1.232 seconds with exit status 0 (successful).
+  INFO [68dede90] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle as ubuntu@103.145.63.218
+ DEBUG [68dede90] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084759 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local path /home/ubuntu/mopxopminhphat/shared/bundle )
+  INFO [68dede90] Finished in 0.920 seconds with exit status 0 (successful).
+  INFO [5d3edc05] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test as ubuntu@103.145.63.218
+ DEBUG [5d3edc05] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084759 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle config --local without development:test )
+  INFO [5d3edc05] Finished in 1.228 seconds with exit status 0 (successful).
+ DEBUG [b9ae40d4] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [b9ae40d4] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi
+ DEBUG [b9ae40d4] Finished in 0.014 seconds with exit status 0 (successful).
+ DEBUG [8ed9d4cb] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check as ubuntu@103.145.63.218
+ DEBUG [8ed9d4cb] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084759 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle check )
+ DEBUG [8ed9d4cb] 	The Gemfile's dependencies are satisfied
+ DEBUG [8ed9d4cb] Finished in 1.027 seconds with exit status 0 (successful).
+  INFO The Gemfile's dependencies are satisfied, skipping installation
+ DEBUG [dbfb9f0b] Running if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi as ubuntu@103.145.63.218
+ DEBUG [dbfb9f0b] Command: if test ! -d /home/ubuntu/mopxopminhphat/releases/20251118084759; then echo "Directory does not exist '/home/ubuntu/mopxopminhphat/releases/20251118084759'" 1>&2; false; fi
+ DEBUG [dbfb9f0b] Finished in 0.016 seconds with exit status 0 (successful).
+  INFO [76d0f44f] Running ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile as ubuntu@103.145.63.218
+ DEBUG [76d0f44f] Command: cd /home/ubuntu/mopxopminhphat/releases/20251118084759 && ( export RAILS_MASTER_KEY="/home/ubuntu/mopxopminhphat/shared/config/credentials/production.key" RAILS_ENV="production" RAILS_GROUPS="" ; ~/.rvm/bin/rvm 3.2.4@mopxopminhphat do bundle exec rake assets:precompile )
+ DEBUG [76d0f44f] 	rake aborted!
+ DEBUG [76d0f44f] 	ActiveSupport::MessageEncryptor::InvalidMessage: ActiveSupport::MessageEncryptor::InvalidMessage (ActiveSupport::MessageEncryptor::InvalidMessage)
+ DEBUG [76d0f44f] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:209:in `rescue in _decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:186:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118084759/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [76d0f44f] 	
+Caused by:
+ DEBUG [76d0f44f] 	ArgumentError: key must be 16 bytes (ArgumentError)
+
+        cipher.key = @secret
+                     ^^^^^^^
+ DEBUG [76d0f44f] 	/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `key='
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:196:in `_decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/message_encryptor.rb:160:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/messages/rotator.rb:22:in `decrypt_and_verify'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:103:in `decrypt'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_file.rb:66:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:43:in `read'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:64:in `config'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/encrypted_configuration.rb:79:in `options'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activesupport-7.0.10/lib/active_support/core_ext/module/delegation.rb:303:in `method_missing'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/activerecord-7.0.10/lib/active_record/railtie.rb:332:in `block in <class:Railtie>'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `instance_exec'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:32:in `run'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:61:in `block in run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/initializable.rb:60:in `run_initializers'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:375:in `initialize!'
+/home/ubuntu/mopxopminhphat/releases/20251118084759/config/environment.rb:5:in `<main>'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/home/ubuntu/.rvm/rubies/ruby-3.2.4/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/bootsnap-1.19.0/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:34:in `require'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:351:in `require_environment!'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/railties-7.0.10/lib/rails/application.rb:509:in `block in run_tasks_blocks'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/sprockets-rails-3.5.2/lib/sprockets/rails/task.rb:61:in `block (2 levels) in define'
+/home/ubuntu/mopxopminhphat/shared/bundle/ruby/3.2.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `eval'
+/home/ubuntu/.rvm/gems/ruby-3.2.4@mopxopminhphat/bin/ruby_executable_hooks:22:in `<main>'
+ DEBUG [76d0f44f] 	Tasks: TOP => environment
+ DEBUG [76d0f44f] 	(See full trace by running task with --trace)

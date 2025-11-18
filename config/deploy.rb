@@ -24,8 +24,9 @@ set :rvm_custom_path, '~/.rvm'  # thêm vào dưới rvm_ruby_version
 
 # -------------------------------
 # default_env
-set :default_env, { "RAILS_MASTER_KEY" => "#{shared_path}/config/credentials/production.key" }
-
+set :default_env, {
+  "RAILS_MASTER_KEY" => File.read("#{shared_path}/config/credentials/production.key").strip
+}
 
 # -------------------------------
 # Linked Files & Directories
