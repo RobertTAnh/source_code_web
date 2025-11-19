@@ -24,9 +24,7 @@ set :rvm_custom_path, '~/.rvm'  # thêm vào dưới rvm_ruby_version
 
 # -------------------------------
 # default_env
-set :default_env, {
-  "RAILS_MASTER_KEY" => File.read("#{shared_path}/config/credentials/production.key").strip
-}
+# set :default_env, { "RAILS_MASTER_KEY" => "f1db91bfc4444e2484bbebfd19788c1d" }
 
 # -------------------------------
 # Linked Files & Directories
@@ -99,6 +97,14 @@ namespace :deploy do
     end
   end
 
+  desc "rsync themes"
+  task :rsync_themes do
+    on roles(:app) do
+      execute :rsync, "-av #{shared_path}/app/views/themes/#{fetch(:application)} #{release_path}/app/views/themes/"
+      # execute :ln, "-nfs #{shared_path}/app/views/themes/#{fetch(:application)}/tassets #{release_path}/public/tassets"
+    end
+  end
+
   # Nếu không dùng migration, bỏ qua
   Rake::Task["deploy:migrate"].clear_actions
   task :migrate do
@@ -140,6 +146,7 @@ namespace :deploy do
 
   # Hooks
   before :starting, :check_revision
+  after "deploy:updating", "deploy:rsync_themes"
   after  :finishing, :compile_assets
   after  :finishing, :cleanup
 end
