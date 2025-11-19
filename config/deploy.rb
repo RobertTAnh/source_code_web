@@ -19,7 +19,7 @@ set :deploy_via,      :copy
 # RVM
 # -------------------------------
 set :rvm_type,        :user
-set :rvm_ruby_version, '3.2.4@mopxopminhphat' # sửa theo ruby bạn dùng
+set :rvm_ruby_version, '3.1.2' # sửa theo ruby bạn dùng
 set :rvm_custom_path, '~/.rvm'  # thêm vào dưới rvm_ruby_version
 
 # -------------------------------
