@@ -102,3 +102,5 @@ gem "omniauth-rails_csrf_protection", "~> 1.0"
 gem 'slack-ruby-client'
 gem "pg_search"
 gem 'discard', '~> 1.2'
+gem 'nokogiri', '1.15.7'
+
