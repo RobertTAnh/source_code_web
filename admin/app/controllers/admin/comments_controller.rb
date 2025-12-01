@@ -3,16 +3,22 @@ module Admin
     before_action :get_comment, only: [:show, :edit, :update, :create]
 
     def index
+      raise Unauthorized unless can?(:read, :comment)
+
       @comments = CommentCmds::List.call(context: context, params: params).result
     end
 
     def show
+      raise Unauthorized unless can?(:read, @comment)
+
       modal = render_to_string(partial: 'admin/comments/comment_modal', locals: { comment: @comment })
 
       render json: { modal_data: modal }
     end
 
     def create
+      raise Unauthorized unless can?(:create, :comment)
+
       cmd = CommentCmds::Create.call(context: context, params: create_comment_params, parent: @comment)
 
       if cmd.success?
@@ -24,6 +30,8 @@ module Admin
     end
 
     def update
+      raise Unauthorized unless can?(:update, @comment)
+
       cmd = CommentCmds::Update.call(context: context, params: update_comment_params, comment: @comment)
 
       if cmd.success?

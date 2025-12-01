@@ -15,6 +15,7 @@ module WebConfigCmds
       convert_extra_fields_data
       validate
       update unless failure?
+      create_permissions
       output
     end
 
@@ -32,6 +33,22 @@ module WebConfigCmds
 
     def update
       web_config.save!
+    end
+
+    def create_permissions
+      permissions = {}
+
+      WebConfig.custom_resource_config.each do |cfg|
+        permissions[cfg[:name]] =  ["create", "read", "update", "delete", "*"]
+      end
+
+      permissions.each do |grant_on, actions|
+        actions.each do |action|
+          next if Permission.where(name: action, granted_on: grant_on).exists?
+
+          Permission.create!(name: action, granted_on: grant_on)
+        end
+      end
     end
 
     def output

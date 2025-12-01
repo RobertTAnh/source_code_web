@@ -1,7 +1,8 @@
 .div.text-right.mb-1
-  %a.btn.btn-primary{data: { target: "#globalSlugFormModal", toggle: "modal"}}
-    %span New
-    %i.bi.bi-plus
+  - if can?(:update, record)
+    %a.btn.btn-primary{data: { target: "#globalSlugFormModal", toggle: "modal"}}
+      %span New
+      %i.bi.bi-plus
 .card
   .card-body.p-0
     %table.table.table-striped
@@ -23,8 +24,9 @@
               .margin
                 = link_to web_path_for(record), class: "btn btn-outline-primary mr-1", target: '_blank' do
                   %i.bi.bi-box-arrow-up-right
-                = link_to "javascript:void(0);", class: "btn btn-outline-danger mr-1", onclick: "handleDeleteSlug(this, #{slug.id});" do
-                  %i.bi.bi-trash
+                - if can?(:update, record)
+                  = link_to "javascript:void(0);", class: "btn btn-outline-danger mr-1", onclick: "handleDeleteSlug(this, #{slug.id});" do
+                    %i.bi.bi-trash
         //%tr
         //  = form_for record.global_slugs.new do |sf|
         //    %td.text-right{ colspan: 2 }

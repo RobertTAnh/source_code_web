@@ -10,12 +10,12 @@ module ApplicationHelper
 
   def safe_eval_user_input(name)
     return name unless name.is_a?(String)
-    name.gsub(/%[^%]+%/) do |m|
+    name.gsub(/%[a-z_]+%/) do |m|
       method = m[1..-2].strip.to_sym
       if UserAllowedMethods.instance_methods.include?(method) 
         send(method)
       else
-        " "
+        m
       end
     end
   end

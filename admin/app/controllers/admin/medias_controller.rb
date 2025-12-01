@@ -1,7 +1,11 @@
 class Admin::MediasController < ActiveStorage::DirectUploadsController
   include ::MediaCmds::Utils
   include Admin::Localizable if Settings.localized?
+  include ExceptionHandler
+  include Admin::AuthorizationHelper
+
   skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!
 
   if Settings.localized?
     before_action :redirect_to_locale_record, only: %i[upload]
@@ -89,9 +93,13 @@ class Admin::MediasController < ActiveStorage::DirectUploadsController
 
   def destroy
     blob = ActiveStorage::Blob.find_by(key: params[:key] + '.' + params[:format])
-    attachment = ActiveStorage::Attachment.find_by(blob_id: blob.id) if blob
+    if blob
+      attachment = ActiveStorage::Attachment.find_by(blob_id: blob.id)
 
-    attachment.destroy!
+      raise Unauthorized unless can?(:update, attachment.record)
+
+      attachment.destroy!
+    end
 
     respond_to do |format|
       format.any
@@ -130,5 +138,11 @@ class Admin::MediasController < ActiveStorage::DirectUploadsController
   private
   def blob_args
     params.require(:upload)
+  end
+
+  def context
+    @context ||= {
+      user: current_user
+    }
   end
 end

@@ -20,7 +20,7 @@ module PageCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = Page.all
+      @scope = scoped(:read, :page)
     end
 
     def filter_scope

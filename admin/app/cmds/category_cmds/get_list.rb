@@ -1,6 +1,7 @@
 module CategoryCmds
   class GetList
     prepend BaseCmd
+    include ::DefaultSort
 
     def initialize(context:, params:)
       @context = context
@@ -20,7 +21,7 @@ module CategoryCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = Category.where(depth: 1)
+      @scope = scoped(:read, :category).where(depth: 1)
     end
 
     def filter_scope
@@ -36,7 +37,9 @@ module CategoryCmds
     end
 
     def sort_scope
-      @scope = @scope.order(created_at: :desc)
+      @scope = apply_default_sort(@scope, 'categories', Category::SUPPORTED_FIELD_SORTS) do
+        @scope.order(created_at: :desc)
+      end
     end
 
     def result

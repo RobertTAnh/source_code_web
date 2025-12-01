@@ -1,4 +1,4 @@
-= form_for record, data: {turbo: false}, url: url do |f|
+= form_for record, data: {turbo: false, disabled: action_name == 'edit' ? !can?(:update, :web_config) : false}, url: url, html: {id: 'edit-form'} do |f|
   .mb-2
     = f.submit 'Submit', class: 'btn btn-primary'
   - if @errors&.any?
@@ -21,4 +21,11 @@
           = render "admin/shared/history_list", record: record, f: f
     / /.card
 #render-upload-midia-place
+
+:javascript
+  $(document).ready(() => {
+    if($("form#edit-form").data().disabled){
+      $("form#edit-form :input").prop("disabled",true);
+    }
+  });
 

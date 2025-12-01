@@ -1,12 +1,20 @@
 module Admin
   class ApplicationController < ActionController::Base
+    include ExceptionHandler
     helper ::ConfigHelper
     helper WebRouteHelper
     include Admin::Localizable if Settings.localized?
+    helper AuthorizationHelper
+    include AuthorizationHelper
+    helper_method :context
+
     before_action :authenticate_user!
     include Loggable
 
     def context
+      @context ||= {
+        user: current_user
+      }
     end
 
     def current_edit_tab_name

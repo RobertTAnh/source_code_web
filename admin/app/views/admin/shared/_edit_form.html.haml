@@ -7,7 +7,7 @@
 
 - property_fields = record.class.properties_config if record.class.respond_to?(:properties_config)
 
-= form_for record, data: {turbo: false}, html: {id: 'edit-form'} do |f|
+= form_for record, data: {turbo: false, disabled: !can?(:update, record)}, html: {id: 'edit-form'} do |f|
   .mb-2
     = f.submit 'Submit', class: 'btn btn-primary'
     = link_to 'Back', back_url, class: "btn btn-default"
@@ -83,6 +83,15 @@
         - if tabs.include?("history")
           %li.nav-item
             %a#history-tab.text-dark.nav-link{"aria-controls" => "history", "aria-selected" => "false", "data-toggle" => "pill", :href => "#history-list", :role => "tab", :onclick => "updateCurrentGroup(this);"} History
+        - if tabs.include?("role_info")
+          %li.nav-item
+            %a#role-info-tab.text-dark.nav-link.tab.active{"aria-controls" => "role-info", "aria-selected" => "false", "data-toggle" => "pill", :href => "#role-info-form", :role => "tab", :onclick => "updateCurrentGroup(this)"} Info
+        - if tabs.include?("role_permissions")
+          %li.nav-item
+            %a#role-permissions-tab.text-dark.nav-link{"aria-controls" => "role-permisstions", "aria-selected" => "false", "data-toggle" => "pill", :href => "#role-permissions-form", :role => "tab", :onclick => "updateCurrentGroup(this)"} Permissions
+        - if tabs.include?("role_users")
+          %li.nav-item
+            %a#role-users-tab.text-dark.nav-link{"aria-controls" => "role-users", "aria-selected" => "false", "data-toggle" => "pill", :href => "#role-users-form", :role => "tab", :onclick => "updateCurrentGroup(this)"} Users
     .card-body
       #custom-tabs-four-tabContent.tab-content
         - if tabs.include?("default")
@@ -125,12 +134,23 @@
         - if tabs.include?("history")
           #history-list.tab-pane.fade{"aria-labelledby" => "history-tab", :role => "tabpanel"}
             = render "admin/shared/history_list", record: record, f: f
+        - if tabs.include?("role_info")
+          #role-info-form.tab-pane.active{"aria-labelledby" => "role-info-tab", :role => "tabpanel"}
+            = render "admin/roles/role_info_form", record: record, f: f
+        - if tabs.include?("role_permissions")
+          #role-permissions-form.tab-pane.fade{"aria-labelledby" => "role-permissions-tab", :role => "tabpanel"}
+            = render "admin/roles/role_permissions", record: record, f: f
+        - if tabs.include?("role_users")
+          #role-users-form.tab-pane.fade{"aria-labelledby" => "role-permissions-tab", :role => "tabpanel"}
+            = render "admin/roles/role_users", record: record, f: f
     / /.card
 #render-upload-midia-place
 - if tabs.include?("global_slug")
   = render "admin/shared/global_slug_form_modal", record: record
 - if tabs.include?("variants")
   = render "admin/shared/edit_variant_modal", record: record
+- if tabs.include?("role_users")
+  = render "admin/roles/new_user_role_form_modal", record: record
 
 = render "admin/shared/preview_modal"
 = render "admin/shared/locale_mapper_modal"
@@ -145,6 +165,9 @@
       }
     }
 
+    if($("form#edit-form").data().disabled){
+      $("form#edit-form :input").prop("disabled",true);
+    }
     setupCkeditor();
   });
 

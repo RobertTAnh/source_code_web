@@ -9,17 +9,24 @@ module Admin
     end
 
     def index
+      raise Unauthorized unless can?(:read, :page)
+
       @records = PageCmds::Index.call(context: context, params: params).result
     end
 
     def edit
+      raise Unauthorized unless can?(:read, @record)
     end
 
     def new
+      raise Unauthorized unless can?(:create, :page)
+
       @record = Page.new
     end
 
     def create
+      raise Unauthorized unless can?(:create, :page)
+
       cmd = PageCmds::Create.call(context: context, params: create_params)
 
       @record = cmd.result
@@ -32,6 +39,8 @@ module Admin
     end
 
     def update
+      raise Unauthorized unless can?(:update, @record)
+
       cmd = PageCmds::Update.call(context: context, page: @record, params: update_params, extra_params: extra_params)
 
       if cmd.success?
@@ -45,6 +54,8 @@ module Admin
     end
 
     def destroy
+      raise Unauthorized unless can?(:delete, @record)
+
       cmd = PageCmds::Destroy.call(context: context, page: @record)
       redirect_to pages_url
     end

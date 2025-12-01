@@ -6,6 +6,8 @@ module Admin
     loggable_actions :create, :update, :destroy
 
     def index
+      raise Unauthorized unless can?(:read, :contact)
+
       @records = ContactCmds::GetList.call(context: context, params: params).result
       respond_to do |format|
         format.html
@@ -27,9 +29,12 @@ module Admin
     end
 
     def edit
+      raise Unauthorized unless can?(:read, @record)
     end
 
     def update
+      raise Unauthorized unless can?(:update, @record)
+
       cmd = ContactCmds::Update.call(context: context, contact: @record, params: edit_params)
 
       if cmd.success?
@@ -43,6 +48,8 @@ module Admin
     end
 
     def destroy
+      raise Unauthorized unless can?(:delete, @record)
+
       cmd = ContactCmds::Destroy.call(context: context, contact: @record)
       redirect_to contacts_url
     end

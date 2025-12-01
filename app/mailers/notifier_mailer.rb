@@ -2,7 +2,9 @@ class NotifierMailer < ApplicationMailer
   helper Rails.application.routes.url_helpers
   helper RouteHelper
 
-  default :from => "FagoGroup Technologies <techfagogroup@gmail.com>"
+  default from: ENV["EMAIL_FROM"].present? ?
+    %("#{ENV['EMAIL_FROM']}" <#{ENV['USER_EMAIL']}>) :
+    "FagoGroup Technologies <techfagogroup@gmail.com>"
 
   def order_created(data)
     return unless Settings.email_notification_enabled?
@@ -10,11 +12,11 @@ class NotifierMailer < ApplicationMailer
 
     @data = data
 
-    emails = (default_email_list + order_received_email_list + system_default_email_list).uniq
+    emails = (default_email_list + order_received_email_list).uniq
 
     return if emails.blank?
 
-    mail :to => emails.join(', '), :subject => "[#{WebConfig.for('website.name')}] Thông báo có khách hàng: #{data.customer_name} đã đặt hàng thành công!"
+    mail :to => emails.join(', '), :subject => "#{WebConfig.for('website.name')} - Thông báo có khách hàng: #{data.customer_name} đã đặt hàng thành công!"
   end
 
   def contact_received(data)
@@ -23,11 +25,35 @@ class NotifierMailer < ApplicationMailer
 
     @data = data
 
-    emails = (default_email_list + contact_received_email_list + system_default_email_list).uniq
+    emails = (default_email_list + contact_received_email_list).uniq
 
     return if emails.blank?
 
-    mail :to => emails.join(', '), :subject => "[#{WebConfig.for('website.name')}] Thông báo có khách hàng: #{data.name} đăng ký liên hệ"
+    mail :to => emails.join(', '), :subject => "#{WebConfig.for('website.name')} - Thông báo có khách hàng: #{data.name} đăng ký liên hệ"
+  end
+
+  def registration_email(data)
+    @data = data
+
+    emails = data.email
+
+    return if emails.blank?
+
+    title_email = t("email.title_registration_email") || "Xác Nhận Đặt Hàng"
+
+    mail :to => emails, :subject => "#{title_email} - #{WebConfig.for('website.name')}"
+  end
+
+  def payment_confirmation(data)
+    @data = data
+
+    emails = data.email
+
+    return if emails.blank?
+
+    title_email = t("email.title_registration_email") || "Xác Nhận Thanh Toán"
+
+    mail :to => emails, :subject => "#{title_email} - #{WebConfig.for('website.name')}"
   end
 
   def default_email_list

@@ -28,40 +28,46 @@
             %i.nav-icon.bi.bi-speedometer
             %p
               Dashboard
-        %li.nav-item
-          %a.nav-link{:href => products_path, class: "#{controller_name == 'products' ? 'active' : ''}"}
-            %i.nav-icon.bi.bi-boxes
-            %p
-              Products
-              //%span.badge.badge-info.right 6
-        %li.nav-item
-          %a.nav-link{:href => posts_path, class: "#{controller_name == 'posts' ? 'active' : ''}"}
-            %i.nav-icon.fa-regular.fa-newspaper
-            %p
-              Posts
-        %li.nav-item
-          %a.nav-link{:href => pages_path, class: "#{controller_name == 'pages' ? 'active' : ''}"}
-            %i.nav-icon.fa-solid.fa-pager
-            %p
-              Pages
-        %li.nav-item
-          %a.nav-link{:href => contacts_path, class: "#{controller_name == 'contacts' ? 'active' : ''}"}
-            %i.nav-icon.fas.fa-edit
-            %p
-              Contacts
-        %li.nav-item
-          %a.nav-link{:href => orders_path, class: "#{controller_name == 'orders' ? 'active' : ''}"}
-            %i.nav-icon.fa-sharp.fa-solid.fa-receipt
-            %p
-              Orders
+        - if can?(:read, :product)
+          %li.nav-item
+            %a.nav-link{:href => products_path, class: "#{controller_name == 'products' ? 'active' : ''}"}
+              %i.nav-icon.bi.bi-boxes
+              %p
+                Products
+                //%span.badge.badge-info.right 6
+        - if can?(:read, :post)
+          %li.nav-item
+            %a.nav-link{:href => posts_path, class: "#{controller_name == 'posts' ? 'active' : ''}"}
+              %i.nav-icon.fa-regular.fa-newspaper
+              %p
+                Posts
+        - if can?(:read, :page)
+          %li.nav-item
+            %a.nav-link{:href => pages_path, class: "#{controller_name == 'pages' ? 'active' : ''}"}
+              %i.nav-icon.fa-solid.fa-pager
+              %p
+                Pages
+        - if can?(:read, :contact)
+          %li.nav-item
+            %a.nav-link{:href => contacts_path, class: "#{controller_name == 'contacts' ? 'active' : ''}"}
+              %i.nav-icon.fas.fa-edit
+              %p
+                Contacts
+        - if can?(:read, :order)
+          %li.nav-item
+            %a.nav-link{:href => orders_path, class: "#{controller_name == 'orders' ? 'active' : ''}"}
+              %i.nav-icon.fa-sharp.fa-solid.fa-receipt
+              %p
+                Orders
 
-        %li.nav-item
-          %a.nav-link{:href => albums_path, class: "#{controller_name == 'albums' ? 'active' : ''}"}
-            %i.nav-icon.bi.bi-chat-left-text-fill
-            %p
-              Gallery
+        - if can?(:read, :album)
+          %li.nav-item
+            %a.nav-link{:href => albums_path, class: "#{controller_name == 'albums' ? 'active' : ''}"}
+              %i.nav-icon.bi.bi-chat-left-text-fill
+              %p
+                Gallery
 
-        - if WebConfig.for('features')&.dig('comments')
+        - if WebConfig.for('features')&.dig('comments') && can?(:read, :comment)
           %li.nav-item
             %a.nav-link{:href => comments_path, class: "#{controller_name == 'comments' ? 'active' : ''}"}
               %i.nav-icon.fa-sharp.fa-solid.fa-receipt
@@ -73,59 +79,69 @@
             OTHERS
           - custom_resource_config.each do |resource|
             - resource_name_pluralize = resource[:name].underscore.pluralize
-            %li.nav-item{class: "#{controller_name == resource_name_pluralize || (controller_name == "categories" && params[:kind] == resource[:name].underscore) ? 'active menu-open menu-is-opening' : ''}"}
-              =link_to "/admin/#{resource[:name].underscore.pluralize}", class: "nav-link #{(controller_name == resource_name_pluralize) ? 'active' : ''}", onclick: "redirectToLink(this)" do
-                %i.fa-solid.fa-shapes
-                %p
-                  =resource[:name]
-                - if resource[:has_category]
-                  %i.fas.fa-angle-left.right
+            - if can?(:read, resource[:name])
+              %li.nav-item{class: "#{controller_name == resource_name_pluralize || (controller_name == "categories" && params[:kind] == resource[:name].underscore) ? 'active menu-open menu-is-opening' : ''}"}
+                =link_to "/admin/#{resource[:name].underscore.pluralize}", class: "nav-link #{(controller_name == resource_name_pluralize) ? 'active' : ''}", onclick: "redirectToLink(this)" do
+                  %i.fa-solid.fa-shapes
+                  %p
+                    =resource[:name]
+                  - if resource[:has_category]
+                    %i.fas.fa-angle-left.right
 
-              - if resource[:has_category]
-                %ul.nav.nav-treeview
-                  %li.nav-item
-                    =link_to categories_path(kind: resource[:name].underscore), class: "nav-link #{params[:kind] == resource[:name].underscore ? 'active' : ''}" do
-                      %i.far.fa-circle.nav-icon
-                      %p Categories
+                - if resource[:has_category]
+                  %ul.nav.nav-treeview
+                    %li.nav-item
+                      =link_to categories_path(kind: resource[:name].underscore), class: "nav-link #{params[:kind] == resource[:name].underscore ? 'active' : ''}" do
+                        %i.far.fa-circle.nav-icon
+                        %p Categories
 
         %li.nav-header
           SETTINGS
 
-        %li.nav-item{class: "#{controller_name == 'categories' && params[:kind].in?(["post", "product", "service"]) ? 'active menu-open menu-is-opening' : ''}"}
-          %a.nav-link{:href => "#", class: "#{controller_name == 'categories' && params[:kind].in?(["post", "product", "service"]) ? 'active' : ''}"}
-            %i.nav-icon.bi.bi-tags-fill
-            %p
-              Categories
-              %i.fas.fa-angle-left.right
-          %ul.nav.nav-treeview
-            %li.nav-item
-              =link_to categories_path(kind: "post"), class: "nav-link #{params[:kind] == "post" ? 'active' : ''}" do
-                %i.far.fa-circle.nav-icon
-                %p Post categories
-            %li.nav-item
-              =link_to categories_path(kind: "product"), class: "nav-link #{params[:kind] == "product" ? 'active' : ''}" do
-                %i.far.fa-circle.nav-icon
-                %p Product categories
-            %li.nav-item
-              =link_to categories_path(kind: "service"), class: "nav-link #{params[:kind] == "service" ? 'active' : ''}" do
-                %i.far.fa-circle.nav-icon
-                %p Service categories
-        %li.nav-item
-          =link_to "/admin/web_configs", class: "nav-link #{(controller_name == "web_configs" && action_name == "edit") ? 'active' : ''}" do
-            %i.nav-icon.fas.fa-table
-            %p
-              Website
-        - if WebConfig.for("website.advanced_settings")
+        - if can?(:read, :category)
+          %li.nav-item{class: "#{controller_name == 'categories' && params[:kind].in?(["post", "product", "service"]) ? 'active menu-open menu-is-opening' : ''}"}
+            %a.nav-link{:href => "#", class: "#{controller_name == 'categories' && params[:kind].in?(["post", "product", "service"]) ? 'active' : ''}"}
+              %i.nav-icon.bi.bi-tags-fill
+              %p
+                Categories
+                %i.fas.fa-angle-left.right
+            %ul.nav.nav-treeview
+              %li.nav-item
+                =link_to categories_path(kind: "post"), class: "nav-link #{params[:kind] == "post" ? 'active' : ''}" do
+                  %i.far.fa-circle.nav-icon
+                  %p Post categories
+              %li.nav-item
+                =link_to categories_path(kind: "product"), class: "nav-link #{params[:kind] == "product" ? 'active' : ''}" do
+                  %i.far.fa-circle.nav-icon
+                  %p Product categories
+              %li.nav-item
+                =link_to categories_path(kind: "service"), class: "nav-link #{params[:kind] == "service" ? 'active' : ''}" do
+                  %i.far.fa-circle.nav-icon
+                  %p Service categories
+        - if can?(:read, :web_config)
+          %li.nav-item
+            =link_to "/admin/web_configs", class: "nav-link #{(controller_name == "web_configs" && action_name == "edit") ? 'active' : ''}" do
+              %i.nav-icon.fas.fa-table
+              %p
+                Website
+        - if WebConfig.for("website.advanced_settings") && can?(:advanced_setting, :web_config)
           %li.nav-item
             =link_to "/admin/advanced_settings", class: "nav-link #{(controller_name == "web_configs" && action_name == "advanced_settings") ? 'active' : ''}" do
               %i.nav-icon.fa-solid.fa-gear
               %p
                 Advanced Settings
-        %li.nav-item
-          =link_to users_path, class: "nav-link #{controller_name == "users" ? 'active' : ''}" do
-            %i.nav-icon.fa-solid.fa-people-group
-            %p
-              All Users
+        - if can?(:read, :role)
+          %li.nav-item
+            =link_to roles_path, class: "nav-link #{controller_name == "roles" ? 'active' : ''}" do
+              %i.nav-icon.fa-solid.fa-diamond
+              %p
+                Roles
+        - if can?(:read, :user)
+          %li.nav-item
+            =link_to users_path, class: "nav-link #{controller_name == "users" ? 'active' : ''}" do
+              %i.nav-icon.fa-solid.fa-people-group
+              %p
+                All Users
         %li.nav-item
           = link_to destroy_user_session_path, class: "nav-link", method: :delete, data: {turbo_method: :delete} do
             %i.nav-icon.fa-solid.fa-power-off

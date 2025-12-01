@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   LOGGABLE_RELATIONS = %w|variants content tags view categorizations extra_fields|
+  SUPPORTED_FIELD_SORTS = ["created_at", "updated_at", "price", "display_order","view_count","discount_percentage", "published_at"]
 
   include SoftDelete
   include HasGlobalSlug
@@ -18,6 +19,7 @@ class Product < ApplicationRecord
   include HasComment
   include PgSearch
   include HasLocale if Settings.localized?
+  include HasPublishedAt
 
   has_one_attached :image
 
@@ -33,6 +35,7 @@ class Product < ApplicationRecord
   scope :published, -> { default_sort.where(status: 'published') }
   scope :lastest, -> { published.order(created_at: :desc) }
   scope :tag, -> (name) { joins(:tags).where(tags: { name: name }) }
+
   pg_search_scope :general_search,
     against: [:name, :slug, :sku]
   pg_search_scope :admin_search,

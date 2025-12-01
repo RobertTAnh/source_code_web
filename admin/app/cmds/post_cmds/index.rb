@@ -1,6 +1,7 @@
 module PostCmds
   class Index
     prepend BaseCmd
+    include ::DefaultSort
 
     def initialize(context:, params:)
       @context = context
@@ -20,7 +21,7 @@ module PostCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = Post.all
+      @scope = scoped(:read, :post)
     end
 
     def filter_scope
@@ -38,7 +39,9 @@ module PostCmds
     end
 
     def sort_scope
-      @scope = @scope.order(created_at: :desc)
+      @scope = apply_default_sort(@scope, 'posts', Post::SUPPORTED_FIELD_SORTS) do
+        @scope.order(created_at: :desc)
+      end
     end
 
     def result

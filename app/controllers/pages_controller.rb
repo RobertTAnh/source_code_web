@@ -25,6 +25,8 @@ class PagesController < ApplicationController
 
   def product
     PageOps::Product.new(self).call
+
+    add_viewed_products
   end
 
   def post
@@ -53,14 +55,25 @@ class PagesController < ApplicationController
   def redirect_to_primary
     global_slug = RequestStore.store[:current_global_slug]
 
-    render_not_found if global_slug.sluggable.status != 'published'
+    render_not_found if global_slug.sluggable.status == 'unpublished'
 
     return if global_slug.primary?
 
     if primary_slug = global_slug.get_primary
-      return redirect_to path_for(primary_slug.sluggable), status: :moved_permanently
+      return redirect_to "#{path_for(primary_slug.sluggable)}#{request.query_string.present? ? "?#{request.query_string}" : ""}", status: :moved_permanently
     end
 
     render_not_found
+  end
+
+  def add_viewed_products
+    return unless @product
+
+    viewed_ids = cookies[:viewed_products].present? ? JSON.parse(cookies[:viewed_products]) : []
+
+    viewed_ids.unshift(@product.id)
+    viewed_ids.pop(viewed_ids.size - 10) if viewed_ids.size > 10
+
+    cookies[:viewed_products] = JSON.dump(viewed_ids.uniq)
   end
 end

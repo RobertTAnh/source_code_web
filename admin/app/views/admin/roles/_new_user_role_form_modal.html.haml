@@ -1,0 +1,64 @@
+#userRoleFormModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "userRoleModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    = form_for record.user_roles.new, url: grant_users_to_role_roles_path,  html: {id: "user-role-form" } do |f|
+      .modal-content
+        .modal-header 
+          %h5#userRoleModalLabel.modal-title Grant role to User
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+        .modal-body
+          #user-role-form-error
+          = f.hidden_field :role_id, value: record.id
+          .form-group
+            = f.label :user
+            = f.select(:user_id, User.all.map{|u| ["#{u.name} (#{u.email})", u.id]}, {}, {style: "display: block;width:85%", class: "form-control variant-select2", multiple: true})
+        .modal-footer
+          %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+          = f.submit "Submit", class: "btn btn-primary"
+
+:javascript
+  $(document).ready(function(){
+    addUserRoleSubmitHandle()
+  })
+
+  document.addEventListener("turbo:load", function() {
+    $("#user_role_user_id").select2({tags: true, closeOnSelect: false});
+  });
+
+  function addUserRoleSubmitHandle(){
+    $('#user-role-form').submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+           type: "POST",
+           url : "/admin/roles/grant_users_to_role",
+           data: $("#user-role-form").serialize(), // serializes the form's elements.
+           success: function(data)
+           {
+                e.preventDefault();
+                var ele = $("#global-slugs-list");
+                var dataItemCount = parseInt(ele.attr('data-item-count'));
+                var nextItemCount = dataItemCount + 1;
+                ele.attr('data-item-count', nextItemCount);
+                data.forEach(user => {
+                  $("#role-users-list").append(`
+                    <tr>
+                      <td>${user['name']}</td>
+                      <td>${user['email']}</td>
+                      <td>
+                        <button class="btn btn-default" onclick="handleDeleteUserRole(this, ${user['user_role_id']});" type='button'><span>Delete</span></button>
+                      </td>
+                    </tr>`)
+                  })
+                $("#userRoleFormModal").modal("hide");
+                $("#user-role-form-error").html('')
+                $("input[name='user_role[user_id][]']").val('')
+                $("#user_role_user_id").val('')
+                return;
+           },
+           error: function(xhr, status, error) {
+            $("#user-role-form-error").html(`<div class="alert alert-warning" role="alert">${error}<div>`);
+           }
+        })
+    });
+  }
+

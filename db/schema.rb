@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_29_050141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -99,8 +99,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.string "universal_slug"
     t.datetime "discarded_at"
     t.index ["discarded_at"], name: "index_categories_on_discarded_at"
+    t.index ["name"], name: "idx_name_on_categories"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["slug", "locale"], name: "index_categories_on_slug_and_locale", unique: true, where: "(discarded_at IS NULL)"
+    t.index ["slug"], name: "idx_slug_on_categories"
     t.index ["universal_slug", "locale"], name: "index_categories_on_universal_slug_and_locale", unique: true, where: "(discarded_at IS NULL)"
     t.index ["view_id"], name: "index_categories_on_view_id"
   end
@@ -216,6 +218,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.index ["name", "locale"], name: "index_global_slugs_on_name_and_locale", unique: true, where: "(discarded_at IS NULL)"
   end
 
+  create_table "granted_permissions", force: :cascade do |t|
+    t.bigint "permission_id", null: false
+    t.string "granted_to_type"
+    t.bigint "granted_to_id"
+    t.jsonb "conditions"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permission_id"], name: "index_granted_permissions_on_permission_id"
+  end
+
+  create_table "ip_logs", force: :cascade do |t|
+    t.string "ip"
+    t.string "action"
+    t.boolean "spam"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.bigint "product_id", null: false
@@ -248,6 +268,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "discarded_at"
+    t.jsonb "extra"
     t.index ["code"], name: "index_orders_on_code", unique: true, where: "(discarded_at IS NULL)"
     t.index ["discarded_at"], name: "index_orders_on_discarded_at"
   end
@@ -279,6 +300,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.index ["view_id"], name: "index_pages_on_view_id"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "name"
+    t.string "granted_on"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "slug", null: false
     t.string "name", null: false
@@ -295,7 +324,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.string "universal_slug"
     t.datetime "discarded_at"
     t.index ["discarded_at"], name: "index_posts_on_discarded_at"
+    t.index ["name"], name: "idx_name_on_posts"
     t.index ["slug", "locale"], name: "index_posts_on_slug_and_locale", unique: true, where: "(discarded_at IS NULL)"
+    t.index ["slug"], name: "idx_slug_on_posts"
     t.index ["universal_slug", "locale"], name: "index_posts_on_universal_slug_and_locale", unique: true, where: "(discarded_at IS NULL)"
     t.index ["view_id"], name: "index_posts_on_view_id"
   end
@@ -317,14 +348,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.jsonb "properties"
     t.jsonb "variant_options"
     t.float "review_rating"
+    t.integer "view_count", default: 0
     t.string "locale", limit: 2, default: "vi", null: false
     t.string "universal_slug"
     t.datetime "discarded_at"
-    t.integer "view_count", default: 0
     t.string "kind"
     t.index ["discarded_at"], name: "index_products_on_discarded_at"
+    t.index ["name"], name: "idx_name_on_products"
     t.index ["sku", "locale"], name: "index_products_on_sku_and_locale", unique: true, where: "(discarded_at IS NULL)"
     t.index ["slug", "locale"], name: "index_products_on_slug_and_locale", unique: true, where: "(discarded_at IS NULL)"
+    t.index ["slug"], name: "idx_slug_on_products"
     t.index ["universal_slug", "locale"], name: "index_products_on_universal_slug_and_locale", unique: true, where: "(discarded_at IS NULL)"
     t.index ["view_id"], name: "index_products_on_view_id"
   end
@@ -347,6 +380,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.index ["universal_slug", "locale"], name: "index_resources_on_universal_slug_and_locale", unique: true, where: "(discarded_at IS NULL)"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "protected"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "owner_id", null: false
@@ -363,6 +404,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.string "path"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -392,6 +442,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
     t.datetime "updated_at", null: false
     t.jsonb "properties"
     t.string "image_url"
+    t.string "status", default: "published"
     t.index ["sku", "owner_type"], name: "index_variants_on_sku_and_owner_type", unique: true
   end
 
@@ -433,12 +484,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_091203) do
   add_foreign_key "categorizations", "categories"
   add_foreign_key "comments", "comments", column: "parent_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "granted_permissions", "permissions"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "order_items", "variants"
   add_foreign_key "pages", "views"
   add_foreign_key "posts", "views"
   add_foreign_key "products", "views"
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "views", "themes"
   add_foreign_key "views", "views", column: "layout_id"
 end

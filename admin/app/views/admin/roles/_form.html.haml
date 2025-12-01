@@ -1,0 +1,12 @@
+.form-container
+  - if errors&.any?
+    = render "admin/shared/errors", errors: errors
+
+  = form_for record, data: {turbo: false} do |f|
+    .form-group
+      %label Name
+      = f.text_field :name, class: 'form-control', placeholder: 'Role name'
+
+    = f.submit 'Submit', class: 'btn btn-primary'
+    = link_to 'Back', roles_path, class: "btn btn-default"
+

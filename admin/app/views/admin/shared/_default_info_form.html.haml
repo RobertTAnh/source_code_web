@@ -1,5 +1,9 @@
 .row
   .col-md-7.col-sm-12
+    - if record.is_a? Product
+      .form-group
+        = f.label :id
+        = f.text_field :id, class: "form-control", readonly: true
     .form-group
       = f.label :name
       = f.text_field :name, class: "form-control"
@@ -20,9 +24,16 @@
         = render "admin/shared/slug_form", f: f, record: record
 
       - if ["Product", "Post", "Category"].include?(record.class.name)
-        .form-group
-          = f.label :display_order
-          = f.number_field :display_order, value: record.display_order, class: "form-control", min: 0
+        - default_sort = WebConfig.for("default_sort.#{controller_name}")
+        - field_sort = default_sort&.keys&.first
+        - if field_sort == "published_at"
+          .form-group
+            = f.label :published_at, "Published Date"
+            = f.text_field :published_at, value: record&.published_at&.strftime('%d-%m-%Y'), class: "form-control datepicker"
+        - else
+          .form-group
+            = f.label :display_order
+            = f.number_field :display_order, value: record.display_order, class: "form-control", min: 0
       - if record.is_a? Post
         .form-group
           = f.label :release_date, "Release Date"

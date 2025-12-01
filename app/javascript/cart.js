@@ -120,6 +120,7 @@ function onDraftOrderCreated() {
 
 function onCartItemAdded() {
   updateCartCount(1);
+    toastr.success('Đã thêm sản phẩm vào giỏ hàng');
 }
 
 function onCartItemRemoved(cartItem) {
@@ -208,7 +209,8 @@ function getCartItemData(event) {
 }
 
 $(function() {
-  $('.add-to-cart').click(addToCart);
+  $(document).on('click', '.add-to-cart', addToCart)
+  // $('.add-to-cart').click(addToCart);
   $('.remove-cart-item').click(removeCartItem);
   $('input.cart-item-quantity').change(changeCartItemQuantity);
   $('.cart-item-checkbox').change(toggleCartItemCheckbox);

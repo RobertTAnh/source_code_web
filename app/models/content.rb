@@ -1,5 +1,5 @@
 class Content < ApplicationRecord
-  belongs_to :owner, polymorphic: true
+  belongs_to :owner, polymorphic: true, touch: true
   # validates_length_of :meta_title, maximum: 60, allow_blank: true
   # validates_length_of :meta_description, maximum: 160, allow_blank: true
   include HasTableOfContent

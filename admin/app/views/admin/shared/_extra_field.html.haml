@@ -19,3 +19,5 @@
       = render "admin/shared/json_field", f: wf, f_name: :data
     - elsif config_record.data_type == "array"
       = render "admin/shared/array_field", f: wf, f_name: :data, fields: extra_field['fields'], extra_field_data: config_record.data
+    - elsif config_record.data_type == "color"
+      = wf.color_field :data, value: config_record.data.presence || "#007bff", class: "form-control"

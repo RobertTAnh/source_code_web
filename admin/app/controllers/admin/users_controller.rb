@@ -4,14 +4,20 @@ module Admin
     before_action :get_user, only: %i[edit update destroy]
 
     def index
+      raise Unauthorized unless can?(:read, :user)
+
       @records = UserCmds::GetList.call(context: context, params: params).result
     end
 
     def new
+      raise Unauthorized unless can?(:create, :user)
+
       @record = User.new
     end
 
     def create
+      raise Unauthorized unless can?(:create, :user)
+
       cmd = UserCmds::Create.call(context: context, params: create_params)
 
       if cmd.success?
@@ -24,9 +30,12 @@ module Admin
     end
 
     def edit
+      raise Unauthorized unless can?(:read, @record)
     end
 
     def update
+      raise Unauthorized unless can?(:update, @record)
+
       cmd = UserCmds::Update.call(context: context, user: @record, params: edit_params, extra_params: extra_params)
 
       if cmd.success?
@@ -40,6 +49,8 @@ module Admin
     end
 
     def destroy
+      raise Unauthorized unless can?(:delete, @record)
+
       cmd = UserCmds::Destroy.call(context: context, user: @record)
       redirect_to users_url
     end

@@ -1,6 +1,7 @@
 # TODO: move to logic to command
 class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token
+  before_action :detect_spam, only: [:create], if: -> { Settings.detect_spam? }
 
   def create
     if params[:draft]
@@ -98,7 +99,7 @@ class OrdersController < ApplicationController
         price: cart_item.price,
         discount_percentage: product.discount_percentage,
         variant_id: cart_item.variant_id,
-        variants: {}
+        variants: variant&.options || {}
       )
     end
   end
@@ -136,7 +137,8 @@ class OrdersController < ApplicationController
       :payment_method,
       :invoice_required,
       shipping_address: [:address, :province, :district, :ward],
-      invoice_data: [:company_name, :tax_number, :address, :note]
+      invoice_data: [:company_name, :tax_number, :address, :note],
+      extra: {}
     )
   end
 end

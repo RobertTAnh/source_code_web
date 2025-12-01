@@ -1,0 +1,49 @@
+= f.fields_for :granted_permissions, f.object.granted_permissions.new do |wf|
+  - default_resource = resource_permissions.keys.first
+  .form-row.mb-2.new-granted-permission.new-gp
+    .col-2
+      = select_tag :name, options_for_select(resource_permissions.keys, default_resource), { class: "form-control", onchange: "handleResourceChange(this)" }
+    .col-2
+      = wf.select :permission_id, options_for_select(resource_permissions[default_resource].map{|p| [p['name'], p['id']]}), {}, { class: "form-control", id: "permission-select_new" }
+
+    .col-7
+      = wf.hidden_field :conditions, value: '', id: "conditions_new"
+      %span{id: "condition-badge_new"}
+
+      = link_to "javascript:void(0);", class: "btn btn-default", onclick: "setCurrentPermission(this)",
+        data: { target: "#permissionConditionModal", toggle: "modal" } do
+        %i.bi.bi-plus
+    .col-1
+      %div
+      %button.btn.btn-default
+        %span Delete
+
+:javascript
+  $(document).ready(function(){
+    const savedGpCount = parseInt("#{f.object.granted_permissions.count}")
+    const newId = generateString(8)
+    const gpIndex = $('.new-gp').length + savedGpCount - 1
+
+    $(".new-granted-permission")[0].setAttribute('data-id', newId);
+    $(".new-granted-permission")[0].setAttribute('id', `granted-permissions_${newId}`);
+    $(".new-granted-permission").removeClass('new-granted-permission')
+
+    $("#permission-select_new")[0].setAttribute('id', `permission-select_${newId}`);
+
+    $("#conditions_new")[0].setAttribute('id', `conditions_${newId}`);
+    $("#condition-badge_new")[0].setAttribute('id', `condition-badge_${newId}`);
+    $(`#permission-select_${newId}`)[0].setAttribute('name', `role[granted_permissions_attributes][${gpIndex}][permission_id]`)
+    $(`#conditions_${newId}`)[0].setAttribute('name', `role[granted_permissions_attributes][${gpIndex}][conditions]`)
+  })
+
+  function generateString(length) {
+      let result = '';
+      const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      const charactersLength = characters.length;
+      for ( let i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      }
+
+      return result;
+  }
+

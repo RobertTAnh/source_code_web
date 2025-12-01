@@ -6,9 +6,9 @@
         %a#general-medias-tab.nav-link{href: "#general-medias", "aria-controls" => "general-medias", "aria-selected" => "false", "data-bs-target" => "#general-medias", "data-toggle" => "pill", :role => "tab"} General Medias
       #v-pills-tabContent.tab-content.px-2{style: "width: 85%"}
         #featured-image.tab-pane.fade.show.active{"aria-labelledby" => "featured-image", :role => "tabpanel"}
-          = render "admin/shared/medias_list", type: "featured_images", images: get_featured_images(record)
+          = render "admin/shared/medias_list", type: "featured_images", images: get_featured_images(record), record: record
         #general-medias.tab-pane.fade{"aria-labelledby" => "general-medias", :role => "tabpanel"}
-          = render "admin/shared/medias_list", type: "general_medias", images: get_general_medias(record)
+          = render "admin/shared/medias_list", type: "general_medias", images: get_general_medias(record), record: record
 :javascript
   function copyToClipboard(text) {
     var dummy = document.createElement("textarea");

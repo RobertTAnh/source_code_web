@@ -1,8 +1,9 @@
 module PageOps
   class Category < BaseOperation
     include CommonOperation::Paginatable
-    SUPPORTED_FIELD_SORTS = ["created_at", "updated_at", "price", "display_order","view_count","discount_percentage"]
+    include ::DefaultSort
     SUPPORTED_VALUE_SORTS = ["asc", "desc"]
+
     def call
       validate_params
 
@@ -41,10 +42,10 @@ module PageOps
 
         if context.params["sort"].present?
           context.params["sort"].each do |k, v|
-            products = products.order(k => v) if SUPPORTED_FIELD_SORTS.include?(k) && SUPPORTED_VALUE_SORTS.include?(v.downcase)
+            products = products.order(k => v) if ::Product::SUPPORTED_FIELD_SORTS.include?(k) && SUPPORTED_VALUE_SORTS.include?(v.downcase)
           end
         else
-          products = products.lastest
+          products = apply_default_sort(products, 'products', ::Product::SUPPORTED_FIELD_SORTS).lastest
         end
 
         if context.params["price_range"].present?
@@ -68,7 +69,9 @@ module PageOps
 
         @products = paginate(products).to_a
       elsif category.post?
-        @posts = paginate(category.posts.lastest).to_a
+        posts = category.posts
+        posts = apply_default_sort(posts, 'posts', ::Post::SUPPORTED_FIELD_SORTS).lastest
+        @posts = paginate(posts).to_a
       end
     end
 

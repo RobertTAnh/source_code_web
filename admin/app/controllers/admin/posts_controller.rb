@@ -9,17 +9,42 @@ module Admin
     end
 
     def index
+      raise Unauthorized unless can?(:read, :post)
+
       @records = PostCmds::Index.call(context: context, params: params).result
+      respond_to do |format|
+        format.html
+        format.csv do
+          category_id = params[:filter_category]
+          attributes = [:name, :slug, :created_at, :status]
+          data_csv = CSV.generate do |csv|
+            csv << attributes + [:category]
+            @records.limit(nil).each do |record|
+              data_attributes = attributes.map{ |attr|  record.public_send(attr) }
+              category_name = record&.primary_category&.name
+              data_attributes = data_attributes << category_name
+              csv << data_attributes 
+            end
+            csv
+          end 
+          send_data data_csv, filename: "posts_#{Time.zone.now.strftime("%d-%m-%y")}.csv"
+        end
+      end
     end
 
     def edit
+      raise Unauthorized unless can?(:read, @record)
     end
 
     def new
+      raise Unauthorized unless can?(:create, :post)
+
       @record = Post.new
     end
 
     def create
+      raise Unauthorized unless can?(:create, :post)
+
       cmd = PostCmds::Create.call(context: context, params: create_params)
 
       @record = cmd.result
@@ -32,6 +57,8 @@ module Admin
     end
 
     def update
+      raise Unauthorized unless can?(:update, :post)
+
       cmd = PostCmds::Update.call(context: context, post: @record, params: update_params, extra_params: extra_params)
 
       if cmd.success?
@@ -45,6 +72,8 @@ module Admin
     end
 
     def destroy
+      raise Unauthorized unless can?(:delete, :post)
+
       cmd = PostCmds::Destroy.call(context: context, post: @record)
       redirect_to posts_url
     end
@@ -60,7 +89,7 @@ module Admin
 
     def update_params
       strong_params = params.require(:post).permit(:name, :slug, :image, :description, :status, :display_order,
-                                   :release_date, content_attributes: CONTENT_PARAMS,
+                                   :release_date, :published_at, content_attributes: CONTENT_PARAMS,
                                    tags: []
                                   )
       if Post.try(:extra_fields_by_config).present?

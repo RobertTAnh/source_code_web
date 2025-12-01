@@ -8,6 +8,11 @@ User-agent: Googlebot-Image
 User-agent: Googlebot
 User-agent: Googlebot-Mobile
 Disallow: /admin
+Disallow: /t/*
+Disallow: /wp-content
+Disallow: /tassets/*
+Disallow: /assets/*
+
 <% if web_config("robots_custom_content").present? %>
 <%= web_config("robots_custom_content") %>
 <% end %>

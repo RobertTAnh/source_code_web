@@ -1,5 +1,6 @@
 module BaseCmd
   include SimpleCommand
+  include Admin::AuthorizationHelper
 
   def self.prepended(base)
     base.extend SimpleCommand::ClassMethods

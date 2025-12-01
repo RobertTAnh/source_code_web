@@ -1,5 +1,6 @@
 class Category < ApplicationRecord
   LOGGABLE_RELATIONS = %w|content tags extra_fields|
+  SUPPORTED_FIELD_SORTS = ["created_at", "updated_at", "price", "display_order", "view_count", "published_at"]
 
   include SoftDelete
   include HasGlobalSlug
@@ -14,6 +15,7 @@ class Category < ApplicationRecord
   include HasComment
   include HasLocale if Settings.localized?
   include PgSearch
+  include HasPublishedAt
 
   belongs_to :parent, class_name: 'Category', optional: true
   has_many :children, class_name: 'Category', foreign_key: :parent_id, dependent: :destroy
@@ -47,6 +49,7 @@ class Category < ApplicationRecord
   scope :published, -> { default_sort.where(status: 'published') }
   scope :by_kind, -> (kind) { where(kind: kind) }
   scope :root, -> { where(parent_id: nil) }
+
   pg_search_scope :admin_search,
     against: [:name, :slug],
     associated_against: {

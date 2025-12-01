@@ -1,6 +1,7 @@
 module ProductCmds
   class GetList
     prepend BaseCmd
+    include ::DefaultSort
 
     def initialize(context:, params:)
       @context = context
@@ -20,7 +21,7 @@ module ProductCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = Product.all
+      @scope = scoped(:read, :product)
     end
 
     def filter_scope
@@ -39,7 +40,9 @@ module ProductCmds
     end
 
     def sort_scope
-      @scope = @scope.order(created_at: :desc)
+      @scope = apply_default_sort(@scope, 'products', Product::SUPPORTED_FIELD_SORTS) do
+        @scope.order(created_at: :desc)
+      end
     end
 
     def result

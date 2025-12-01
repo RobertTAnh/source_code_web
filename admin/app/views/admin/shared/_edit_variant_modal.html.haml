@@ -22,6 +22,9 @@
                 .form-group
                   = sf.label :price
                   = sf.number_field :price, class: "form-control"
+                .form-group
+                  = sf.label :status
+                  = sf.select :status, options_for_select(['published', 'unpublished']), {}, {class: "form-control"}
                 - if property_fields
                   = render "admin/shared/property_form", record: temp_variant, f: sf, fields_config: property_fields
         .modal-footer

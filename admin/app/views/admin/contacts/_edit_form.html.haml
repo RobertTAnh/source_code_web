@@ -23,3 +23,7 @@
           .form-group
             = f.label :extra
             = f.text_area :extra, class: "form-control"
+        .col-sm-6
+          .form-group
+            = f.label :file_url, "File media"
+            = image_tag url_for(record.file_url) if record.file_url.present?

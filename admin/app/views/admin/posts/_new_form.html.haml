@@ -12,7 +12,7 @@
           = f.text_field :slug, class: 'form-control', placeholder: 'Auto generated'
         .form-group
           = f.label :status
-          = f.select :status, options_for_select([["Published", "published"], ["Unpublished", "unpublished"]], "published"), {}, {class: "form-control record-status-field"}
+          = f.select :status, options_for_select([["Published", "published"], ["Unpublished", "unpublished"], ["Unlisted", "unlisted"]], "published"), {}, {class: "form-control record-status-field"}
         .form-group
           = f.label :release_date
           = f.text_field :release_date, class: 'form-control', disabled: true

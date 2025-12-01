@@ -21,7 +21,7 @@ module ResourceCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = @resource.all
+      @scope = scoped(:read, @resource)
     end
 
     def filter_scope

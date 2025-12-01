@@ -13,7 +13,7 @@
                   %i.fas.fa-clock
                   = format_datetime log.created_at
                 %h3.timeline-header
-                  %a{href: "#"}= log.actor.name
+                  %a{href: "#"}= log.actor.present? ? log.actor.name : "Not found"
                   has executed a 
                   - if log.finished?
                     %span.right.badge.badge-success successful

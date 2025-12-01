@@ -40,6 +40,9 @@
                     %tr
                       %th{ width: 200 } Created at
                       %td= format_datetime(@record.created_at)
+                    %tr
+                      %th{ width: 200 } Extra
+                      %td= @record.extra
               .col-sm-6.bd-l
                 %table
                   %tbody
@@ -87,7 +90,7 @@
                   %tbody
                     - @record.order_items.each do |item|
                       %tr
-                        %td= image_tag item.product.image_url, height: 50
+                        %td= image_tag item.product.image_url || "", height: 50
                         %td= item.product.name
                         %td= item.variants.to_s
                         %td= item.price

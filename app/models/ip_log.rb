@@ -1,0 +1,2 @@
+class IpLog < ApplicationRecord
+end

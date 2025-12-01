@@ -2,7 +2,7 @@ Admin::Engine.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: 'admin/omniauth_callbacks'
   }
-  root :to => 'products#index'
+  root :to => 'dashboard#show'
 
   resources :products do
     member do
@@ -38,6 +38,12 @@ Admin::Engine.routes.draw do
 
   resources :global_slugs
   resources :users
+  resources :roles do
+    collection do
+      post :grant_users_to_role
+      delete "destroy_user_role/:id", action: :destroy_user_role
+    end
+  end
   resources :contacts
   resources :orders
   resources :albums

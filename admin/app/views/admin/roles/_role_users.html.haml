@@ -1,0 +1,40 @@
+.div.text-right.mb-1
+  %a.btn.btn-primary{data: { target: "#userRoleFormModal", toggle: "modal"}}
+    %span Add
+    %i.bi.bi-plus
+%table.table.table-striped
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Actions
+  %tbody#role-users-list
+    - record.user_roles.includes(:user).each do |user_role|
+      - user = user_role.user
+      %tr
+        %td= user.name
+        %td= user.email
+        %td
+          %button.btn.btn-default{type: 'button', onclick: "handleDeleteUserRole(this, #{user_role.id})"}
+            %span Revoke
+
+:javascript
+  function handleDeleteUserRole(e, id){
+    if(window.confirm("Are you sure?")){
+      var data = {};
+      data[$('meta[name=csrf-param]').attr('content')] = $('meta[name=csrf-token]').attr('content')
+
+      $.ajax({
+        type: "DELETE",
+        url : `/admin/roles/destroy_user_role/${id}`,
+        data: data,
+        success: function(data){
+          e.parentElement.parentElement.remove();
+          return;
+        },
+        error: function(xhr, status, error) {
+          alert(xhr.responseText)
+        }
+      })
+    }
+  }

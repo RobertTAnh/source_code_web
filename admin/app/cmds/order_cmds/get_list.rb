@@ -20,7 +20,7 @@ module OrderCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = Order.all
+      @scope = Order.where.not(status: "draft").all
     end
 
     def filter_scope

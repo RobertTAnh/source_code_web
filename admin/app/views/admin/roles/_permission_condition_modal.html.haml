@@ -1,0 +1,53 @@
+#permissionConditionModal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog.modal-md{:role => "document"}
+    .modal-content
+      .modal-header
+        %h5#variantModalLabel.modal-title Permission condition
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        .container-fluid
+          .form-group
+            .form-row
+              .col-2.pt-2
+                = label_tag :kind
+              .col-10
+                = select_tag :kind, options_for_select(["belong_to_category", "resource_query"]), { class: "form-control", id: "condition_kind" }
+            .form-row
+              .col-2.pt-2
+                = label_tag :field
+              .col-10
+                = select_tag :field, options_for_select(["id"]), { class: "form-control", id: "condition_field"}
+            .form-row
+              .col-2.pt-2
+                = label_tag :value
+              .col-10
+                = text_field_tag :name, nil, class: "form-control", placeholder: "Add a comma (,) if multiple values.", id: "condition_value"
+      .modal-footer
+        %button.btn.btn-secondary{"data-dismiss" => "modal", :type => "button"} Close
+        %button.btn.btn-primary{:type => "button", onclick: "handleSubmit()"} OK
+
+:javascript
+  function handleSubmit(){
+    if(!$("#condition_kind").val().length || !$("#condition_field").val().length || !$("#condition_value").val().length){
+      $('#permissionConditionModal').modal('hide');
+      return
+    }
+  
+    var permissionId = $("#list-granted-permissions").attr("data-permission")
+    var conditionInput = $(`#conditions_${permissionId}`)
+
+    if(conditionInput.val().length){
+      var conditionVal = JSON.parse(conditionInput.val())
+    }else{
+      var conditionVal = { "matchers": [], "logical_operator": "AND"}
+    }
+
+    conditionVal.matchers = conditionVal.matchers.concat([{"kind": $("#condition_kind").val(), "field": $("#condition_field").val(),"relation_operator": "in", "value": $("#condition_value").val().split(',')}])
+    conditionInput.val(JSON.stringify(conditionVal))
+
+    window.renderConditions(conditionVal, permissionId);
+    $("#condition_value").val('')
+    $('#permissionConditionModal').modal('hide');
+  }
+

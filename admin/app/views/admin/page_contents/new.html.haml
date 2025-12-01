@@ -39,6 +39,11 @@
         %label{:for => "newText"} New text
         %textarea.form-control{name: 'text', rows: 5}
 
+    - wk_editable_html = capture_haml do
+      .form-group
+        %label{:for => "newHtml"} New HTML content
+        %textarea.form-control{name: 'html', rows: 5, id: 'html-editor'}
+
     - wk_editable_link = capture_haml do
       .form-group
         %label{:for => "newText"} New text
@@ -55,6 +60,12 @@
       .form-group
         %label{:for => "oldImage"} New Image
         %input{name: "upload", id: "upload-file_medias", class: "dropify", type: "file", "data-max-file-size": "#{max_image_size_in_mb}M"}
+        %input{name: "file_url", type: "hidden"}/
+
+    - wk_editable_background = capture_haml do
+      .form-group
+        %label{:for => "oldImage"} New Background Image
+        %input{name: "upload", class: "dropify", type: "file", "data-max-file-size": "#{max_image_size_in_mb}M"}
         %input{name: "file_url", type: "hidden"}/
 
     :javascript
@@ -81,12 +92,35 @@
             return element.text();
           }
         },
+        "wk-editable-html": {
+          form: `#{wk_editable_html}`,
+          applyForm: (data, elementId) => {
+            const textareaId = 'html-editor';
+            setupCkeditor(textareaId);
+            CKEDITOR.instances[textareaId].setData(data || '');
+          },
+          data: (elementId) => {
+            const textareaId = 'html-editor';
+            if (!CKEDITOR.instances[textareaId]) {
+              throw new Error('Error setup ckeditor');
+            }
+            return CKEDITOR.instances[textareaId].getData();
+          },
+          applyView: (id, data) => {
+            if (!isPresent(data)) return;
+            const el = $('#wk-editable-iframe').contents().find('#' + $.escapeSelector(id));
+            el.html(data);
+          },
+          dataFromView: (element) => {
+            return element.html();
+          }
+        },
         "wk-editable-link": {
           form: `#{wk_editable_link}`,
           applyForm: (data) => {
             $('#wk-editable-modal input[name="text"]').val((data || {}).text);
-            $('#wk-editable-modal input[name="target"').val((data || {}).target);
-            $('#wk-editable-modal input[name="file_url"').val((data || {}).image);
+            $('#wk-editable-modal input[name="target"]').val((data || {}).target);
+            $('#wk-editable-modal input[name="file_url"]').val((data || {}).image);
           },
           data: () => {
             const text = $('#wk-editable-modal input[name="text"]').val();
@@ -109,7 +143,9 @@
 
             if (textElement.length){
               textElement.text(data?.text || '');
-              imageElement[0]?.attr('src', data?.image);
+              if (imageElement.length){
+                imageElement.attr('src', data?.image);
+              }
             } else if (imageElement.length){
               imageElement.attr('src', data?.image);
             }
@@ -142,6 +178,31 @@
             return element.attr('src');
           }
         },
+        "wk-editable-background": {
+          form: `#{wk_editable_background}`,
+          applyForm: (data) => {
+            $('#wk-editable-modal input[name="file_url"]').val(data || '');
+          },
+          data: () => {
+            return $('#wk-editable-modal input[name="file_url"]').val();
+          },
+          applyView: (id, data) => {
+            if (!isPresent(data)) return;
+
+            const element = $('#wk-editable-iframe').contents().find('#' + $.escapeSelector(id));
+            element.css('background-image', data ? `url("${data}")` : 'none');
+          },
+          dataFromView: (element) => {
+            const backgroundImage = element.css('background-image');
+
+            if (backgroundImage && backgroundImage !== 'none') {
+              const match = backgroundImage.match(/url\(['"]?(.+)['"]?\)/);  
+              return match ? match[1] : '';
+            }
+  
+            return '';
+          }
+        }
       };
 
       function isPresent(data) {
@@ -156,12 +217,56 @@
         }
       }
 
+      function setupCkeditor(textareaId) {
+        CKEDITOR.replace(textareaId, {
+          height: 300,
+          toolbarGroups: [
+            { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+            { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+            { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+            { name: 'forms', groups: [ 'forms' ] },
+            '/',
+            { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+            { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+            { name: 'links', groups: [ 'links' ] },
+            { name: 'insert', groups: [ 'insert' ] },
+            '/',
+            { name: 'styles', groups: [ 'styles' ] },
+            { name: 'colors', groups: [ 'colors' ] },
+            { name: 'tools', groups: [ 'tools' ] },
+            { name: 'others', groups: [ 'others' ] },
+            { name: 'font', groups: [ 'font' ] },
+            { name: 'fontsize', groups: [ 'fontsize' ] },
+            { name: 'format', groups: [ 'format' ] }
+          ],
+          removeButtons: 'Save,NewPage,Preview,Print,Templates,Cut,Copy,Paste,PasteText,PasteFromWord,SelectAll,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Strike,Subscript,Superscript,CopyFormatting,Outdent,Indent,CreateDiv,BidiLtr,BidiRtl,Language,Link,Unlink,Anchor,Image,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,ShowBlocks,About'.split(',')
+            .filter(button => !['Bold', 'Italic', 'Underline', '-', 'Strike', 'Subscript', 'Superscript',
+              'CopyFormatting', 'RemoveFormat',
+              'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent',
+              'Blockquote', 'CreateDiv',
+              'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
+              'BidiLtr', 'BidiRtl',
+              'Link', 'Unlink', 'Anchor',
+              'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe',
+              'Styles', 'Format', 'Font', 'FontSize',
+              'TextColor', 'BGColor',
+              'Maximize', 'ShowBlocks',
+              'Source'].includes(button) &&
+              !['Save', 'NewPage', 'Preview', 'Print', 'Templates',
+                'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
+                'Find', 'Replace', 'SelectAll', 'Scayt',
+                'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField',
+                'About'].includes(button)
+            ).join(',')
+        });
+      }
+
       $('#wk-editable-iframe').on('load', () => {
         $('#wk-editable-iframe').contents().find('a').click(function(event) {
           event.preventDefault();
         });
 
-        $('#wk-editable-iframe').contents().find('.wk-editable-text, .wk-editable-link, .wk-editable-image').each(function(index, element) {
+        $('#wk-editable-iframe').contents().find('.wk-editable-text, .wk-editable-html, .wk-editable-link, .wk-editable-image, .wk-editable-background').each(function(index, element) {
           $(element).css('outline', '1px solid yellow');
           $(element).css('outline-offset', '5px');
           $(element).css('cursor', 'pointer');
@@ -214,13 +319,14 @@
             editableComponents[editable].applyView(eid, getDisplayDataFor(eid));
 
             $(element).click(function(event) {
+              event.stopPropagation();
               const eid = $(event.currentTarget).attr('id');
 
               setCurrentCustomElementId(eid);
               setCurrentCustomElementType(editable);
 
               $('#wk-editable-modal .modal-body').empty().append(sharedFormScope).append(editableComponents[editable].form);
-
+              
               applyCurrentScope();
 
               $('#wk-editable-modal').modal('show');
@@ -308,9 +414,12 @@
             const file = event.target.files[0];
             window.validateImageSize(file, window.IMAGE_LIMIT_SIZE)
           });
-        }
+        }  
       });
 
+      $('#wk-editable-modal').on('hidden.bs.modal', function() {
+        $('#wk-editable-modal .modal-body').empty();
+      });
 
       $('#submitData').click((event) => {
         event.preventDefault();

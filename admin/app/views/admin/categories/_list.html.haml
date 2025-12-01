@@ -1,9 +1,13 @@
+- default_sort = WebConfig.for('default_sort.categories')
+- field_sort = default_sort&.keys&.first
+
 .card
   .card-header
     .card-tools.float-right
-      = link_to new_category_path(kind: params[:kind]), class: "btn btn-block btn-sx btn-primary" do
-        %span New
-        %i.bi.bi-plus
+      - if can?(:create, :category)
+        = link_to new_category_path(kind: params[:kind]), class: "btn btn-block btn-sx btn-primary" do
+          %span New
+          %i.bi.bi-plus
     .card-tools.float-left
       = form_tag send("#{controller_name}_path"), method: :get do
         .input-group.input-group-m.mt-0
@@ -23,7 +27,11 @@
           %th Slug
           %th Status
           %th Seo Index
-          %th Created At
+          - if field_sort
+            %th= field_sort.titleize
+          - else
+            %th Display Order
+            %th Created At
           %th Actions
       %tbody
       - records.each do |record|
@@ -39,7 +47,11 @@
           %td= record.slug
           %td= record.status && record.status.camelize
           %td= record.content.seo_index ? "Index" : "NoIndex"
-          %td= format_date(record.created_at)
+          - if field_sort
+            %th= format_date(record.send(field_sort))
+          - else
+            %td= record.display_order
+            %td= format_date(record.created_at)
           %td
             .margin
               = link_to new_category_path(parent_id: record.id, kind: params[:kind]), class: "btn btn-primary mr-1" do
@@ -64,7 +76,11 @@
               %td= level_1_child.slug
               %td= level_1_child.status && level_1_child.status.camelize
               %td= level_1_child.content.seo_index ? "Index" : "NoIndex"
-              %td= format_date(level_1_child.created_at)
+              - if field_sort
+                %th= format_date(level_1_child.send(field_sort))
+              - else
+                %td= level_1_child.display_order
+                %td= format_date(level_1_child.created_at)
               %td
                 .margin
                   = link_to new_category_path(parent_id: level_1_child.id, kind: params[:kind]), class: "btn btn-primary mr-1" do
@@ -89,7 +105,11 @@
                   %td= level_2_child.slug
                   %td= level_2_child.status && level_2_child.status.camelize
                   %td= level_2_child.content.seo_index ? "Index" : "NoIndex"
-                  %td= format_date(level_2_child.created_at)
+                  - if field_sort
+                    %th= format_date(level_2_child.send(field_sort))
+                  - else
+                    %td= level_2_child.display_order
+                    %td= format_date(level_2_child.created_at)
                   %td
                     .margin
                       = link_to new_category_path(parent_id: level_2_child.id, kind: params[:kind]), class: "btn btn-primary mr-1" do
@@ -114,7 +134,11 @@
                       %td= level_3_child.slug
                       %td= level_3_child.status && level_3_child.status.camelize
                       %td= level_3_child.content.seo_index ? "Index" : "NoIndex"
-                      %td= format_date(level_3_child.created_at)
+                      - if field_sort
+                        %th= format_date(level_3_child.send(field_sort))
+                      - else
+                        %td= level_3_child.display_order
+                        %td= format_date(level_3_child.created_at)
                       %td
                         .margin
                           = link_to web_path_for(level_3_child), class: "btn btn-outline-primary mr-1", target: '_blank' do
@@ -130,7 +154,11 @@
           %th Slug
           %th Status
           %th Seo Index
-          %th Created At
+          - if field_sort
+            %th= field_sort.titleize
+          - else
+            %th Display Order
+            %th Created At
           %th Actions
 .row
   .col-sm-12.col-md-5

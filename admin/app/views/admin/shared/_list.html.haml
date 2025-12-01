@@ -5,9 +5,10 @@
   .card-header
     - if view_options[:createable]
       .card-tools.float-right
-        = link_to send("new_#{controller_name.classify.downcase}_path"), class: "btn btn-block btn-sx btn-primary" do
-          %span New
-          %i.bi.bi-plus
+        - if can?(:create, controller_name.classify)
+          = link_to send("new_#{controller_name.classify.downcase}_path"), class: "btn btn-block btn-sx btn-primary" do
+            %span New
+            %i.bi.bi-plus
     .card-tools.float-left
       = form_tag send("#{controller_name}_path"), method: :get do
         .input-group.input-group-m.mt-0
@@ -24,9 +25,11 @@
           - if controller_name == "products"
             = select_tag "filter_category", options_for_select([["All", "All"]] + all_categories_select_options(Category.where(depth: 1, kind: "product"), ''), params[:filter_category]),
               { class: "form-control mx-3", onchange: "this.form.submit();" }
+            = link_to "Export file", '/admin/products.csv', onclick: "exportCsv()", class: "btn btn-primary", id: "exportCSV"     
           - if controller_name == "posts"
             = select_tag "filter_category", options_for_select([["All", "All"]] + all_categories_select_options(Category.where(depth: 1, kind: "post"), ''), params[:filter_category]),
               { class: "form-control mx-3", onchange: "this.form.submit();" }
+            = link_to "Export file", '/admin/posts.csv', onclick: "exportCsv()", class: "btn btn-primary", id: "exportCSV"     
   .card-body.table-responsive.p-0
     %table.table.table-hover.text-nowrap.table-head-fixed.limit-width-table
       %thead
@@ -36,6 +39,10 @@
           - if index_actions.any?
             %th Actions
       %tbody
+        - scope = scoped(:delete, controller_name.classify)
+        - if controller_name.classify == 'Role'
+          - scope = scope.where('protected is not true')
+        - can_delete_ids = scope.where(id: index_data_table.map{|i| i[:_record].id}).pluck(:id)
         - index_data_table.each do |i|
           %tr
             - index_columns.each do |col|
@@ -64,7 +71,7 @@
                   - if index_actions.include?(:edit)
                     = link_to send("edit_#{i[:_record].class.name.downcase}_path", i[:_record]), class: "btn btn-outline-info mr-1" do
                       %i.bi.bi-pencil-square
-                  - if index_actions.include?(:destroy)
+                  - if index_actions.include?(:destroy) && i[:_record].id.in?(can_delete_ids)
                     = link_to send("#{i[:_record].class.name.downcase}_path", i[:_record]), class: "btn btn-outline-danger mr-1", method: :delete,  data: { turbo_confirm: 'Are you sure?', turbo_method: :delete } do
                       %i.bi.bi-trash
       %thead

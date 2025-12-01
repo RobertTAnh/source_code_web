@@ -5,16 +5,22 @@ module Admin
     loggable_actions :create, :update, :destroy
 
     def index
+      raise Unauthorized unless can?(:read, :order)
+
       @records = OrderCmds::GetList.call(context: context, params: params).result
     end
 
     def edit
+      raise Unauthorized unless can?(:update, @record)
     end
 
     def show
+      raise Unauthorized unless can?(:read, @record)
     end
 
     def update
+      raise Unauthorized unless can?(:update, @record)
+
       cmd = OrderCmds::Update.call(context: context, order: @record, params: edit_params, extra_params: extra_params)
 
       if cmd.success?
@@ -28,6 +34,8 @@ module Admin
     end
 
     def destroy
+      raise Unauthorized unless can?(:delete, @record)
+
       cmd = OrderCmds::Destroy.call(context: context, order: @record)
       redirect_to orders_url
     end
@@ -41,7 +49,8 @@ module Admin
     def edit_params
       params.require(:order).permit(:customer_name, :customer_email, :customer_phone, :payment_method, :shipping_method, :invoice_required, :status, :vat_fee,
                                     shipping_address: [:address, :province, :district, :ward],
-                                    invoice_data: [:company_name, :tax_number, :address, :note])
+                                    invoice_data: [:company_name, :tax_number, :address, :note],
+                                    extra: {})
     end
 
     def extra_params

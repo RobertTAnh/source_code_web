@@ -26,10 +26,11 @@
           %th SKU
           %th Original price
           %th Price
+          %th Status
           %th Actions
       %tbody{ data: { item_count: record.global_slugs.size } }
-        - record.variants.each_with_index do |variant, index|
-          %tr{id: "variant_row-#{variant.id}", data: { properties: variant.properties, name: variant.name, sku:  variant.sku, image_url: variant.image_url }}
+        - record.variants.order(:status).each_with_index do |variant, index|
+          %tr{id: "variant_row-#{variant.id}", data: { properties: variant.properties, name: variant.name, sku:  variant.sku, image_url: variant.image_url, status: variant.status }}
             %td= "#{index + 1}."
             %td= image_tag(variant.image_url || '', width: "86px", id: "image-#{variant.id}")
             %td= format_date(variant.created_at)
@@ -37,6 +38,7 @@
             %td= variant.sku
             %td{id: "original_price-#{variant.id}"}= variant.original_price
             %td{id: "price-#{variant.id}"}= variant.price
+            %td{id: "status-#{variant.id}"}= variant.status
             %td
               .margin
                 = link_to "javascript:void(0);", class: "btn btn-outline-primary mr-1 edit-variant",
@@ -67,6 +69,7 @@
   
   function editVariantSubmitHandle(variant_id){
     $("#variant_price").val($(`#price-${variant_id}`).html())
+    $("#variant_status").val($(`#status-${variant_id}`).html())
     changePreviewImage($(`#variant_row-${variant_id}`).attr('data-image-url'))
     $("#variant_original_price").val($(`#original_price-${variant_id}`).html())
     variantRow = $(`#variant_row-${variant_id}`)
@@ -110,6 +113,7 @@
                   $(`#variant_row-${data['id']}`).attr(`data-properties-${converted_property}-key`, data.properties[property]?.key)
                 })
                 $(`#price-${data['id']}`).html(data['price'])
+                $(`#status-${data['id']}`).html(data['status'])
                 $("#variant-error").html('')
                 $("#variant_price").val('')
                 $("#variant_original_price").val('')

@@ -13,17 +13,24 @@ module Admin
     loggable_actions :create, :update, :destroy
 
     def index
+      raise Unauthorized unless can?(:read, @resource_name)
+
       @records = ResourceCmds::GetList.call(context: context, params: params, resource: @resource_model).result
     end
 
     def edit
+      raise Unauthorized unless can?(:read, @record)
     end
 
     def new
+      raise Unauthorized unless can?(:create, @resource_name)
+
       @record = @resource_model.new
     end
 
     def create
+      raise Unauthorized unless can?(:create, @resource_name)
+
       cmd = ResourceCmds::Create.call(context: context, params: create_params, resource: @resource_model)
 
       @record = cmd.result
@@ -36,6 +43,8 @@ module Admin
     end
 
     def update
+      raise Unauthorized unless can?(:update, @record)
+
       cmd = ResourceCmds::Update.call(context: context, resource: @record, params: update_params, extra_params: extra_params)
 
       if cmd.success?
@@ -49,6 +58,8 @@ module Admin
     end
 
     def destroy
+      raise Unauthorized unless can?(:delete, @record)
+
       cmd = ResourceCmds::Destroy.call(context: context, resource: @record)
       redirect_to resources_url(@resource_name)
     end

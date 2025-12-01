@@ -25,7 +25,9 @@ $(function() {
 
     $.ajax({
       type: 'POST',
-      data : form.serialize(),
+      data : new FormData(form[0]),
+      processData: false,
+      contentType: false,
       url: '/contacts',
       success: (data) => {
         form.trigger('onSuccess', [data]);

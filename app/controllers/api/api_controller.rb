@@ -20,7 +20,8 @@ class Api::ApiController < ApplicationController
   end
 
   def get_products
-    html = Theme.current.render_view("components/products/products_list",
+    template = params[:template].presence || "products_list"
+    html = Theme.current.render_view("components/products/#{template}",
       self,
       locals: {
         products: ProductOps::GetProducts.new(self).call

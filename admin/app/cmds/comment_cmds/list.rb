@@ -19,7 +19,7 @@ module CommentCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = Comment.where(is_admin: false, depth: 0)
+      @scope = scoped(:read, :comment).where(is_admin: false, depth: 0)
     end
 
     def filter_scope

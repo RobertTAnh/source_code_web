@@ -19,5 +19,14 @@ module HasMedias
 
       legacy_images.uniq
     end
+
+    def get_general_medias
+      general_medias =  extra_field('general_medias')&.data || []
+
+      self.general_medias.joins(:blob).order(created_at: :desc).
+        map{|file| general_medias << {"link" => get_absolute_direct_link(file), "content_type" => file.content_type}}
+
+      general_medias.uniq
+    end
   end
 end

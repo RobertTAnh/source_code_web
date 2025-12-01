@@ -36,5 +36,9 @@ class Settings
     def localized?
       I18n.available_locales.size > 1
     end
+
+    def detect_spam?
+      Rails.env.production? && !ENV['SPAM_DETECTOR_DISABLED']
+    end
   end
 end

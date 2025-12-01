@@ -2,6 +2,10 @@ unless WebConfig.current
   WebConfig.create!(key: 'default')
 end
 
+mail_list = ENV["SYSTEM_DEFAULT_NOTI_EMAILS"]&.split(",") || []
+mail_list.concat(WebConfig.for('notifications.emails.default_list')&.split(",") || [])
+WebConfig.current.add_string('notifications.emails.default_list', mail_list.uniq.join(','))
+
 unless Theme.current
   Theme.create!(
     name: 'default',
@@ -35,7 +39,8 @@ settings = {
                 "name": "Favicon",
                 "data_type": "image"
               }
-            ]
+            ],
+            
           ]
         },
         {
@@ -48,25 +53,25 @@ settings = {
               },
               {
                 "key": "phone",
-                "name": "Hotline"
+                "name": "Hotline 1"
               },
               {
                 "key": "phone_text",
-                "name": "Hotline Text"
+                "name": "Hotline 2"
               }
             ],
             [
               {
                 "key": "office_address",
-                "name": "Office Address"
+                "name": "Office Address 1"
               },
               {
                 "key": "vpdd",
-                "name": "Vpdd address"
+                "name": "Office address 2"
               },
               {
                 "key": "worktime",
-                "name": "Vpdd address"
+                "name": "Giờ làm việc"
               }
             ],
             [
@@ -203,6 +208,7 @@ settings = {
 }
 
 WebConfig.current.add_json('website.settings', settings)
+WebConfig.current.add_string('notifications.emails.default_list', ENV['SYSTEM_DEFAULT_NOTI_EMAILS'])
 
 advanced_settings = {
   "groups": [

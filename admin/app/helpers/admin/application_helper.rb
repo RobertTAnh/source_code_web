@@ -31,11 +31,11 @@ module Admin
     end
 
     def format_datetime datetime
-      datetime.strftime("%m/%d/%Y %R")
+      datetime.strftime("%d/%m/%Y %R")
     end
 
     def format_date datetime
-      datetime.strftime("%m-%d-%Y")
+      datetime.strftime("%d/%m/%Y")
     end
 
     def meta_count records
@@ -76,11 +76,12 @@ module Admin
     end
 
     def products_view_options records
+
       index_columns = [
         { column_name: :image, human_column_name: "Image" },
         { column_name: :name, human_column_name: "Name" },
         { column_name: :slug, human_column_name: "Slug" },
-        { column_name: :created_at, human_column_name: "Created At" },
+        default_column_sort,
         { column_name: :category, human_column_name: "Category" },
         { column_name: :status, human_column_name: "Status" },
         { column_name: :seo_index, human_column_name: "Seo Index" },
@@ -90,6 +91,7 @@ module Admin
         {
           image: record.image_url ? image_tag(record.image_url, width: 86) : nil,
           created_at: format_date(record.created_at),
+          published_at: format_date(record.published_at),
           category: record.primary_category.try(:name),
           name: link_to(record.name, send("edit_#{record.class.name.downcase}_path", record)),
           slug: record.slug,
@@ -109,11 +111,12 @@ module Admin
     end
 
     def posts_view_options records
+
       index_columns = [
         { column_name: :image, human_column_name: "Image" },
         { column_name: :name, human_column_name: "Name" },
         { column_name: :slug, human_column_name: "Slug" },
-        { column_name: :created_at, human_column_name: "Created At" },
+        default_column_sort,
         { column_name: :category, human_column_name: "Category" },
         { column_name: :status, human_column_name: "Status" },
         { column_name: :seo_index, human_column_name: "Seo Index" },
@@ -124,10 +127,12 @@ module Admin
           image: record.image_url ? image_tag(record.image_url, width: 86) : nil,
           created_at: format_date(record.created_at),
           category: record.primary_category.try(:name),
+          published_at: format_date(record.published_at),
           name: link_to(record.name, send("edit_#{record.class.name.downcase}_path", record)),
           slug: record.slug,
           status: record.status && record.status.camelize,
           seo_index: record.content.seo_index ? "Index" : "NoIndex",
+          display_order: record.display_order,
           _record: record
         }
       end
@@ -249,6 +254,30 @@ module Admin
       }
     end
 
+    def roles_view_options records
+      index_columns = [
+        { column_name: :name, human_column_name: "Name" },
+        { column_name: :created_at, human_column_name: "Created At" },
+        { column_name: :description, human_column_name: "Description" },
+      ]
+
+      index_data_table = records.map do |record|
+        {
+          created_at: format_date(record.created_at),
+          description: record.description,
+          name: link_to(record.name, edit_role_path(record)),
+          _record: record
+        }
+      end
+
+      {
+        index_columns: index_columns,
+        index_actions: [:edit, :destroy],
+        index_data_table: index_data_table,
+        createable: true
+      }
+    end
+
     def contacts_view_options records
       columns_config = WebConfig.for "admin.contacts_list.display_fields" || []
       columns_config = columns_config.split(',').map(&:strip) if columns_config.is_a?(String)
@@ -342,6 +371,28 @@ module Admin
       else
         name.humanize
       end
+    end
+
+    def load_resource_permissions
+      result = {}
+      Permission.all.each do |p|
+        result[p.granted_on] = [] if result[p.granted_on].nil?
+        result[p.granted_on] << {id: p.id, name: p.name}.as_json
+      end
+
+      result
+    end
+
+    def default_column_sort
+      default_sort = WebConfig.for("default_sort.#{controller_name}")
+      column_sort = { column_name: :created_at, human_column_name: "Created At" }
+      if default_sort
+        field_sort = default_sort&.keys&.first
+
+        column_sort = { column_name: field_sort.to_sym, human_column_name: field_sort.titleize }
+      end
+
+      column_sort
     end
   end
 end

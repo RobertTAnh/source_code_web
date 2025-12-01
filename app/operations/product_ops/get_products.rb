@@ -1,7 +1,7 @@
 module ProductOps
   class GetProducts < BaseOperation
     include CommonOperation::Paginatable
-    SUPPORTED_FIELD_SORTS = ["created_at", "updated_at", "price", "display_order","view_count","discount_percentage"]
+    include ::DefaultSort
     SUPPORTED_VALUE_SORTS = ["asc", "desc"]
 
     def call
@@ -24,12 +24,17 @@ module ProductOps
         products = Product.lastest
       end
 
+      if context.params["product_ids"].present?
+        product_ids = context.params["product_ids"].split(',').map(&:to_i).compact.uniq
+        products = products.where(id: product_ids)  
+      end
+
       if context.params["sort"].present?
         context.params["sort"].each do |k, v|
-          products = products.order(k => v) if SUPPORTED_FIELD_SORTS.include?(k) && SUPPORTED_VALUE_SORTS.include?(v.downcase)
+          products = products.order(k => v) if Product::SUPPORTED_FIELD_SORTS.include?(k) && SUPPORTED_VALUE_SORTS.include?(v.downcase)
         end
       else
-        products = products.lastest
+        products = apply_default_sort(products, 'products', Product::SUPPORTED_FIELD_SORTS).lastest
       end
 
       if context.params["price_range"].present?

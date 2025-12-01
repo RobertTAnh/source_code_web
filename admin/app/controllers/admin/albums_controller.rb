@@ -5,17 +5,24 @@ module Admin
     loggable_actions :create, :update, :destroy
 
     def index
+      raise Unauthorized unless can?(:read, :album)
+
       @records = AlbumCmds::Index.call(context: context, params: params).result
     end
 
     def edit
+      raise Unauthorized unless can?(:read, @record)
     end
 
     def new
+      raise Unauthorized unless can?(:create, :album)
+
       @record = Album.new
     end
 
     def create
+      raise Unauthorized unless can?(:create, :album)
+
       cmd = AlbumCmds::Create.call(context: context, params: create_params)
 
       @record = cmd.result
@@ -28,6 +35,8 @@ module Admin
     end
 
     def update
+      raise Unauthorized unless can?(:update, @record)
+
       cmd = AlbumCmds::Update.call(context: context, album: @record, params: update_params)
 
       if cmd.success?
@@ -41,6 +50,8 @@ module Admin
     end
 
     def destroy
+      raise Unauthorized unless can?(:delete, @record)
+
       cmd = AlbumCmds::Destroy.call(context: context, album: @record)
       redirect_to albums_url
     end

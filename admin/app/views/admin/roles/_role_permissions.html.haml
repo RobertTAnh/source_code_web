@@ -1,0 +1,95 @@
+- resource_permissions = load_resource_permissions
+.row
+  .col-12
+    .form-row
+      .col-2
+        %label Resource
+      .col-2
+        %label Action
+      .col-7
+        %label Conditions
+  #list-granted-permissions.col-12{data: {permission: ''}}
+    = f.fields_for :granted_permissions, record.granted_permissions.order(id: :asc) do |wf|
+      = wf.hidden_field :id
+      = wf.hidden_field :_destroy, value: false, id: "delete-granted-permission_#{wf.object.id}"
+      .form-row.mb-2{data: {id: wf.object.id}, id: "granted-permissions_#{wf.object.id}"}
+        - permission = wf.object.permission
+        .col-2
+          = select_tag :name, options_for_select(resource_permissions.keys, permission.granted_on), { class: "form-control", onchange: "handleResourceChange(this)", disabled: f.object.protected }
+        .col-2
+          = wf.select :permission_id, options_for_select(resource_permissions[permission.granted_on].map{|p| [p['name'], p['id']]}, wf.object.permission_id), {}, { class: "form-control", id: "permission-select_#{wf.object.id}", disabled: f.object.protected }
+        .col-7
+          = wf.hidden_field :conditions, value: wf.object.conditions.present? ? wf.object.conditions.to_json : '', id: "conditions_#{wf.object.id}"
+
+          %span{id: "condition-badge_#{wf.object.id}"}
+            - if wf.object.conditions && wf.object.conditions["matchers"].present?
+              - wf.object.conditions["matchers"].each_with_index do |matcher, index|
+                %a.badge.badge-info.py-2.mt-2{ href: "javascript:void(0)", onclick: "handleDeleteCondition(this, #{index})" }= "#{matcher["kind"]}: #{matcher["field"]} #{matcher["relation_operator"]} #{matcher["value"].join(',')}"
+          - unless f.object.protected
+            = link_to "javascript:void(0);", class: "btn btn-default", onclick: "setCurrentPermission(this)",
+              data: { target: "#permissionConditionModal", toggle: "modal" } do
+              %i.bi.bi-plus
+        - unless f.object.protected
+          .col-1
+            %a.btn.btn-default{ href: "javascript:void", onclick: "deletePermission(this)"}
+              %span Delete
+- unless f.object.protected
+  %a.btn.btn-default.mt-3{ href: "javascript:void", onclick: "addPermission()" }
+    %i.bi.bi-plus
+    %span Add permission
+
+= render "admin/roles/permission_condition_modal"
+
+:javascript
+  function handleResourceChange(e){
+    let grantedPermissionId = e.parentNode.parentNode.getAttribute('data-id')
+    let options = []
+    var resourcePermissions = JSON.parse('#{ raw resource_permissions.to_json}')
+    resourcePermissions[e.value]?.forEach(p => {
+      options.push(`<option value="${p.id}">${p.name}</option>`)
+    })
+    $(`#permission-select_${grantedPermissionId}`).html(options.join(' '))
+  }
+
+  function addPermission(){
+    $("#list-granted-permissions").append("#{escape_javascript(render("admin/roles/granted_permission_form", f: f, resource_permissions: resource_permissions))}")
+  }
+
+  function deletePermission(e){
+    let grantedPermissionId = e.parentNode.parentNode.getAttribute('data-id')
+    let anchor = `#granted-permissions_${grantedPermissionId}`
+    $(anchor).remove()
+    $(`#delete-granted-permission_${grantedPermissionId}`).val(true)
+  }
+
+  function handleDeleteCondition(e, matcherIndex){
+    let grantedPermissionId = e.parentNode.parentNode.parentNode.getAttribute('data-id')
+    var allCondition = $('#'+'conditions_'+ grantedPermissionId).val()
+
+    if(allCondition.length > 0){
+      allCondition = JSON.parse(allCondition)
+    }else{
+      return
+    }
+
+    allCondition["matchers"].splice(matcherIndex, 1)
+     $('#'+'conditions_'+ grantedPermissionId).val(JSON.stringify(allCondition))
+    renderConditions(allCondition, grantedPermissionId)
+  }
+
+  function renderConditions(data, id){
+    html = []
+    if(data["matchers"]){
+      data["matchers"].forEach((matcher, index) => {
+        html = html.concat([`<a class="badge badge-info py-2 mt-2" href="javascript:void(0)" onclick="handleDeleteCondition(this, ${index})">${matcher.kind}: ${matcher.field} ${matcher.relation_operator} ${matcher.value}</a>`])
+      })
+    }
+    $(`#condition-badge_${id}`).html(html.join(' '))
+  }
+  window.renderConditions = renderConditions
+
+  function setCurrentPermission(e){
+    let id = e.parentNode.parentNode.getAttribute('data-id')
+    $("#list-granted-permissions").attr('data-permission', id)
+  }
+

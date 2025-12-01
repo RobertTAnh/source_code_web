@@ -4,14 +4,20 @@ module Admin
     loggable_actions :update_advanced_settings, :update
 
     def edit
+      raise Unauthorized unless can?(:read, :web_config)
+
       @configs = WebConfig.for("website.settings")
     end
 
     def advanced_settings
+      raise Unauthorized unless can?(:advanced_setting, :web_config)
+
       @configs = WebConfig.for("website.advanced_settings")
     end
 
     def update_advanced_settings
+      raise Unauthorized unless can?(:advanced_setting, :web_config)
+
       cmd = WebConfigCmds::Update.call(context: context, web_config: @record, params: web_config_params, extra_params: nil)
 
       if cmd.success?
@@ -25,6 +31,8 @@ module Admin
     end
 
     def update
+      raise Unauthorized unless can?(:update, :web_config)
+
       cmd = WebConfigCmds::Update.call(context: context, web_config: @record, params: web_config_params, extra_params: nil)
 
       if cmd.success?

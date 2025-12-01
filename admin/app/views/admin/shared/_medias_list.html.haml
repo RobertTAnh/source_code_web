@@ -10,8 +10,9 @@
     - images.each do |file|
       .col-2
         .card.mt-2.mr-2.float-left{ style: "width: 11rem;"}
-          %a.btn.btn-danger.ck-delete-btn{onclick: "handleDeleteImage(event,this, '#{file[:key]}');"}
-            %i.bi.bi-trash
+          - if can?(:update, record)
+            %a.btn.btn-danger.ck-delete-btn{onclick: "handleDeleteImage(event,this, '#{file[:key]}');"}
+              %i.bi.bi-trash
           %img.card-img-top.img-list{:alt => file[:filename], :src => file[:url]}/
           .card-body.p-2{ style: "font-size: 80%;" }
             %p.card-text= file[:filename]

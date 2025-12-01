@@ -19,7 +19,7 @@ module UserCmds
     attr_reader :context, :params, :scope
 
     def base_scope
-      @scope = User.all
+      @scope = scoped(:read, :user)
     end
 
     def filter_scope

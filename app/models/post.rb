@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   LOGGABLE_RELATIONS = %w|content tags view categorizations extra_fields|
+  SUPPORTED_FIELD_SORTS = ["created_at", "updated_at", "price", "display_order", "view_count", "published_at"]
 
   include SoftDelete
   include HasGlobalSlug
@@ -16,6 +17,7 @@ class Post < ApplicationRecord
   include PgSearch
   include HasComment
   include HasLocale if Settings.localized?
+  include HasPublishedAt
 
   has_one_attached :image
 
@@ -28,6 +30,7 @@ class Post < ApplicationRecord
   scope :lastest, -> { published.order(created_at: :desc) }
   scope :favorite, -> { published.order(created_at: :desc).offset(3).limit(3) }
   scope :popular, -> { published.unscope(:order).order(view_count: :desc).limit(5) }
+
   pg_search_scope :general_search,
     against: [:name, :slug, :description],
     associated_against: {

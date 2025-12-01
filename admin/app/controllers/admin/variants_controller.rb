@@ -33,7 +33,7 @@ module Admin
     end
 
     def update_params
-      params.require(:variant).permit(:image, :price, :original_price, properties: {})
+      params.require(:variant).permit(:image, :price, :original_price, :status, properties: {})
     end
   end
 end
