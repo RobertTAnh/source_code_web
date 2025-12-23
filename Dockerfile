@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     gnupg \
     tzdata \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js 18
