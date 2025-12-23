@@ -30,6 +30,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
+# Verify unzip is installed
+RUN which unzip || (apt-get update && apt-get install -y unzip)
+
 # Install Node.js 18
 RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - && \
     apt-get install -y nodejs
