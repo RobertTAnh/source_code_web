@@ -12,6 +12,8 @@ class Theme < ApplicationRecord
     @current ||= Theme.first
   rescue ActiveRecord::NoDatabaseError
     nil
+  rescue ActiveRecord::ConnectionNotEstablished, PG::ConnectionBad
+    nil
   rescue ActiveRecord::StatementInvalid => e
     if e.message.match(/relation "themes" does not exist/)
       nil
