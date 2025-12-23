@@ -69,6 +69,9 @@ COPY . /app
 # Set ownership
 RUN chown -R root:root /app
 
+# Create necessary tmp directories for Puma and Rails
+RUN mkdir -p tmp/pids tmp/cache tmp/sockets log
+
 # Install Ruby dependencies
 # Use bash -l to ensure rbenv is properly initialized
 RUN /bin/bash -l -c "bundle install"
