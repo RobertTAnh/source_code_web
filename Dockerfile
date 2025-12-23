@@ -72,7 +72,7 @@ RUN /bin/bash -l -c "bundle install"
 RUN /bin/bash -l -c "bundle exec bootsnap precompile --gemfile"
 
 # Install Node.js dependencies
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 # Build assets (includes admin assets)
 RUN yarn build
