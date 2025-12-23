@@ -6,7 +6,7 @@ ENV RUBY_VERSION=3.1.2
 ENV BUNDLER_VERSION=2.3.17
 ENV NODE_VERSION=18
 
-# Install system dependencies
+# Install system dependencies (including unzip for CKEditor plugins)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     procps \
     libpq-dev \
