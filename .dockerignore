@@ -1,0 +1,64 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+*.md
+README.md
+HUONG_DAN_DEPLOY_RAILWAY.md
+
+# Dependencies (will be installed in Docker)
+node_modules
+vendor/bundle
+
+# Logs
+log/*
+tmp/*
+*.log
+
+# Environment files
+.env*
+!.env.example
+
+# Database
+*.sqlite3
+*.sqlite3-journal
+
+# Storage
+storage/*
+!storage/.keep
+tmp/storage/*
+!tmp/storage/.keep
+
+# Assets (will be built in Docker)
+app/assets/builds/*
+!app/assets/builds/.keep
+admin/app/assets/builds/*
+!admin/app/assets/builds/.keep
+public/assets
+public/tassets
+
+# Rails
+/config/master.key
+/config/credentials/production.key
+
+# Capistrano
+Capfile
+config/deploy.rb
+config/deploy/*
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Railway config (optional, but kept for reference)
+railway.json
+
