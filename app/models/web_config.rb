@@ -36,6 +36,8 @@ class WebConfig < ApplicationRecord
   class << self
     def current
       @current ||= WebConfig.first
+    rescue ActiveRecord::ConnectionNotEstablished, PG::ConnectionBad
+      nil
     end
 
     def for(key)
@@ -78,6 +80,8 @@ class WebConfig < ApplicationRecord
     # Handle missing table error when run db:migrate for the first time,
     # because web config is accessed in routes
     rescue ActiveRecord::NoDatabaseError
+      []
+    rescue ActiveRecord::ConnectionNotEstablished, PG::ConnectionBad
       []
     rescue ActiveRecord::StatementInvalid => e
       if e.message.match(/relation "web_configs" does not exist/)
