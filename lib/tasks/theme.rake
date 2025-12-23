@@ -1,32 +1,40 @@
 namespace :theme do
   desc 'Link theme assets'
   task :link_assets => :environment do
-    next unless Theme.current
+    begin
+      next unless Theme.current
 
-    logger.info 'Setup theme: linking assets...'
+      logger.info 'Setup theme: linking assets...'
 
-    target = Rails.public_path.join('tassets')
+      target = Rails.public_path.join('tassets')
 
-    if File.exists?(target)
-      raise "Could not link theme assets, file or directory exists: #{target}" unless File.symlink?(target)
-      system("unlink #{target}")
+      if File.exists?(target)
+        raise "Could not link theme assets, file or directory exists: #{target}" unless File.symlink?(target)
+        system("unlink #{target}")
+      end
+
+      system("ln -s #{Theme.current.local_path.join('tassets')} #{Rails.public_path}")
+    rescue ActiveRecord::ConnectionNotEstablished, PG::ConnectionBad, ActiveRecord::NoDatabaseError
+      logger.info 'Skipping theme asset linking: database not available'
     end
-
-    system("ln -s #{Theme.current.local_path.join('tassets')} #{Rails.public_path}")
   end
 
   desc 'Compile theme assets'
   task :compile do
     logger.info 'Compiling theme assets'
 
-    if Theme.current
-      Theme.current.compile_stylesheet
-      Theme.current.compile_javascript
-    else
-      default_theme = Theme.new(path: ENV["WEB"],  name: "default", is_default: true, source: "local")
+    begin
+      if Theme.current
+        Theme.current.compile_stylesheet
+        Theme.current.compile_javascript
+      else
+        default_theme = Theme.new(path: ENV["WEB"],  name: "default", is_default: true, source: "local")
 
-      default_theme.compile_stylesheet
-      default_theme.compile_javascript
+        default_theme.compile_stylesheet
+        default_theme.compile_javascript
+      end
+    rescue ActiveRecord::ConnectionNotEstablished, PG::ConnectionBad, ActiveRecord::NoDatabaseError
+      logger.info 'Skipping theme compilation: database not available'
     end
   end
 
