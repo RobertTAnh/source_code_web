@@ -85,4 +85,10 @@ test:
 #
 production:
   <<: *default
+  # Railway automatically provides DATABASE_URL, which Rails will use
+  # If DATABASE_URL is not set, fall back to individual environment variables
+  <% if ENV['DATABASE_URL'].present? %>
+  url: <%= ENV['DATABASE_URL'] %>
+  <% else %>
   database: <%= ENV['WAKER_POSTGRES_DB_NAME'] %>
+  <% end %>
